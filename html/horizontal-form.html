@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="success.html" method="post">
+        <table border="1" width="50%" cellpadding="10" align="center">
+            <tr>
+                <td colspan="2" align="center">
+                    <h3>Search Bus</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    From
+                </td>
+                <td>
+                    <input type="text" name="from" required />
+                </td>
+            </tr>
+            <tr>
+                <td>To</td>
+                <td>
+                    <input type="text" name="to" required />
+                </td>
+            </tr>
+            <tr>
+                <td>Journey Date</td>
+                <td>
+                    <input type="date" min="2024-01-30" name="journey_date" required />
+                </td>
+            </tr>
+            <tr>
+                <td>Bus type</td>
+                <td>
+                    <label for="gurjarnagari">
+                        <input id="gurjarnagari" type="radio" name="bustype" value="1" required /> Gujar nagari
+                    </label>
+                    <label for="express">
+                        <input id="express" type="radio" name="bustype" value="2" required /> express
+                    </label>
+                    <label for="ac">
+                        <input id="ac" type="radio" name="bustype" value="4" required /> AC
+                    </label>
+                    <label for="slepper">
+                        <input id="slepper" type="radio" name="bustype" value="8" required /> slepper
+                    </label>
+                    <label for="ac_sleeper">
+                        <input id="ac_sleeper" type="radio" name="bustype" value="16" required /> AC slepper
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>No of seats</td>
+                <td>
+                    <input type="number" name="seats" min="1" max="6" required />
+                </td>
+            </tr>
+            <tr>
+                <td>Single lady</td>
+                <td>
+                    <label for="lady">
+                        <input type="checkbox" name="lady" id="lady" value="1">single lady
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="search bus" name="search" />
+                    <input type="reset" value="clear all" name="reset" />
+                    <input type="button" value="i cant do anything" name="nothing" />
+                </td>
+            </tr>
+            
+        </table>
+    </form>
+</body>
+</html>
