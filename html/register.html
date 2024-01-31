@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register form</title>
+</head>
+
+<body>
+    <h1 align="center">
+        Register form
+    </h1>
+    <hr>
+    <form action="success.html" method="post">
+        <table border="2" width="80%" cellpadding="5" align="center" >
+            <tr>
+                <td align="center" colspan="2">
+                    <h2>Register With Us</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="username">
+                        Enter your name
+                    </label>
+                </td>
+                <td>
+                    <input type="text" name="name" id="username" required placeholder="Name Goes here ">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="email">
+                        Enter your email
+                    </label>
+                </td>
+                <td>
+                    <input type="email" name="email" id="email" required placeholder="Email Goes here">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="password">
+                        Enter your Password
+                    </label>
+                </td>
+                <td>
+                    <input type="password" name="password" id="password" placeholder="Password Goes here" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="contact"> Enter your phone number </label>
+                </td>
+                <td>
+                    <input type="number" name="contact" id="contact" placeholder="Contact number goes here" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Select your Gender
+                </td>
+                <td>
+                    <input type="radio" name="gender" id="male" value="1"> <label for="male">Male</label>
+                    <input type="radio" name="gender" id="female" value="0"><label for="female">Female</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Select your hobbies
+                </td>
+                <td>
+                    <input type="checkbox" name="hobbies" id="hockey" value="1"><label for="hockey"> Hockey </label>
+                    <input type="checkbox" name="hobbies" id="cricket" value="2"><label for="cricket"> Cricket </label>
+                    <input type="checkbox" name="hobbies" id="coding" value="3"><label for="coding"> Coding </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">
+                        Select your birth date
+                    </label>
+                </td>
+                <td>
+                    <input type="date" name="dob" id="dob">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="image">Select your image</label>
+                </td>
+                <td>
+                    <input type="file" name="image" id="image" accept="image/*" required multiple>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Register" name="btn_submit">
+                    <input type="reset" value="Clear All" name="btn_clear">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>
