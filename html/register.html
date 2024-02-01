@@ -54,7 +54,7 @@
                     <label for="contact"> Enter your phone number </label>
                 </td>
                 <td>
-                    <input type="number" name="contact" id="contact" placeholder="Contact number goes here" required>
+                    <input type=" required /" name="contact" id="contact" placeholder="Contact number goes here" required>
                 </td>
             </tr>
             <tr>
@@ -62,8 +62,8 @@
                     Select your Gender
                 </td>
                 <td>
-                    <input type="radio" name="gender" id="male" value="1"> <label for="male">Male</label>
-                    <input type="radio" name="gender" id="female" value="0"><label for="female">Female</label>
+                    <input type="radio" name="gender" id="male" value="1" required /> <label for="male">Male</label>
+                    <input type="radio" name="gender" id="female" value="0" required /><label for="female">Female</label>
                 </td>
             </tr>
             <tr>
@@ -71,9 +71,9 @@
                     Select your hobbies
                 </td>
                 <td>
-                    <input type="checkbox" name="hobbies" id="hockey" value="1"><label for="hockey"> Hockey </label>
-                    <input type="checkbox" name="hobbies" id="cricket" value="2"><label for="cricket"> Cricket </label>
-                    <input type="checkbox" name="hobbies" id="coding" value="3"><label for="coding"> Coding </label>
+                    <input type="checkbox" name="hockey" id="hockey" value="1"><label for="hockey"> Hockey </label>
+                    <input type="checkbox" name="cricket" id="cricket" value="2"><label for="cricket"> Cricket </label>
+                    <input type="checkbox" name="coding" id="coding" value="3"><label for="coding"> Coding </label>
                 </td>
             </tr>
             <tr>
@@ -95,12 +95,43 @@
                 </td>
             </tr>
             <tr>
+                <td>Country</td>
+                <td>
+                    <select name="country" id="country" required>
+                        <option value="">Select country</option>
+                        <option value="1">India</option>
+                        <option value="2">china</option>
+                        <option value="3">Indoneasia</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">Select language that you speak, read, write</td>
+                <td>
+                    <select name="language" id="language" multiple >
+                        <option value="">select language</option>
+                        <option value="1">Gujarati</option>
+                        <option value="2">Hindi</option>
+                        <option value="3">English</option>
+                        <option value="4">Marathi</option>
+                        <option value="5">tamil</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">Address</td>
+                <td>
+                    <textarea name="address" id="address" cols="60" rows="8"></textarea>
+                </td>
+            </tr>
+            <tr>
                 <td colspan="2" align="center">
                     <input type="submit" value="Register" name="btn_submit">
                     <input type="reset" value="Clear All" name="btn_clear">
                 </td>
             </tr>
         </table>
+        <input type="hidden" name="secret" value="apple" />
     </form>
 </body>
 
