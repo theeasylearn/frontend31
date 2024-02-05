@@ -6,11 +6,4 @@ https://images.template.net/wp-content/uploads/2018/11/Free-Basic-Resume-Templat
 
 4) create a website gujartirecipes.com 
     1 Home 
-    2 Nasta recipes 
-        4 page 
-    3 Shak recipes
-    4 fastfood recipes
-    5 Athana recipes
-    6 sweets recipes
-    7 mukhvas recipes
-    8 Juice recipes
+    2 Categories 
