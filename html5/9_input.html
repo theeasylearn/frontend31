@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Working with html 5 (forms)</h1>
+    <form action="success.html" method="post">
+        <table border="1" width="70%" align="center" cellpadding="10">
+            <tr>
+                <td width="30%">
+                    <label for="birthdate">Select birthdate</label>
+                </td>
+                <td>
+                    <input type="date" name="birthdate" id="birthdate" required />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="favourite_color">what is your favourite color</label>
+                </td>
+                <td>
+                    <input type="color" name="favourite_color" id="favourite_color" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="income">Enter your monthly income</label>
+                </td>
+                <td>
+                    <input type="number" name="income" id="income" min="0" max="100" required />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="url">Enter website name</label>
+                </td>
+                <td>
+                    <input type="url" name="url" id="url" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="submit data" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
