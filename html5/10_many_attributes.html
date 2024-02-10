@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>HTML 5 attributes</h1>
+    <form action="success.html" autocomplete="on">
+        <table align="center" cellpadding="5" width="50%" border="1">
+            <tr>
+                <td>
+                    Fullname
+                </td>
+                <td>
+                    <input autofocus type="text" name="fullname" id="fullname" required
+                    placeholder="fullname" />
+                </td>
+            </tr>
+            <tr>
+                <td>Pancard</td>
+                <td>
+                    <input type="text" name="pancard" id="pancard" required
+                    pattern="^[A-Z]{5}[0-9]{4}[A-Z]$" placeholder="XXXXX9999X" />
+                </td>
+            </tr>
+            <tr>
+                <td>aadhar card</td>
+                <td>
+                    <input type="text" name="aadhar_card" id="aadhar_card" required
+                    pattern="\d{4}-\d{4}-\d{4}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Email address
+                </td>
+                <td>
+                    <input type="email" name="email" id="email" required autocomplete="off">
+                </td>
+            </tr>
+           
+            <tr>
+                <td>Select your at least 2 photo</td>
+                <td>
+                    <input type="file" name="photo" accept="image/*" multiple  />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="submit to success" />
+                    <input type="submit" value="submit to failure" formaction="failed.html" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
