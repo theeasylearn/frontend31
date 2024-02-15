@@ -1,0 +1,22 @@
+/* external stylesheet */
+*
+{
+    margin:0px;
+    padding:0px;
+    font-size: 18px;
+    color:rgb(234,124,29);
+}
+body 
+{
+    background-color: rgb(255,239,206);
+}
+#site-header 
+{
+    background-color: rgb(23,97,124);
+    height:100px;
+}
+#site-footer 
+{
+    background-color: rgb(23,97,124);
+    height:100px;
+}
