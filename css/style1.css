@@ -10,13 +10,38 @@ body
 {
     background-color: rgb(255,239,206);
 }
-#site-header 
+#site-header , #site-footer   
 {
     background-color: rgb(23,97,124);
     height:100px;
 }
-#site-footer 
+#recipe
 {
-    background-color: rgb(23,97,124);
-    height:100px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 10px;
+}
+.dish
+{
+    width:calc(25% - 10px);
+    border:1px solid black;
+    box-sizing: border-box;
+    /* padding:10px; */
+}
+.dish>header  /* style applies only to header which is direct child of each .dish */
+{
+   background-color: rgb(23,97,124);
+   padding:10px;
+}
+.dish>header>h1 
+{
+    text-align: center;
+    font-size: 1.6rem;
+    color:white;
+}
+.dish>header>p 
+{
+    color:white;
+    text-align: center;
 }
