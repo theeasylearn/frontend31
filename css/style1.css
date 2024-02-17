@@ -1,10 +1,17 @@
+/* font cdn  (Content Delivery network) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:wght@500&display=swap');
 /* external stylesheet */
 *
 {
     margin:0px;
     padding:0px;
     font-size: 18px;
-    color:rgb(234,124,29);
+    color: black;
+    font-family: "Montserrat", sans-serif;
+}
+h1, h2, h3, h4, h5, h6
+{
+    font-family: "Playfair Display", serif;
 }
 body 
 {
@@ -22,6 +29,10 @@ body
     gap: 10px;
     padding-top: 10px;
 }
+#recipe>.dish:first-child
+{
+    margin-left: 10px;
+}
 .dish
 {
     width:calc(25% - 10px);
@@ -29,6 +40,34 @@ body
     box-sizing: border-box;
     /* padding:10px; */
 }
+.dish>* /* this style apply to any child of html tag whose class name is dish */
+{
+    padding:20px;
+}
+.dish>aside>h2, .dish>div>h2 
+{
+    font-size: 1.4rem;  
+    background-color:rgb(234,124,29);
+    color:white;
+    padding:10px;
+    text-transform: uppercase;
+}
+.dish>aside>ul 
+{
+    list-style-type: none;
+}
+.dish>aside>ul>li 
+{
+    line-height: 150%;
+    background-color: antiquewhite;
+    margin-bottom: 10px;
+    box-shadow: 5px 5px 5px gray;
+    padding:2px 10px;
+}
+.dish>aside>ul>li:first-child /* below style applies only to first li of ul inside aside inside dish */
+{
+    margin-top: 10px;
+}    
 .dish>header  /* style applies only to header which is direct child of each .dish */
 {
    background-color: rgb(23,97,124);
@@ -44,4 +83,15 @@ body
 {
     color:white;
     text-align: center;
+}
+.dish>div>ol 
+{
+    list-style-position: inside;
+}
+.dish>div>ol>li 
+{
+    text-align: justify;
+    margin-top: 10px;
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
 }
