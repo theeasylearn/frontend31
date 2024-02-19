@@ -22,6 +22,56 @@ body
     background-color: rgb(23,97,124);
     height:100px;
 }
+#site-header 
+{
+    display: flex;
+    justify-content: space-between;  /* horizintal alignment */
+    align-items: center; /* vertical alignment */
+    position: sticky;
+    top:0px;
+    left:0px;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    border-bottom: 2px solid white;
+}
+#site-header>div>img 
+{
+    height: 100px;
+    width: 100px;
+}
+#site-header>div 
+{
+    display: flex;
+    align-items: center; /* vertical alignment */
+}
+#site-header>ul
+{
+    display: flex;
+    list-style-type: none;
+}
+#site-header>div>h1 
+{
+    font-size: 2rem;
+    color:white;
+    letter-spacing: 2px;
+}
+#site-header>div>h1:hover
+{
+    color:rgb(255,239,206)
+}
+#site-header>ul>li>a:link , #site-header>ul>li>a:visited
+{
+    color:white;
+    padding:10px 20px;
+    font-size: 1.25rem;
+    text-decoration: none;
+}
+#site-header>ul>li>a:hover 
+{
+    background-color: white;
+    color:rgb(23,97,124);
+    font-weight: bold;
+    border-radius: 20px;
+}
 #recipe
 {
     display: flex;
