@@ -6,29 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        * 
-        {
-            margin:0px;
-            padding:0px;
+        @media (min-width: 375px) {
+            #row {
+                display: flex;
+            }
+
+            .empty {
+                width: 70px !important;
+            }
+        }
+
+        * {
+            margin: 0px;
+            padding: 0px;
             box-sizing: border-box;
             border: 2px solid black;
         }
-        #row 
-        {
+
+        /* #row {
             display: flex;
+        } */
+
+        .p {
+            font-size: 1.5rem;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 30px;
+            background-color: rgb(227, 198, 255);
+        }
+
+        .empty {
+            width: 100%;
+            font-size: 1.5rem;
+
         }
     </style>
 </head>
 
 <body>
     <div>
-        <div>1</div>
-        <div id="row">
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
+        <div>
+            <p class="p">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad ipsum adipisci, eius, neque rem quod
+                recusandae soluta animi aliquam quisquam dolore, eos cum consectetur nesciunt alias delectus ullam
+                labore aut?
+            </p>
         </div>
-        <div>5</div>
+        <div id="row">
+            <div class="empty" align="center">
+                2
+            </div>
+            <div>
+                <p class="p">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad ipsum adipisci, eius, neque rem quod
+                    recusandae soluta animi aliquam quisquam dolore, eos cum consectetur nesciunt alias delectus ullam
+                    labore aut?
+                </p>
+            </div>
+            <div class="empty" align="center">
+                4
+            </div>
+        </div>
+        <div>
+            <p class="p">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad ipsum adipisci, eius, neque rem quod
+                recusandae soluta animi aliquam quisquam dolore, eos cum consectetur nesciunt alias delectus ullam
+                labore aut?
+            </p>
+        </div>
     </div>
 </body>
 

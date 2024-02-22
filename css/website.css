@@ -1,0 +1,47 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+#logo {
+    height: 80px;
+}
+
+#menu {
+    background-color: #F9CF0C;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    color: #422A01;
+}
+
+#logo_div {
+    display: flex;
+}
+
+.logo_heading {
+    margin-top: 15px;
+    font-size: 2.3rem;
+    font-family: "Acme", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#links {
+    margin-top: 30px;
+    font-size: 1.5rem;
+    margin-right: 15px;
+}
+
+a:link,
+a:visited {
+    text-decoration: none;
+    color: #422A01;
+}
+
+.menu_links {
+    margin-left: 40px;
+    font-family: "Acme", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
