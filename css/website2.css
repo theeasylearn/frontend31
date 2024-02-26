@@ -1,0 +1,52 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+html 
+{
+    height: 100vh;
+}
+body 
+{
+    background-color: #FFFFF0;
+    height:100%;
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
+    grid-template-areas: 
+    "heading heading heading"
+    "menu content advertise"
+    "footer footer footer";
+    grid-template-rows: 15% 75% 10%;
+}
+body>div 
+{
+    border: 1px solid black;
+}
+#heading
+{
+    grid-area: heading;
+    background-color: #F9CF0C;
+
+}
+#menu
+{
+    grid-area:menu;
+}
+#content 
+{
+    grid-area: content;
+}
+#advertise 
+{
+    grid-area: advertise;
+}
+#footer 
+{
+    grid-area: footer;
+    background-color: #000000;
+}
+#heading>img 
+{
+    height: 100%;
+    width: auto;
+}

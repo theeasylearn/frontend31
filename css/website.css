@@ -2,7 +2,15 @@
     margin: 0px;
     padding: 0px;
 }
-
+html 
+{
+    height: 100vh;
+}
+body 
+{
+    background-color: #FFFFF0;
+    height:100%;
+}
 #logo {
     height: 80px;
 }
@@ -13,6 +21,7 @@
     display: flex;
     justify-content: space-between;
     color: #422A01;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 #logo_div {
