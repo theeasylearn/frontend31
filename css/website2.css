@@ -2,51 +2,125 @@
     margin: 0px;
     padding: 0px;
 }
-html 
-{
+
+html {
     height: 100vh;
 }
-body 
-{
+
+body {
     background-color: #FFFFF0;
-    height:100%;
+    height: 100%;
     display: grid;
-    grid-template-columns: 15% 70% 15%;
-    grid-template-areas: 
-    "heading heading heading"
-    "menu content advertise"
-    "footer footer footer";
+    grid-template-columns: 10% 70% 20%;
+    grid-template-areas:
+        "heading heading heading"
+        "menu content advertise"
+        "footer footer footer";
     grid-template-rows: 15% 75% 10%;
 }
-body>div 
-{
+
+body>div {
     border: 1px solid black;
 }
-#heading
-{
+
+#heading {
     grid-area: heading;
     background-color: #F9CF0C;
 
 }
-#menu
-{
-    grid-area:menu;
+
+#menu {
+    grid-area: menu;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-left: 35px;
+    padding-top: 15px;
 }
-#content 
-{
+
+#content {
+    overflow-y: scroll;
     grid-area: content;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
-#advertise 
-{
+
+#advertise {
     grid-area: advertise;
+    overflow-y: scroll;
 }
-#footer 
-{
+
+#footer {
     grid-area: footer;
     background-color: #000000;
+    color: #FFFFF0;
+    padding: 15px;
 }
-#heading>img 
-{
+
+.footer_text {
+    font-size: 1.3rem;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    margin-top: 7px;
+}
+
+.footer_text>a:link,.footer_text>a:visited,.footer_text>a:active{
+    color: white;
+    text-decoration: none;
+}
+
+#heading>img {
     height: 100%;
     width: auto;
+}
+
+.menu_links {
+    font-size: 1.5rem;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    text-decoration: none;
+}
+
+.menu_links:active,
+.menu_links:visited,
+.menu_links:link {
+    color: #422B00;
+}
+
+.menu_links:hover {
+    color: #D14013;
+}
+
+.single_item {
+    background-color: #F9CF0C;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 30px;
+}
+
+.image {
+    border-radius: 15px;
+    width: 200px;
+    height: 200px;
+}
+
+.text {
+    font-size: 1.1rem;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.single_advertise {
+    background-color: #F9CF0C;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.add_image {
+    border-radius: 12px;
 }
