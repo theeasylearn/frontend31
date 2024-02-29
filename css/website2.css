@@ -16,7 +16,7 @@ body {
         "heading heading heading"
         "menu content advertise"
         "footer footer footer";
-    grid-template-rows: 15% 75% 10%;
+    grid-template-rows: 15% auto 10%;
 }
 
 body>div {
@@ -52,10 +52,11 @@ body>div {
 }
 
 #content {
-    overflow-y: scroll;
     grid-area: content;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    scrollbar-width: none;
+    padding:10px;
 }
 
 #advertise {
@@ -110,16 +111,17 @@ body>div {
 }
 
 .single_item {
-    background-color: #F9CF0C;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 30px;
+    background-color:  #F8FFF0;
+    padding: 10px;
+    margin: 5px;
+    width:calc(25% - 30px);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .image {
     border-radius: 15px;
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: auto;
 }
 
 .text {
@@ -140,7 +142,10 @@ body>div {
 .add_image {
     border-radius: 12px;
 }
-
+#menu_icon 
+{
+    display:none;
+}
 /* ##Device = Desktops ##Screen = 1281px to higher resolution desktop */
 @media (min-width: 1281px) {
     /* code in this block will be applied only if device width>1281 */
@@ -173,6 +178,27 @@ body>div {
             "content"
             "advertise"
             "footer";
-        grid-template-rows: 10% 0px 70% 10% 10%;
+        grid-template-rows: 10% 0px auto 20% 10%;
+    }
+    #heading>div 
+    {
+        flex-direction: column;
+    }
+    #heading>div>ul>li>img 
+    {
+        height: 24px;
+        width: 24px;
+    }
+    #heading>div>ul
+    {
+        justify-content: space-around;
+    }
+    #heading>div>h1 
+    {
+        text-align: center;
+    }
+    .single_item
+    {
+        width: 100%;
     }
 }
