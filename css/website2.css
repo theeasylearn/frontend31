@@ -56,7 +56,7 @@ body>div {
     display: flex;
     flex-wrap: wrap;
     scrollbar-width: none;
-    padding:10px;
+    padding: 10px;
 }
 
 #advertise {
@@ -111,10 +111,10 @@ body>div {
 }
 
 .single_item {
-    background-color:  #F8FFF0;
+    background-color: #F8FFF0;
     padding: 10px;
     margin: 5px;
-    width:calc(25% - 30px);
+    width: calc(25% - 30px);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
@@ -142,10 +142,12 @@ body>div {
 .add_image {
     border-radius: 12px;
 }
-#menu_icon 
-{
-    display:none;
+
+#menu_icon {
+    display: none;
+    /* hide html element */
 }
+
 /* ##Device = Desktops ##Screen = 1281px to higher resolution desktop */
 @media (min-width: 1281px) {
     /* code in this block will be applied only if device width>1281 */
@@ -159,11 +161,86 @@ body>div {
 /* ##Device = Tablets, Ipads (portrait) ##Screen = B/w 768px to 1024px */
 @media (min-width: 768px) and (max-width: 1024px) {
     /* code in this block will be applied only if device width>768 and <1024 */
+    body {
+        grid-template-columns: 100%;
+        grid-template-areas:
+            "heading"
+            "menu"
+            "content"
+            "advertise"
+            "footer";
+        grid-template-rows: 10% auto auto 20% 10%;
+    }
+
+    #heading>div {
+        flex-direction: column;
+    }
+
+    #heading>div>ul>li>img {
+        height: 32px;
+        width: 32px;
+    }
+
+    #heading>div>ul {
+        justify-content: space-around;
+    }
+
+    #heading>div>h1 {
+        text-align: center;
+    }
+
+    .single_item {
+        width: calc(33.33% - 30px);
+    }
+
+    #menu_icon {
+        display:inline-block;
+        height: 24px;
+        width: 24px;
+    }
 }
 
 /* ##Device = Low Resolution Tablets,  ##Screen = B/w 481px to 767px */
 @media (min-width: 481px) and (max-width: 767px) {
     /* code in this block will be applied only if device width>481 and <767 */
+      /* code in this block will be applied only if device width>320 and <480 */
+      body {
+        grid-template-columns: 100%;
+        grid-template-areas:
+            "heading"
+            "menu"
+            "content"
+            "advertise"
+            "footer";
+        grid-template-rows: 10% auto auto 20% 10%;
+    }
+
+    #heading>div {
+        flex-direction: column;
+    }
+
+    #heading>div>ul>li>img {
+        height: 24px;
+        width: 24px;
+    }
+
+    #heading>div>ul {
+        justify-content: space-around;
+    }
+
+    #heading>div>h1 {
+        text-align: center;
+    }
+
+    .single_item {
+        width: calc(50% - 30px);
+    }
+
+    #menu_icon {
+        display:inline-block;
+        height: 24px;
+        width: 24px;
+    }
 }
 
 /*  ##Device = Most of the Smartphones Mobiles (Portrait) ##Screen = B/w 320px to 479px */
@@ -178,27 +255,33 @@ body>div {
             "content"
             "advertise"
             "footer";
-        grid-template-rows: 10% 0px auto 20% 10%;
+        grid-template-rows: 10% auto auto 20% 10%;
     }
-    #heading>div 
-    {
+
+    #heading>div {
         flex-direction: column;
     }
-    #heading>div>ul>li>img 
-    {
+
+    #heading>div>ul>li>img {
         height: 24px;
         width: 24px;
     }
-    #heading>div>ul
-    {
+
+    #heading>div>ul {
         justify-content: space-around;
     }
-    #heading>div>h1 
-    {
+
+    #heading>div>h1 {
         text-align: center;
     }
-    .single_item
-    {
+
+    .single_item {
         width: 100%;
+    }
+
+    #menu_icon {
+        display:inline-block;
+        height: 24px;
+        width: 24px;
     }
 }

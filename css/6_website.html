@@ -24,8 +24,9 @@
                 <li><img src="images/youtube.png" alt=""></li>
                 <li><img src="images/gmail.png" alt=""></li>
                 <li><img src="images/share.png" alt=""></li>
+                <img id="menu_icon" src="images/menu_icon.png" onclick="ToggleMenu();" />
+
             </ul> 
-            <img id="menu_icon" src="images/menu_icon.png" />
         </div>
     </div>
     <div id="menu">
@@ -125,6 +126,24 @@
             <a href="https://github.com/theeasylearn/frontend31" target="_blank"> CopyRight by frontend31</a>
         </div>
     </div>
+    <script>
+        //create variable 
+        var isMenuVisible = true;
+        function ToggleMenu()
+        {
+            //alert(isMenuVisible);
+            if(isMenuVisible == false)
+            {
+                isMenuVisible = true;
+                document.getElementById('menu').style="display:grid";
+            }
+            else 
+            {
+                isMenuVisible = false;
+                document.getElementById('menu').style="display:none";
+            }
+        }
+    </script>
 </body>
 
 </html>
