@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-8 offset-2">
+                <div class="card">
+                    <div class="card-header text-bg-danger">
+                        <h3>Search Bus</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="">
+                            <div class="row mb-3">
+                                <label for="source" class="col-sm-3 col-form-label">From</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="source" name="source" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="destination" class="col-sm-3 col-form-label">To</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="destination" name="destination" class="form-control" >
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="journey_date" class="col-sm-3 col-form-label">Journey Date</label>
+                                <div class="col-sm-9">
+                                    <input type="date" id="journey_date" name="journey_date" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="" class="col-sm-3 col-form-label">Bus type</label>
+                                <div class="col-sm-8">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" name="bus_type" id="non_ac" class="form-check-input">
+                                        <label for="non_ac" class="form-check-label">Non Ac</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" name="bus_type" id="ac" class="form-check-input">
+                                        <label for="ac" class="form-check-label">AC</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" name="bus_type" id="sleeper" class="form-check-input">
+                                        <label for="sleeper" class="form-check-label">Sleeper</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-danger">Search
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                <button type="reset" class="btn btn-dark">clear all
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/f07f0a38b5.js" crossorigin="anonymous"></script>
+</body>
+</html>
