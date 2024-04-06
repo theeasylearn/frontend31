@@ -1,0 +1,7 @@
+1) write a program to swap value of 2 variables without using 3rd variable.
+2) write a program to swap digits of amount between 10 to 99.
+    input = 39 output 93
+    input = 28 output 82
+3) write a program to findout absolute different value of two given number
+    num1 = 100 num2 = 50 = 50
+    num1 = 50  num2 = 100  = -50

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Example of Prompt write and operators</h1>
+    <hr/>
+    <script>
+        var num1 = prompt("Enter one number",0);
+        var num2 = prompt("Enter second number",0);
+
+        //convert strint into integer
+        num1 = parseInt(num1);
+        num2 = parseInt(num2);
+
+
+        var add = num1 + num2;
+        var sub = num1 - num2;
+        var mul = num1 * num2;
+        var div = num1 / num2; 
+
+        document.write("<h3>Addition = " + add + " </h3>");
+        document.write("<h3>Subtraction = " + sub + " </h3>");
+        document.write("<h3>Multiplication = " + mul + " </h3>");
+        document.write("<h3>Division = " + div.toFixed(2) + " </h3>");
+
+    </script>
+</body>
+</html>
