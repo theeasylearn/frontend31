@@ -5,3 +5,11 @@
 3) write a program to findout absolute different value of two given number
     num1 = 100 num2 = 50 = 50
     num1 = 50  num2 = 100  = -50
+
+4) write a program to check whether given year is leap year or not. 
+5) write a program to check whether given year is milanium year or not. 
+6) write a program to check whether shape is square or not from given dimensions. 
+7) write a program to accept bride and groom's birthdate in terms of year, month & day. and findout whole is elder. display message.
+
+8) write a program to rewrite example 6 using conditional operator
+9) write a program to rewrite example 5 using conditional operator

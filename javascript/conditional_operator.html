@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Conditional Operator in javascript</h1>
+    <script>
+        let currenttime = prompt("enter current time");
+        currenttime = parseInt(currenttime);
+        // let message = null;
+        // if(currenttime>12)
+        //     message = (currenttime - 12) + " PM";
+        // else
+        //     message = (currenttime) + " AM";
+        // document.write("Current time ",message);
+        // or 
+        document.write("Current time ",(currenttime>12) ? ((currenttime - 12) + " PM") : currenttime + "AM");
+    </script>
+</body>
+</html>
