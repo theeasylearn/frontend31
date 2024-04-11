@@ -11,21 +11,59 @@
     <table border="1" align="center" cellpadding="10">
         <tr>
             <td width="300px">
-                <input type="button" value="get date" onclick="" />
+                <input type="button" value="get date" onclick="showCurrentDate()" />
             </td>
             <td width="300px">
-                <input type="button" value="get time" onclick="" />
+                <input type="button" value="get time" onclick="showCurrentTime()" />
             </td>
             <td width="300px">
-                <input type="button" value="get date time" onclick="" />
+                <input type="button" value="get date time" onclick="showDateTime();" />
             </td>
         </tr>   
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td id="td1"></td>
+            <td id="td2"></td>
+            <td id="td3"></td>
         </tr>   
          
     </table>
+    <script>
+        //create user defined function
+        function getCurrentDate()
+        {
+            //create data classs object
+            let today = new Date(); //Date is build in class
+            let day = today.getDate();
+            let month = today.getMonth() + 1;
+            let year = today.getFullYear();
+            
+            let currentdate = day + "/" + month + "/" + year;
+            return currentdate;
+        }
+        function getCurrentTime()
+        {
+            let now = new Date();
+            
+            let hour = now.getHours();
+            let minute = now.getMinutes();
+            let seconds = now.getSeconds();
+
+            return hour + ":" + minute + ":" + seconds;
+        }
+
+        function showCurrentDate()
+        {
+            document.getElementById('td1').innerHTML = getCurrentDate();
+        }
+        function showCurrentTime()
+        {
+            document.getElementById('td2').innerHTML = getCurrentTime();
+        }
+        function showDateTime()
+        {
+            document.getElementById('td3').innerHTML = getCurrentDate() + " ";
+            document.getElementById('td3').innerHTML += getCurrentTime();
+        }
+    </script>
 </body>
 </html>
