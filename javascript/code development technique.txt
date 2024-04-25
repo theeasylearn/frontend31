@@ -1,0 +1,8 @@
+1) understand problem definition
+2) decide inputs 
+3) design webpage 
+4) check event function working or not 
+5) check input are stored in variables or not 
+6) do process 
+7) check result
+8) display result in html tag 

@@ -1,0 +1,8 @@
+there are 3 types of button in html 
+    1) submit
+        submit button always submit input to the webpage given inside action attribute of form tag. if action attribute is empty then it will submit input to current page which result into reload of webpage. if inputs are not given as per conditions then input is not submited.
+    2) button 
+        button tag itself do nothing. button tag generate onclick event which can be handled by javascript to run some code. button do not check inputs while submit button do. 
+
+    3) reset
+        reset button is used to clear all form input. 
