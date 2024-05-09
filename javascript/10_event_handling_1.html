@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Event Handling using 1st technique</h1>
+    <table width="100%" border="1">
+        <tr>
+            <td width="33%" align="center">
+                <img src="https://picsum.photos/200?random=1" id="one" onmouseenter="ZoomImage(this.id);" />
+            </td>
+            <td width="33%" align="center">
+                <img src="https://picsum.photos/200?random=2" id="two" onmouseenter="ZoomImage(this.id);" />
+            </td>
+            <td width="33%" align="center">
+                <img src="https://picsum.photos/200?random=3" id="three" onmouseenter="ZoomImage(this.id);" />
+            </td>
+        </tr>
+    </table>
+    <script>
+        function ZoomImage(ImageId)
+        {
+            console.log(ImageId);
+            let height = document.getElementById(ImageId).height;
+            let width = document.getElementById(ImageId).width;
+            console.log(height,width);
+            height = parseInt(height);
+            width = parseInt(width);
+            height = height * 1.50;
+            width = width * 1.50;
+            console.log(height,width);
+            document.getElementById(ImageId).height = height;
+            document.getElementById(ImageId).width = width;
+        }
+    </script>
+</body>
+</html>
