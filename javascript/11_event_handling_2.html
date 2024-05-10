@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .mybutton {
+            height: 100px;
+            width: 100px;
+            font-size: xx-large;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Event handing using 2nd technique</h1>
+    <table border="1" align="center" cellpadding="10">
+        <tr>
+            <td><input type="button" value="-" class="mybutton"></td>
+            <td><input type="button" value="-" class="mybutton"></td>
+            <td><input type="button" value="-" class="mybutton"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="-" class="mybutton"></td>
+            <td><input type="button" value="-" class="mybutton"></td>
+            <td><input type="button" value="-" class="mybutton"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="-" class="mybutton"></td>
+            <td><input type="button" value="-" class="mybutton"></td>
+            <td><input type="button" value="-" class="mybutton"></td>
+        </tr>
+    </table>
+
+    <script src="common.js"></script>
+    <script>
+        // select all button that has class mybutton
+        var mybuttons = document.getElementsByClassName('mybutton');
+        console.log(mybuttons);
+        var symbol = 'X';
+        for(let i=0;i<=8;i++)
+        {
+            mybuttons[i].onclick = function () {
+                this.value = symbol;
+                if(symbol === 'X')
+                    symbol = '0';
+                else 
+                    symbol = 'X';
+                this.onclick = null;
+
+            }
+        }
+
+    </script>
+</body>
+
+</html>
