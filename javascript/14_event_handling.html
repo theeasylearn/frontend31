@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        article {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <article>
+            <img src="https://picsum.photos/300?random=1" alt="">
+            <img src="https://picsum.photos/300?random=2" alt="">
+            <img src="https://picsum.photos/300?random=3" alt="">
+        </article>
+        <article>
+            <img src="https://picsum.photos/300?random=4" alt="">
+            <img src="https://picsum.photos/300?random=5" alt="">
+            <img src="https://picsum.photos/300?random=6" alt="">
+        </article>
+        <article>
+            <img src="https://picsum.photos/300?random=7" alt="">
+            <img src="https://picsum.photos/300?random=8" alt="">
+            <img src="https://picsum.photos/300?random=9" alt="">
+        </article>
+
+    </section>
+    <script>
+        var count = 1;
+        window.addEventListener('scroll', function () {
+            console.log('you have scrolled....', count);
+            count++;
+            var scrollPosition = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+
+            // Get the total height of the page including the invisible part
+            var totalPageHeight = document.body.scrollHeight;
+
+            // Get the visible height of the browser window
+            var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+            // Check if we have reached the bottom of the page
+            if (scrollPosition + windowHeight >= totalPageHeight) {
+                // Perform your action here
+                console.log('End of page reached!');
+                
+            }
+        });
+    </script>
+</body>
+
+</html>

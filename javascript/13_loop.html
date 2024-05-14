@@ -26,7 +26,7 @@
                             required />
                     </div>
                     <div class="col-12">
-                        <select class="form-select" aria-label="Default select" required>
+                        <select id="loop" class="form-select" aria-label="Default select" required>
                             <option selected="">Select loop</option>
                             <option value="1">while</option>
                             <option value="2">for</option>
@@ -61,23 +61,41 @@
             var table = document.getElementById('mytable');
             var row = document.getElementById('row');
             var column = document.getElementById('column');
+            var loop = document.getElementById('loop');
             table.innerHTML = '';
-            var count = 1;
-            while (count <= row.value) {
-                var content = `<tr>`;
-                var temp = '';
-                var columncount=1;
-                while(columncount<=column.value)
-                {
-                    temp = temp + `<td>the easylearn academy</td>`;
-                    columncount = columncount +1;
+            if (loop.value === '1') {
+                var count = 1;
+                while (count <= row.value) {
+                    var content = `<tr>`;
+                    var temp = '';
+                    var columncount = 1;
+                    while (columncount <= column.value) {
+                        temp = temp + `<td>the easylearn academy</td>`;
+                        columncount = columncount + 1;
+                    }
+                    content = content + temp + `</tr>`;
+                    table.innerHTML = table.innerHTML + content;
+                    count = count + 1;
                 }
+            }
+            else if (loop.value === '2') {
+                let temp = '';
+                let content = `<tr>`;
+                for (let j = 1; j <= column.value; j++) {
+                    temp += `<td>TEL</td>`;
+                }
+
                 content = content + temp + `</tr>`;
-                table.innerHTML = table.innerHTML + content;
-                count = count + 1;
+                for (let i = 1; i <= row.value; i++) {
+                    mytable.innerHTML += content;
+                }
+            }
+            else if (loop.value === '3') {
+                
             }
             return false; //required
         }
+
     </script>
 </body>
 
