@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <section>
+    <section id="gallary">
         <article>
             <img src="https://picsum.photos/300?random=1" alt="">
             <img src="https://picsum.photos/300?random=2" alt="">
@@ -34,10 +34,11 @@
 
     </section>
     <script>
-        var count = 1;
+        var count = 10;
+        var gallary = document.getElementById('gallary');
+
         window.addEventListener('scroll', function () {
             console.log('you have scrolled....', count);
-            count++;
             var scrollPosition = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
 
             // Get the total height of the page including the invisible part
@@ -50,7 +51,14 @@
             if (scrollPosition + windowHeight >= totalPageHeight) {
                 // Perform your action here
                 console.log('End of page reached!');
-                
+                let content = ` <article>
+            <img src="https://picsum.photos/300?random=${count++}" alt="">
+            <img src="https://picsum.photos/300?random=${count++}" alt="">
+            <img src="https://picsum.photos/300?random=${count++}" alt="">
+        </article>`;
+
+                gallary.innerHTML += content;
+
             }
         });
     </script>
