@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>1st method of creating object</h1>
+    <hr>
+    <table id="currentdatetime">
+
+    </table>
+    <script>
+        var table = document.getElementById('currentdatetime');
+        var current= new Date();
+
+        //create object using 1st method
+        var now = 
+        {
+            hour : current.getHours(),
+            minute: current.getMinutes(),
+            seconds : current.getMinutes(),
+            day: current.getDate(),
+            month:current.getMonth()+1,
+            year:current.getFullYear(),
+            display:function()
+            {
+                console.log(this.hour,this.minute,this.seconds,this.day,this.month,this.year);
+            },
+            addRow:function(message)
+            {
+                table.innerHTML += message;
+            },
+            showDate:function()
+            {
+                let message = `<tr><td>${this.day}</td><td>${this.month}</td><td>${this.year}</td></tr>`;
+                this.addRow(message);
+            },
+            showTime:function()
+            {
+                let message = `<tr><td>${this.hour}</td><td>${this.minute}</td><td>${this.seconds}</td></tr>`;
+                this.addRow(message);
+            }
+        };
+        //use object's method
+        now.showDate();
+        now.showTime();
+    </script>
+</body>
+</html>

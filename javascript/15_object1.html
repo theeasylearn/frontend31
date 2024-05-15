@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>1st method of creating object</h1>
+    <hr>
+    <b>use console</b>
+    <script>
+        //create object using 1st method
+        var now = 
+        {
+            hour : 11,
+            minute: 10,
+            seconds : 50,
+            day: 15,
+            month:5,
+            year:2024,
+            display:function()
+            {
+                console.log(this.hour,this.minute,this.seconds,this.day,this.month,this.year);
+            }
+        };
+        //use object's method
+        now.display();
+        
+    </script>
+</body>
+</html>
