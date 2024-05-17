@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>3rd method to create object</h1>
+    <table width="75%" border="1">
+        <thead>
+            <tr>
+                <th>Sr No</th>
+                <th>Name</th>
+                <th>HTML</th>
+                <th>CSS</th>
+                <th>JS</th>
+                <th>TOTAL</th>
+                <th>percentage</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody id="output">
+
+        </tbody>
+    </table>
+    <script>
+        var count = 1;
+        //3rd method of creating object
+        function Student(name, html, css, js) {
+            this.name = name,
+                this.html = html,
+                this.css = css,
+                this.js = js,
+                this.total = this.html + this.css + this.js,
+                this.percentage = (this.total / 3).toFixed(2),
+                this.result = 'pass',
+                this.display = function () {
+                    console.log(this.name, this.html, this.css, this.js, this.total, this.percentage, this.result);
+                },
+            this.addRow = function () {
+                document.getElementById('output').innerHTML += `  <tr>
+                <td>${count++}</td>
+                <td>${this.name}</td>
+                <td>${this.html}</td>
+                <td>${this.css}</td>
+                <td>${this.js}</td>
+                <td>${this.total}</td>
+                <td>${this.percentage}</td>
+                <td>${this.result}</td>
+            </tr>`;
+            }
+        }
+        //create object variable
+        var krish = new Student("Krish Ghori",75,80,90);
+        krish.display();
+        krish.addRow();
+        var om = new Student("Om Goswami",95,100,90);
+        om.display();
+        om.addRow();
+    </script>
+</body>
+
+</html>
