@@ -17,7 +17,7 @@
                 <h5>4th method to create object</h5>
             </div>
             <div class="col-8">
-                <form onsubmit="return GenerateTable();" class="row row-cols-lg-auto g-3 d-flex justify-content-end">
+                <form onsubmit="return AddItem();" class="row row-cols-lg-auto g-3 d-flex justify-content-end">
                     <div class="col-12">
                         <input type="text" name="title" id="title" class="form-control" placeholder="product name"
                             required />
@@ -63,6 +63,10 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <p>No of Items <span id="noofitems"></span></p>
+                        <p>Total <span id="total"></span></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -73,9 +77,13 @@
     <script>
         //create constant 
         const TAXRATE = 10;
-        var count=1;
+        var count = 1;
+        var billtotal=0;
+        var itemcount=0;
         //create class 
         var output = document.getElementById('output');
+        var total = document.getElementById('total');
+        var noofitems = document.getElementById('noofitems');
         class Product {
             constructor(name, price, quantity) {
                 this.name = name;
@@ -83,9 +91,11 @@
                 this.quantity = quantity;
                 this.tax = ((this.price * this.quantity) * TAXRATE) / 100;
                 this.total = (this.price * this.quantity) + this.tax;
+                billtotal+=this.total;
+                total.innerHTML=billtotal;
+                noofitems.innerHTML = count;
             }
-            addRow() 
-            {
+            addRow() {
                 output.innerHTML += `<tr>
                                     <td>${count++}</td>
                                     <td>${this.name}</td>
@@ -98,8 +108,18 @@
         }
 
         //create object variable
-        var p1 = new Product('IPhone -15',111000,5);
-        p1.addRow();
+
+        var title = document.getElementById('title');
+        var price = document.getElementById('price');
+        var quantity = document.getElementById('quantity');
+        let AddItem = (event) => {
+            var p1 = new Product(title.value,price.value,quantity.value);
+            p1.addRow();
+            title.value = "";
+            price.value = "";
+            quantity.value="";
+            return false;
+        }
     </script>
 </body>
 
