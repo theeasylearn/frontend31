@@ -100,10 +100,10 @@
                 this.total = (this.price * this.quantity) + this.tax;
                 billtotal += this.total;
                 total.innerHTML = billtotal;
-                noofitems.innerHTML = count;
             }
             addRow() {
                 count = count + 1;
+                noofitems.innerHTML = count;
                 output.innerHTML += `<tr>
                                     <td>${count}</td>
                                     <td>${this.name}</td>
