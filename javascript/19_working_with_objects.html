@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>working with objects</h1>
+    <p>use console</p>
+    <script>
+        //create empty object
+        let student = {};
+        console.log(student);
+        student.name = "Dipali";
+        student.surname = "Dudhrejiya";
+        student['age'] = 19;
+        console.log(student);
+        //check whether property exists or not 
+        if (student.name === undefined)
+            alert('student has no name property');
+        else
+            alert('student has name property');
+        if ("email" in student)
+            alert('email exists');
+        else
+            alert('email does not exists...');
+        student.name = "monika";
+        student['age'] = 20;
+        console.log(student);
+
+    </script>
+</body>
+
+</html>
