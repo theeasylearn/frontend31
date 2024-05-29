@@ -1,0 +1,4 @@
+1) add 2 more functions into mydatetime.js
+    1 - addDays() it should add give number of days into current date 
+    2 - getDifference() it should return the different in days between two given dates. 
+    
