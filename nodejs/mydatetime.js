@@ -12,6 +12,10 @@ function getCurrentTime()
     let now = d1.getHours() + ":" + d1.getMinutes() + ":" + d1.getSeconds();
     return now;
 }
+function getHour()
+{
+    return new Date().getHours();
+}
 let getCurrentDateTime = function()
 {
     let currentdatetime = getCurrentDate() + " " + getCurrentTime();

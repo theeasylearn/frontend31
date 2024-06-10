@@ -8,7 +8,7 @@ class MyMail
     }
     send(receiver,subject,message)
     {
-        console.log('I will send you email');
+        console.log('I will send you email ' + subject  + ' ' + message);
     }
 }
 module.exports.MyMail = MyMail;
