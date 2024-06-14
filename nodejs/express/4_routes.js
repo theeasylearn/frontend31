@@ -30,25 +30,38 @@ var mycontacts = [
 ]
 
 //get method is used to fetch single contact by id
-//localhost:5000/contact/1
-
+//localhost:5000/contact?id=1
+//get method is used to fetch contacts by city
+//localhost:5000/contact?city=surat
 //to fetch all contact
 //localhost:5000/contact
-app.get(ROUTE + "/:contactid?", function (request, response) {
-    let contactid = request.params.contactid;
-    if(contactid === undefined)
-        response.json(mycontacts);
-    else 
+app.get(ROUTE, function (request, response) {
+    let id = request.query.id;
+    let city = request.query.city;
+    console.log(id,city);
+    let temp = []; //empty array
+    if(id=== undefined && city===undefined)
     {
-        let temp = mycontacts.filter((contact) => {
-            if(contact.id == contactid)
+        temp = mycontacts;
+    }    
+    else if(id!== undefined)
+    {
+        temp = mycontacts.filter((contact) => {
+            if (contact.id == id)
                 return contact;
         });
-        if(temp.length === 0)
-            response.json({'error':'no contact found'});
-        else 
-            response.json(temp);
     }
+    else if(city !== undefined)
+    {
+        temp = mycontacts.filter((contact) => {
+            if(contact.city === city)
+                return contact;
+        });
+    }    
+    if(temp.length === 0)
+        response.json({ 'error': 'no contact found' });
+    else
+        response.json(temp);
 });
 
 const PORTNO = 5000;
