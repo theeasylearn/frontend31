@@ -79,3 +79,7 @@ http://html5test.com/
 
 
 https://alternativeto.net/
+
+
+convert html code into pug 
+https://codebeautify.org/html-to-pug-converter
