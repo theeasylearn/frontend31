@@ -1,0 +1,21 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Gujarat Districts
+    // Bootstrap 5 CSS CDN
+    link(href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css', rel='stylesheet')
+  body
+    .container.mt-5
+      .row
+        .col-lg-8.offset-lg-2
+          .card.shadow
+            .card-header.bg-primary.text-white
+              h3.card-title.mb-0 Districts of Gujarat
+            .card-body
+              ul#districtList.list-group
+                each item in district
+                    li.list-group-item=item
+    // Bootstrap 5 JS and Popper.js CDN
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js')
