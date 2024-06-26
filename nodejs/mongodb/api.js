@@ -1,30 +1,25 @@
 var express = require('express');
 var mongodb = require('mongodb');
 var parser = require('body-parser');
+var { dbPromise } = require('./connection');
 var app = express();
 //middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); //new line added
 var client = mongodb.MongoClient;
-const DATABASE_NAME = "frontend31";
-var database_url = "mongodb://0.0.0.0:27017/" + DATABASE_NAME;
 const ROUTE = "/object";
 let getObject = function(request,response) {
     response.send('request received for get')
 }
 let insertObject = function (request, response) {
-    client.connect(database_url, function (error, database) {
-        if (error != null) {
-            console.log(error);
-        }
-        else 
-        {
-            let db = database.db();
-            let data = request.body;
-            console.log(data);
-            db.collection('myobjects').insertOne(data);
-            response.json([{'error':'no','message':'object added'}]);
-        }
+    dbPromise.then((database) => {
+        let data = request.body;
+        console.log(data);
+        database.collection('myobjects').insertOne(data);
+        response.json([{ 'error': 'no', 'message': 'object added' }]);
+
+    }).catch((error) => {
+        response.json([{ 'error': 'yes', 'message': 'error in connection' }]);
     });
 }
 let updateObject = function (request, response) {
