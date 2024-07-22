@@ -1,15 +1,29 @@
 var connection = require("./connection");
+const getMissingFields = (body, requiredFields) => {
+    return requiredFields.filter(field => !body[field]);
+};
+
 let insert = function(request,response){
-    let sql = "insert into register_user (name,email,password,mobileno,city,address,bloodgroup,dob,gender) values ('krish','krish@gmail.com','123123','11223344','bhavnagar','waghawadi road','b+','2004-12-15','1')";
+    let { name, email, password, mobileno, city, address, bloodgroup, dob, gender } = request.body; //object destructring 
+  
+    let sql = `insert into register_user (name,email,password,mobileno,city,address,bloodgroup,dob,gender) values ('${name}','${email}','${password}','${mobileno}','${city}','${address}','${bloodgroup}','${dob}','${gender}')`;
+
     connection.db.query(sql,function(error,result){
         if(error!=null)
         {
-            response.json("[{'error':'error occured'}]");
+            if (error.code === 'ER_DUP_ENTRY')
+            {
+                response.json("[{'error':'no'},{'success':'no'},{'message':'email/mobile is already regisered with us'}]");
+            }    
+            else 
+            {
+                response.json("[{'error':'no'},{'success':'no'},{'message':'something went wrong, please try after someimes'}]");
+            }
             console.log(error);
         }    
         else 
         {
-            response.json("[{'error':'no'},{'message':'registered successfully'}]");
+            response.json("[{'error':'no'},{'success':'yes'},{'message':'registered successfully'}]");
         }
     });    
 }
