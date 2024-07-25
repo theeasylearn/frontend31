@@ -50,13 +50,29 @@ let update = function (request, response) {
     }
     else {
         let { id, oldpassword, newpassword } = request.body;
-        let sql = `update register_user set password='${newpassword}' where id=${id}`;
-        connection.db.query(sql, function (error, result) {
-            if (error != null)
+        //check id and password combination is valid or invalid
+        let sql = `select id from register_user where id=${id} and password='${oldpassword}'`;
+        connection.db.query(sql,function(error,result){
+            if(error!=null)
                 response.json("[{ 'error': 'error occured' }]");
-            else
-                response.json("[{'error':'no'},{'success':'yes'},{'message':'password changed successfully'}]");
-        });
+            else 
+            {
+                let count = result.length;
+                if(count===0)
+                    response.json("[{'error':'no'},{'success':'no'},{'message':'invalid  password'}]");
+                else 
+                {
+                    sql = `update register_user set password='${newpassword}' where id=${id}`;
+                    connection.db.query(sql, function (error, result) {
+                        if (error != null)
+                            response.json("[{ 'error': 'error occured' }]");
+                        else
+                            response.json("[{'error':'no'},{'success':'yes'},{'message':'password changed successfully'}]");
+                    });
+                }
+            }
+        })
+        
     }
 
 }
