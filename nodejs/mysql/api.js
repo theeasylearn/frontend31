@@ -16,5 +16,9 @@ app.post(ROUTE,(request,response) => users.insert(request,response));
 //change password
 app.put(ROUTE,(request,response) => users.update(request,response));
 
+
+//forgot password
+app.get(ROUTE, (request, response) => users.forgot_password(request, response));
+
 app.listen(PORTNO);
 console.log('ready to accept request');
