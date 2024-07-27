@@ -18,7 +18,8 @@ app.put(ROUTE,(request,response) => users.update(request,response));
 
 
 //forgot password
-app.get(ROUTE, (request, response) => users.forgot_password(request, response));
+app.get('patient_forgot_password', (request, response) => users.forgot_password(request, response));
 
+app.post('patient_login', (request, response) => users.select(request, response));
 app.listen(PORTNO);
 console.log('ready to accept request');

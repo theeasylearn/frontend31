@@ -1,11 +1,11 @@
 var nodemailer = require('nodemailer');
-class mail 
+class Email 
 {
     constructor()
     {
       this.sender = 'tempm7777@gmail.com';
-      this.password = 'cyey hbwe hvzp xzsc';
-        this.MailSender = nodemailer.createTransport({
+      this.password = 'wahe iifl jzoi apax';
+      this.MailSender = nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: 587,
             auth: {
@@ -13,7 +13,7 @@ class mail
               pass: this.password,
             },
           });
-        MailSender.verify().then(console.log).catch(console.error);
+        //this.MailSender.verify();
     }
     send(receiver,subject,message)
     {
@@ -25,4 +25,4 @@ class mail
           });
     }
 }
-module.exports.mail = mail;
+module.exports.Email = Email;
