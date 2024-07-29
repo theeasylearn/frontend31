@@ -1,13 +1,12 @@
 var connection = require("./connection");
-const getMissingFields = (body, requiredFields) => {
-    return requiredFields.filter(field => !body[field]);
-};
+//local module import
+var common = require("./common.js");
 
 let insert = function (request, response) {
     let { name, email, password, mobileno, city, address, bloodgroup, dob, gender } = request.body;
 
     const requiredFields = ['name', 'email', 'password', 'mobileno', 'city', 'address', 'bloodgroup', 'dob', 'gender'];
-    const missingFields = getMissingFields(request.body, requiredFields);
+    const missingFields = common.getMissingFields(request.body, requiredFields);
 
     if (missingFields.length > 0) {
         response.json({
@@ -39,7 +38,7 @@ let insert = function (request, response) {
 //change password
 let update = function (request, response) {
     let requiredFields = ['id', 'oldpassword', 'newpassword'];
-    let missingFields = getMissingFields(request.body, requiredFields);
+    let missingFields = common.getMissingFields(request.body, requiredFields);
     if (missingFields.length > 0) {
         response.json({
             error: 'no',
@@ -121,7 +120,7 @@ let forgot_password = function (request, response) {
 
 let select = function (request, response) {
     var requiredFields = ['email', 'password'];
-    var missingFields = getMissingFields(request.body, requiredFields);
+    var missingFields = common.getMissingFields(request.body, requiredFields);
     if (missingFields.length > 0) {
         response.json({
             error: 'no',
