@@ -5,8 +5,9 @@ var parser = require('body-parser');
 //import local modules
 var users = require("./users");
 var admin = require('./admin');
-
+var cors = require('cors');
 var app = express();
+app.use(cors());
 //middleware are required to access input passed using post,put,delete 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); //new line added
