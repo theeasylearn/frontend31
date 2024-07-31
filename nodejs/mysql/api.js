@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); //new line added
 
 const ROUTE = "/patient";
-const ADMIN_ROUTE = "/patient";
+const ADMIN_ROUTE = "/admin";
 const PORTNO = 5000;
 //define routes
 //register
