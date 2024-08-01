@@ -1,0 +1,19 @@
+	Online Shoppping web Application
+		Types of users
+			Admin (owner of app/business)
+			Registered User (who buy product online from this app)
+		Features of app (to be used registered user)
+			1) Register, Login, Change Password, Reset Password 
+			2) browse categories, product as well as search product 
+			3) View Offers and buy product of offers
+			4) Add, remove product to and from cart, move product from cart to wishlist
+			5) Add, remove product to and from wishlist, move product from wishlist to cart
+			6) Checkout
+			7) View History
+		Admin Panel  (to be used admin)
+			1) Login, Change Password, Reset Password 
+			2) Categories Management (Add, Edit, Delete, View, search categories)
+			3) Product Management (Add, Edit, Delete, View, search Product)
+			4) User Management (View, search,Message,Block/Unblock users)
+			5) Orders Management (Accept/Reject,View, Search, status change)
+			6) Offers Management (Add, Edit, Delete, View, search Offers) Exercise

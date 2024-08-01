@@ -1,16 +1,22 @@
 // this file is only used to define routes
-var express = require('express');
-var parser = require('body-parser');
+var express = require("express")
+var bodyParser = require("body-parser");
+var cors = require("cors"); // Add this line
+var cors = require('cors');
 
 //import local modules
 var users = require("./users");
 var admin = require('./admin');
-var cors = require('cors');
+
 var app = express();
-app.use(cors());
-//middleware are required to access input passed using post,put,delete 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json()); //new line added
+app.use(express.json());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    // Update with your React.js app's origin
+    optionsSuccessStatus: 200,
+}));
+
 
 const ROUTE = "/patient";
 const ADMIN_ROUTE = "/admin";
