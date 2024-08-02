@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 var settings = {
-    database : 'doctor',
+    database : 'frontend31',
     user: 'root',
     password:'',
     port:3308,

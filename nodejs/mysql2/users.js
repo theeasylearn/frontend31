@@ -1,18 +1,30 @@
 var connection = require("./connection");
 
 let register = function (request, response) {
-   let sql = `insert into users (email,password,mobile) values ('ram@gmail.com','123123','9876543210')`;
-   connection.db.query(sql,function(error,result){
-        if(error!=null)
-        {
-            response.json([{'error':"error occured"}]);
-            console.log(error);
-        }    
-        else 
-        {
-            response.json([{'error':'no'},{'success':'yes'},{'message':'registered successfully'}]);
-        }
-   });
+   //create variables to store input passed by browser via post method
+   let email = request.body.email;
+   let password = request.body.password;
+   let mobile = request.body.mobile;
+   console.log(email,mobile,password);
+   if(email === undefined || password === undefined || mobile === undefined)
+   {
+       response.json([{ 'error': 'input is missing' }]);
+   } 
+   else 
+   {
+       let sql = `insert into users (email,password,mobile) values ('${email}','${password}','${mobile}')`;
+
+       connection.db.query(sql, function (error, result) {
+           if (error != null) {
+               response.json([{ 'error': "error occured" }]);
+               console.log(error);
+           }
+           else {
+               response.json([{ 'error': 'no' }, { 'success': 'yes' }, { 'message': 'registered successfully' }]);
+           }
+       });
+   }
+  
 }
 let login = function (request, response) {
     response.send("login request received via post method");

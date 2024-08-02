@@ -1,18 +1,21 @@
 var express = require('express');
+var cors = require('cors');
 // import local module
 var users = require('./users');
 var app = express();
 // Middleware required to access input passed using post, put, delete 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // New line added
-
+app.use(cors());
 const USER_ROUTE = "/users";
 const PORTNO = 5000;
 
 // Register
 // Endpoint: http://localhost:5000/users/register
 // Method: POST
-app.post(USER_ROUTE, (request, response) => users.register(request, response));
+//input email=krish@gmail.com&password=159753&mobile=2589631470
+//all inputs are required
+app.post(USER_ROUTE + "/register", (request, response) => users.register(request, response));
 
 // Login
 // Endpoint: http://localhost:5000/users/login
