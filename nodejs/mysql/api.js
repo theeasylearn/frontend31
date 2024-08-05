@@ -2,22 +2,14 @@
 var express = require("express")
 var bodyParser = require("body-parser");
 var cors = require("cors"); // Add this line
-var cors = require('cors');
-
 //import local modules
 var users = require("./users");
 var admin = require('./admin');
 
 var app = express();
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors({
-    origin: 'http://localhost:3000',
-    // Update with your React.js app's origin
-    optionsSuccessStatus: 200,
-}));
-
-
 const ROUTE = "/patient";
 const ADMIN_ROUTE = "/admin";
 const PORTNO = 5000;
