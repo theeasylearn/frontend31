@@ -31,21 +31,54 @@ let register = function (request, response) {
   
 }
 let login = function (request, response) {
-    let sql = "select id from users where email='krish@gmail.com' and password='123123'";
-    connection.db.query(sql,function(error,result){
-        if(error!=null)
-            response.json([{ 'error': "error occured" }]);
-        else 
-        {
-            if(result.length === 0)
-                response.json([{ 'error': 'no' }, { 'success': 'no' }, { 'message': 'invalid login' }]);
-            else 
-                response.json([{ 'error': 'no' }, { 'success': 'yes' }, { 'message': 'login successfully' }]);
+    let email = request.body.email;
+    let password = request.body.password;
+    if(email === undefined || password === undefined)
+    {
+        response.json([{'error':'input is missing'}]);
+    }
+    else 
+    {
+        let sql = `select id from users where email='${email}' and password='${password}'`;
+        connection.db.query(sql, function (error, result) {
+            if (error != null)
+                response.json([{ 'error': "error occured" }]);
+            else {
+                if (result.length === 0)
+                    response.json([{ 'error': 'no' }, { 'success': 'no' }, { 'message': 'invalid login' }]);
+                else
+                    response.json([{ 'error': 'no' }, { 'success': 'yes' }, { 'message': 'login successfully' }, { 'id': result[0]['id'] }]);
 
-        }
-    });
+            }
+        });
+    }
+   
 }
 let change_password = function (request, response) {
+    let {id,oldpassword,newpassword} = request.body;
+    if(id === undefined || oldpassword === undefined || newpassword === undefined)
+    {
+        response.json([{ 'error': 'input is missing' }]);
+    }
+    else 
+    {
+        let sql = `select id from users where password='${oldpassword}' and id=${id}`;
+        connection.db.query(sql,function(error,result){
+            if (error != null)
+                response.json([{ 'error': "error occured" }]);
+            else 
+            {
+                if(result.length === 0)
+                {
+                    response.json([{ 'error': 'no' }, { 'success': 'no' }, { 'message': 'invalid password' }]);
+                }
+                else 
+                {
+                    //update old password with new password
+                }
+            }
+        })
+    }
     response.send("change password request received via post method");
 }
 let forgot_password = function (request, response) {

@@ -20,7 +20,8 @@ app.post(USER_ROUTE + "/register", (request, response) => users.register(request
 // Login
 // Endpoint: http://localhost:5000/users/login
 // Method: POST
-
+//input (required)
+//email=ankit@gmail.com&password=123123
 
 app.post(USER_ROUTE + "/login", (request, response) => users.login(request, response));
 
