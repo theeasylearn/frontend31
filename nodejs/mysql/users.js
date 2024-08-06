@@ -171,7 +171,6 @@ let select = function (request, response) {
         });
     }
 }
-
 module.exports.insert = insert;
 module.exports.update = update;
 module.exports.forgot_password = forgot_password;
