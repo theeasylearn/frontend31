@@ -31,6 +31,7 @@ app.get('/admin_forgot_password', (request, response) => admin.forgot_password(r
 
 app.post('/patient_login', (request, response) => users.select(request, response));
 app.post('/doctor_login', (request, response) => doctor.select(request, response));
+app.post('/doctor_profile', (request, response) => doctor.profile(request, response));
 app.post(ADMIN_ROUTE, (request, response) => admin.select(request, response));
 app.listen(PORTNO);
 console.log('ready to accept request');

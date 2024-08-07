@@ -140,7 +140,7 @@ let forgot_password = function (request, response) {
 }
 
 let select = function (request, response) {
-    console.log(request.body);
+    console.log(request.body,'hi');
     var requiredFields = ['email', 'password'];
     var missingFields = common.getMissingFields(request.body, requiredFields);
     if (missingFields.length > 0) {
