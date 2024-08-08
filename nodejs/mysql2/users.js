@@ -75,11 +75,17 @@ let change_password = function (request, response) {
                 else 
                 {
                     //update old password with new password
+                    sql = `update users set password='${newpassword}' where id='${id}'`;
+                    connection.db.query(sql,function(error,result){
+                        if(error)
+                            response.json([{ 'error': "error occured" }]);
+                        else 
+                            response.json([{ 'error': 'no' }, { 'success': 'yes' }, { 'message': 'password changed successfully' }]);
+                    });
                 }
             }
         })
     }
-    response.send("change password request received via post method");
 }
 let forgot_password = function (request, response) {
     response.send("forgot password request received via get method");

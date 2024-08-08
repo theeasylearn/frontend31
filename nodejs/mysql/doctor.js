@@ -81,7 +81,7 @@ let profile = function (request, response) {
     // console.log(qualification, city, address, gender, dob, website, photo);
     let { qualification, city, address, dob, website, gender, doctor_id } = request.body;
 
-    const requiredFields = ['qualification', 'city', 'address', 'dob', 'website', 'gender','doctor_id'];
+    const requiredFields = ['qualification', 'city', 'address', 'dob', 'website', 'gender', 'doctor_id'];
     const missingFields = common.getMissingFields(request.body, requiredFields);
 
     if (missingFields.length > 0) {
@@ -90,25 +90,31 @@ let profile = function (request, response) {
         ]);
         return;
     } else {
-        let sql = `update doctor set qualification='${qualification}',city='${city}',address='${address}',dob='${dob}',website='${website}',gender='${gender}' where id='${doctor_id}'`;
+        if (request.file) {
+            let sql = `update doctor set qualification='${qualification}',city='${city}',address='${address}',dob='${dob}',website='${website}',gender='${gender}',photo='${request.file.filename}' where id='${doctor_id}'`;
 
-        connection.db.query(sql, function (error, result) {
-            if (error != null) {
-                
+            connection.db.query(sql, function (error, result) {
+                if (error != null) {
+
                     response.json([
                         { error: 'no' },
                         { success: 'no' },
                         { message: 'something went wrong, please try after some time' }
                     ]);
-                console.log(error);
-            } else {
-                response.json([
-                    { error: 'no' },
-                    { success: 'yes' },
-                    { message: 'profile created/updated successfully' }
-                ]);
-            }
-        });
+                    console.log(error);
+                } else {
+                    response.json([
+                        { error: 'no' },
+                        { success: 'yes' },
+                        { message: 'profile created/updated successfully' }
+                    ]);
+                }
+            });
+        }
+        else 
+        {
+            response.json([{ 'error': 'could not upload file' }]);
+        }
     }
 }
 module.exports.insert = insert;
