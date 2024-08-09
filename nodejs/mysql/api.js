@@ -18,23 +18,26 @@ const ROUTE = "/patient";
 const ADMIN_ROUTE = "/admin";
 const DOCTOR_ROUTE = "/doctor";
 const PORTNO = 5000;
+
+/* require to upload file on server (start) */
 var storage = multer.diskStorage({
     //destination property is used to provide relative path where files will be uploaded
     destination: function (req, file, cb) {
-        //2nd argument in cb is relative path where files will be uploaded
-        cb(null, "images/");
+        //set path of the project's directory where files will be saved
+        let path = "images/" 
+        cb(null, path);
         console.log('destination ', file);
     },
     //filename propety is used to give unique file name to uploaded file
     filename: function (req, file, cb) {
-        //2nd argument in cb is filename which has 2 part. 1st part is original file name and 2nd part is Date.now() means unique timestamp
-        cb(null, file.fieldname + "-" + Date.now() + ".jpg");
+        let uniqueFileName = file.fieldname + "-" + Date.now() + ".jpg";
+        cb(null,uniqueFileName);
         console.log('filename ', file.fieldname);
 
     },
 });
 
-const maxSize = 3 * 1024 * 1024; //maximum filesize is 3 mb. which you can change
+const maxSize = 1 * 1024 * 1024; //maximum filesize is 3 mb. which you can change
 var upload = multer({
     storage: storage,
     limits: { fileSize: maxSize },
@@ -49,6 +52,7 @@ var upload = multer({
     },
 });
 
+/* require to upload file on server (end) */
 
 //define routes
 //register

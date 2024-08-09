@@ -69,7 +69,7 @@ let select = function (request, response) {
                         { error: 'no' },
                         { success: 'yes' },
                         { message: 'login successfully' },
-                        { message: result[0]['id'] },
+                        { id: result[0]['id'] },
                     ]);
                 }
             }
