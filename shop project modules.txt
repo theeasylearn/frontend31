@@ -27,7 +27,14 @@ Types of users
                     id,productid,quantity,price,userid,billid
                 2 bill
                     id,userid,billdate,amount,paymentmode,paymentstatus,fullname,address1,address2,city,pincode,mobile,remarks,orderstatus
-
+            //checkout 
+            //process
+            //check all the items in order are in stock or not 
+            //calculate total bill amount 
+            //reduce the stock of items given in order 
+            insert new record into bill table 
+                userid,billdate,amount,paymentmode,fullname,address1,address2,city,pincode,mobile,remarks
+            //update cart 
             Users management   (class)      
                 view, search, shopping history, send mail, block & unblock   
                 users

@@ -49,17 +49,20 @@ app.get(CATEGORY_ROUTE,(request,response) => category.select(request,response));
 //used to insert new cateory
 //http://localhost:5000/category
 //method post 
-
+//title=abc&islive=1
 app.post(CATEGORY_ROUTE,(request,response) => category.insert(request,response));
 
 //used to update existing cateory
 //http://localhost:5000/category
-//method put 
+//method put
+
+//title=abcde&islive=0&id
 app.put(CATEGORY_ROUTE,(request,response) => category.update(request,response));
 
 //used to delete existing cateory
 //http://localhost:5000/category
 //method delete 
+//id=8
 app.delete(CATEGORY_ROUTE,(request,response) => category.Delete(request,response));
 
 app.listen(PORTNO, () => {
