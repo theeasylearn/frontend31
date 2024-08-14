@@ -3,6 +3,7 @@ var cors = require('cors');
 // import local module
 var users = require('./users');
 var category = require('./category');
+var cart = require("./cart");
 var app = express();
 // Middleware required to access input passed using post, put, delete 
 app.use(express.urlencoded({ extended: true }));
@@ -10,6 +11,8 @@ app.use(express.json()); // New line added
 app.use(cors());
 const USER_ROUTE = "/users";
 const CATEGORY_ROUTE = "/category";
+const CART_ROUTE = "/cart";
+
 const PORTNO = 5000;
 
 // Register
@@ -64,6 +67,15 @@ app.put(CATEGORY_ROUTE,(request,response) => category.update(request,response));
 //method delete 
 //id=8
 app.delete(CATEGORY_ROUTE,(request,response) => category.Delete(request,response));
+
+//used to update/insert product into cart
+//http://localhost:5000/cart
+//method delete
+//productid=1&userid=1
+
+app.post(CART_ROUTE,(request,response) => cart.insert(request,response));
+app.delete(CART_ROUTE,(request,response) => cart.delete(request,response));
+app.get(CART_ROUTE,(request,response) => cart.select(request,response));
 
 app.listen(PORTNO, () => {
     console.log('ready to accept request on port', PORTNO);
