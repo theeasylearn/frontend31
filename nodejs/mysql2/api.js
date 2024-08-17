@@ -4,6 +4,7 @@ var cors = require('cors');
 var users = require('./users');
 var category = require('./category');
 var cart = require("./cart");
+var bill = require("./bill");
 var app = express();
 // Middleware required to access input passed using post, put, delete 
 app.use(express.urlencoded({ extended: true }));
@@ -12,6 +13,7 @@ app.use(cors());
 const USER_ROUTE = "/users";
 const CATEGORY_ROUTE = "/category";
 const CART_ROUTE = "/cart";
+const BILL_ROUTE = "/bill";
 
 const PORTNO = 5000;
 
@@ -76,6 +78,10 @@ app.delete(CATEGORY_ROUTE,(request,response) => category.Delete(request,response
 app.post(CART_ROUTE,(request,response) => cart.insert(request,response));
 app.delete(CART_ROUTE,(request,response) => cart.delete(request,response));
 app.get(CART_ROUTE,(request,response) => cart.select(request,response));
+
+
+//usersid=1&fullname=ram&address1=105_evasurbhi&address2=opp_akshwarwadi&city=bhavnagar&pincode=364001&paymentmode=cod&remarks=water_proof_parcel&mobile=1234567890
+app.post(BILL_ROUTE,(request,response) => bill.insert(request,response));
 
 app.listen(PORTNO, () => {
     console.log('ready to accept request on port', PORTNO);

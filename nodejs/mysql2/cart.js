@@ -31,9 +31,7 @@ module.exports.insert = function (request, response) {
             response.json([{ 'error': 'no' }, { 'success': 'yes' }, { 'message': 'cart updated' }]);
     });
 }
-module.exports.update = function (request, response) {
 
-}
 module.exports.delete = function (request, response) {
     let sql = `delete from cart where id=?`;
     let id = request.body.id;
