@@ -80,7 +80,7 @@ app.delete(CART_ROUTE,(request,response) => cart.delete(request,response));
 app.get(CART_ROUTE,(request,response) => cart.select(request,response));
 
 
-//usersid=1&fullname=ram&address1=105_evasurbhi&address2=opp_akshwarwadi&city=bhavnagar&pincode=364001&paymentmode=cod&remarks=water_proof_parcel&mobile=1234567890
+//usersid=2&fullname=ram&address1=105_evasurbhi&address2=opp_akshwarwadi&city=bhavnagar&pincode=364001&paymentmode=cod&remarks=water_proof_parcel&mobile=1234567890
 app.post(BILL_ROUTE,(request,response) => bill.insert(request,response));
 
 app.listen(PORTNO, () => {

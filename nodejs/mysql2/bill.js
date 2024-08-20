@@ -21,8 +21,28 @@ module.exports.insert = function (request, response) {
             else {
                 //1) check all the items in order are in stock or not 
                 let orderdetail = [...result]; 
+                let outofstock = [];
                 
-                response.json([{ 'error': 'no' }, { 'success': 'yes' }, { 'message': 'data fetched' }]);
+                outofstock = orderdetail.filter((item) => {
+                    if(item.stock<item.quantity)
+                        return item;    
+                });
+
+                if(outofstock.length>=1)
+                {
+                    console.log(outofstock);
+                    let titles = outofstock.map(item => item.title).join(', ');
+                    response.json([{ 'error': 'no' }, { 'success': 'no' }, { 'message': 'following items are not in stock \n' + titles}]);
+                }    
+                else 
+                {
+                    //calculate total bill amount 
+                    let grandtotal = 0;
+                    orderdetail.map((item) => {
+                        grandtotal+= (item.price * item.quantity);
+                    });
+                    response.json([{ 'error': 'no' }, { 'success': 'yes' }, { 'message': 'all products are available in stock' + grandtotal }]);
+                }
             }
         });
     }
