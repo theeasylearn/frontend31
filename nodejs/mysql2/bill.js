@@ -37,11 +37,46 @@ module.exports.insert = function (request, response) {
                 else 
                 {
                     //calculate total bill amount 
-                    let grandtotal = 0;
+                    var grandtotal = 0;
                     orderdetail.map((item) => {
                         grandtotal+= (item.price * item.quantity);
                     });
-                    response.json([{ 'error': 'no' }, { 'success': 'yes' }, { 'message': 'all products are available in stock' + grandtotal }]);
+                    //reduce the stock of items given in order 
+                    orderdetail.map((item) => {
+                        sql = `update product set stock=stock-${item.quantity} where id=${item.id}`;
+                        connection.db.query(sql,function(error,result2){
+                            if (error) {
+                                response.json([{ 'error': 'error occured' }]);
+                                console.log(error);
+                            }
+                        })
+                    });
+                    // insert new record into bill table 
+                    sql = "INSERT INTO `bill`(`usersid`, `fullname`, `address1`, `address2`, `mobile`, `city`, `pincode`,`amount`, `remarks`) VALUES (?,?,?,?,?,?,?,?,?)";
+                    let data2 = [usersid, fullname, address1, address2, mobile, city, pincode, grandtotal,remarks];
+                    connection.db.query(sql,data2,function(error,result2){
+                        if (error) {
+                            response.json([{ 'error': 'error occured' }]);
+                            console.log(error);
+                        }
+                        else 
+                        {
+                            //update cart 
+                            orderdetail.map((item) => {
+                                let billid = result2.insertId; 
+                                console.log(result2);
+                                sql = `update cart set billid=${billid},price=${item.price} where billid=0 and productid=${item.id} and usersid=${item.usersid}`;
+                                connection.db.query(sql, function (error, result2) {
+                                    if (error) {
+                                        response.json([{ 'error': 'error occured' }]);
+                                        console.log(error);
+                                    }
+                                });
+                            });
+                            response.json([{ 'error': 'no' }, { 'success': 'yes' }, { 'message': 'new order created with order id' + billid }]);
+                        }
+                    })
+                    
                 }
             }
         });
