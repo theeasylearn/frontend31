@@ -1,0 +1,16 @@
+1) create an reactjs example that has table in following format
+variable1       variable2       expression      result 
+a = 10            b = 15             a<b            True 
+a = 10            b = 15             a>b            False 
+a = 10            b = 15             a==b           False 
+a = 10            b = 15             a!=b           True 
+a = 10            b = 15             a<=b            
+a = 10            b = 15             a>=b            
+
+
+2) create various class in css to apply attactive formatting to resume created earlier.
+        use web font 
+        change colors, background colors 
+        apply borders and shadow
+        use margin and padding 
+        

@@ -13,3 +13,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* create class type style */
+.my-list 
+{
+    background-color:cadetblue;
+    color:white;
+    border:1px solid black;
+}
