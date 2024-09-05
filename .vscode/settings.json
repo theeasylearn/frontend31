@@ -1,3 +1,21 @@
 {
-    "liveServer.settings.port": 5501
+    "liveServer.settings.port": 5501,
+    "html-css-class-completion.CSSLanguages": [
+
+        "css",
+        "sass",
+        "scss",
+        "js",
+        "jsx"
+    ],
+    "editor.quickSuggestions": {
+        "comments": false, // <- no 24x7 IntelliSense in comments
+        "strings": true, // but in strings and the other parts of source files
+        "other": true
+    },
+    "auto-rename-tag.activationOnLanguage": [
+        
+
+        "*"
+    ]
 }
