@@ -14,3 +14,16 @@ a = 10            b = 15             a>=b
         apply borders and shadow
         use margin and padding 
         
+
+3) modify lesson6, use st,rd,th,nd after date using decision making in react js
+        1st
+        2nd 
+        3rd
+        4th
+        5th
+        6th 
+        7th
+        8th
+        9th
+
+   display full month name instead of month number 
