@@ -20,6 +20,8 @@ function showDateTime()
     var time = hour + ":" + now.getMinutes() + ":" + now.getSeconds();
     var today = now.getDate() + "/" + now.getMonth() + "/" + now.getFullYear();
     var output = time + ampm + today;
-    return output;
+    root.render(output);
 }
-root.render(showDateTime());
+// showDateTime(); // run only 1 time
+// to update date and time at every 1 second use setInterval
+setInterval(showDateTime,1000);
