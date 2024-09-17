@@ -4,61 +4,52 @@ import ReactDOM from 'react-dom/client';
 //create virtual DOM using root from index.html
 const root = ReactDOM.createRoot(document.getElementById('root'));
 //create class components
-class Player extends React.Component
+class Movie extends React.Component
 {
     constructor(props)
     {
-        super(props); //calling parent class constuctor (required)
-        //create property (instance variable)
-        this.name = props.name;
-        this.runs = props.runs;
-        this.match = props.match;
-        this.century = props.century;
-        this.fifties = props.fifties;
-        this.average = this.run / this.match;
-        this.photo = props.photo;
+      super(props);
+      //create state object
+      this.state = {
+          name: 'James Bond',
+          starcast: 'ABC XYZ BCD',
+          duration:150,
+          price:300,
+          photo: 'http://picsum.photos/300?random=1'
+      }
     }
-    //must override below method
     render()
     {
-        return (  <div className="col-lg-6">
-            <div className="card shadow">
-              <div className="row">
-                <div className="col-8">
-                  <div className="card-body">
-                    <h3 className="card-title">{this.name}</h3>   
-                    <hr />
-                    Runs : {this.runs} <br />
-                    Match : {this.match} <br />
-                    100s: {this.century} <br />
-                    50s: {this.fifties} <br />
-                  </div>
-                </div>
-                <div className="col-4">
-                  <img src={this.photo} className="img-fluid" />
-                </div>
+        return ( <div className='col-lg-3'>
+          <div className='card shadow'>
+              <img className='card-img-top' src={this.state.photo} />
+              <div className='card-body'>
+                  <h3>{this.state.name}</h3>
+                  <ul className='list-group list-group-flush'>
+                    <li className='list-group-item'>{this.state.starcast}</li>
+                    <li className='list-group-item'>{this.state.duration}</li>
+                    <li className='list-group-item'>{this.state.price}</li>
+                  </ul>
               </div>
-            </div>
-          </div>);
-    }
-}
-class Cricket extends React.Component
-{
-    // must Override below method 
-    render()
-    {
-        return (<div className="container">
-            <div className="row">
-              <div className="col-12">
-                <h1>Players</h1>
-              </div>
-              {/* it will automatically call render function of Player class  */}
-             <Player name='KL Rahul' runs='12000' match='100' century='20' fifties='20' photo='http://picsum.photos/300?random=1' />    
-             <Player name='Pant' runs='15000' match='111' century='15' fifties='11' photo='http://picsum.photos/300?random=2' />    
-            
-            </div>
           </div>
-          );
+      </div>);
     }
 }
-root.render(<Cricket />);
+
+class Multiplex extends React.Component
+{
+    render()
+    {
+        return (
+          <div className='container'>
+              <div className='row'>
+                <div className='col-12'>
+                    <h1>Maxus</h1>
+                </div>
+              <Movie />
+              </div>
+          </div>
+        )
+    }
+}
+root.render(<Multiplex />);
