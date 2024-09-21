@@ -17,7 +17,7 @@ class Movie extends React.Component {
       price: this.props.price,
       photo: this.props.photo,
       count: 0,
-      total:0
+      total: 0
     }
   }
 
@@ -28,7 +28,11 @@ class Movie extends React.Component {
 
     this.setState({
       count: this.state.count + 1,
-      total: this.state.count * this.state.price
+    }, () => {
+      //annonymus arrow function which execute only after count variable gets updated
+      this.setState({
+        total: this.state.count * this.state.price
+      });
     });
 
   }
@@ -37,7 +41,12 @@ class Movie extends React.Component {
     // this.state.count = this.state.count - 1; wrong way
     this.setState({
       count: this.state.count - 1,
-      total: this.state.count * this.state.price
+    }, () => {
+      //annonymus arrow function which execute only after count variable gets updated
+      this.setState({
+        total: this.state.count * this.state.price
+
+      })
     });
   }
   // call-back function
