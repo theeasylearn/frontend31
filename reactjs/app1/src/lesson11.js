@@ -22,13 +22,27 @@ class Movie extends React.Component {
     }
   }
 
-    //updating phase
+  //mounting phase
+  componentWillMount()
+  {
+      console.log('componentWillMount called...');
+  }
+
+  componentDidMount()
+  {
+    console.log('componentDidMount called...');
+  }
+
+  //updating phase
   shouldComponentUpdate(nextProp,nextState)
   {
-      if(nextState.count<= -1)
-        return false;
-      else 
-        return true;
+      console.log('shouldComponentUpdate called...');
+      return true;
+  }
+
+  componentWillUpdate(nextProp,nextState)
+  {
+    console.log('componentWillUpdate called...');
   }
 
   componentDidUpdate(nextProp,nextState)
@@ -36,6 +50,10 @@ class Movie extends React.Component {
     console.log('componentDidUpdate called...');
   }
 
+  componentWillUnmount()
+  {
+    console.log('componentWillUnmount called...');
+  }
   //non call-back function should be create as arrow function
   increaseCount = () => {
     //alert('plus');
