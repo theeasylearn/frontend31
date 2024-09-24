@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Post Example</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-4">
+            <div class="card shadow">
+                <!-- Post Header (User Info) -->
+                <div class="card-header d-flex align-items-center">
+                    <img src="https://picsum.photos/50" alt="Profile" class="rounded-circle me-3">
+                    <div>
+                        <h5 class="mb-0">John Doe</h5>
+                        <small class="text-muted">2 hours ago</small>
+                    </div>
+                </div>
+        
+                <!-- Post Body (Text and Image) -->
+                <div class="card-body">
+                    <p class="card-text">
+                        This is a sample Facebook post. Bootstrap makes creating responsive layouts easy and efficient!
+                    </p>
+                    <img src="https://picsum.photos/400" class="img-fluid rounded" alt="Post Image">
+                    <b>Comments</b>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Congratulation, Great Job</li>
+                        <li class="list-group-item">Well done.</li>
+                    </ul>
+                </div>
+        
+                <!-- Post Footer (Like, Comment, Share Buttons) -->
+                <div class="card-footer d-flex justify-content-between">
+                    <button class="btn btn-light btn-sm">
+                        <i class="bi bi-hand-thumbs-up"></i> Like
+                    </button>
+                    <button class="btn btn-light btn-sm">
+                        <i class="bi bi-chat"></i> Comment
+                    </button>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap 5 JS Bundle (with Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Optional Bootstrap Icons CDN -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+</body>
+</html>
