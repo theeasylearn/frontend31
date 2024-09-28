@@ -61,10 +61,13 @@ class UserPost extends React.Component {
                         {this.content}
                     </p>
                     <img src={this.photo} className="img-fluid rounded" alt="Post Image" /> <br />
-                    <b>Comments</b>
+                    <div className='d-flex justify-content-between'>
+                        <span><b>Comments</b></span>
+                        <span className='badge bg-dark'>{this.state.comments.length>0 && this.state.comments.length + " comments"}</span>
+                    </div>
                     <ul className="list-group list-group-flush">
-                        {this.state.comments.map((item) => {
-                            return (<li className='list-group-item d-flex justify-content-between'><span>{item}</span>
+                        {this.state.comments.map((item,index) => {
+                            return (<li key={index} className='list-group-item d-flex justify-content-between'><span>{item}</span>
                                 <i onClick={() => this.deleteComment(item)} className='fa fa-trash'></i>
                             </li>)
                         })}
