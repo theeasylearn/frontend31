@@ -1,78 +1,61 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-class EMICalculator extends React.Component {
+class LoginForm extends React.Component {
     constructor(props) {
         super(props);
+        this.email = React.createRef();
+        this.password = React.createRef();
         this.state = {
-            amount: 1000,
-            rate: 10,
-            years: 1,
-            emi_amount: 0
+            message:''
         }
     }
 
-    onInputChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        }, () => {
-            this.calculateEMI();
-        });
-    }
-    calculateEMI = () => {
-        console.log(this.state);
-        //here i will calculate emi and store into state variable emi_amount
-        const { amount, rate, year } = this.state;
-        const principal = parseFloat(amount);
-        const annualRate = parseFloat(rate);
-        const timeInYears = parseInt(year);
-
-        // Convert annual interest rate to monthly and time in years to months
-        const monthlyRate = annualRate / (12 * 100);
-        const numberOfMonths = timeInYears * 12;
-
-        // EMI calculation formula
-        const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, numberOfMonths)) /
-                    (Math.pow(1 + monthlyRate, numberOfMonths) - 1);
-
-        // Update state with EMI value (rounded to 2 decimal places)
-        this.setState({
-            emi_amount: emi.toFixed(2)
-        });
-
+    verifyLogin = (event) => {
+        console.log(this.email.current.value);
+        console.log(this.password.current.value);
+        if(this.email.current.value === 'admin@gmail.com' && this.password.current.value === "123123")
+        {
+            this.setState({
+                message:'login successfull'
+            })
+        }    
+        else 
+        {
+            this.setState({
+                message:'login failed'
+            })
+        }
+        event.preventDefault(); 
     }
     render() {
         return (<div className="container mt-5">
-            <div className="row">
-                <div className="col-8 offset-2">
-                    <div className="card shadow">
-                        <div className="card-header text-bg-primary">
-                            <h2 className="mb-4">EMI Calculator</h2>
-                        </div>
-                        <div className="card-body">
-
-                            <div className="mb-3">
-                                <label htmlFor="amount" className="form-label">Principal Amount (P)</label>
-                                <input type="number" className="form-control" id="amount" name="amount" placeholder="Enter principal amount" required
-                                    value={this.state.amount} onChange={this.onInputChange} />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="rate" className="form-label">Annual Interest Rate (R%)</label>
-                                <input type="number" className="form-control" id="rate" name='rate' placeholder="Enter interest rate" required
-                                    value={this.state.rate} onChange={this.onInputChange} />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="year" className="form-label">Time Period (T in years)</label>
-                                <input type="number" className="form-control" id="year" name='year' placeholder="Enter time in years" required
-                                    value={this.state.year} onChange={this.onInputChange} />
-                            </div>
-
-                            <h2>{this.state.emi_amount}</h2>
-                        </div>
-                    </div>
+            <div className="row justify-content-center">
+              <div className="col-md-6">
+                <div className="card shadow">
+                  <div className="card-header text-center text-bg-primary">
+                    <h4>Login</h4>
+                  </div>
+                  <div className="card-body">
+                    <form onSubmit={this.verifyLogin}>
+                      <div className="mb-3">
+                        <label htmlFor="email" className="form-label">Email address</label>
+                        <input type="email" className="form-control" id="email" placeholder="Enter your email" required ref={this.email} />
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="password" className="form-label">Password</label>
+                        <input type="password" className="form-control" id="password" placeholder="Enter your password" required ref={this.password} />
+                      </div>
+                      <button type="submit" className="btn btn-primary w-100">Sign in</button>
+                      <p align='center'>
+                        {this.state.message}
+                      </p>
+                    </form>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>);
+          </div>);
     }
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<EMICalculator />);
+root.render(<LoginForm />);
