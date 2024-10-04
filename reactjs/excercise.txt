@@ -8,7 +8,7 @@ a = 10            b = 15             a<=b
 a = 10            b = 15             a>=b            
 
 
-2) create various class in css to apply attactive formatting to resume created earlier.
+2) create various class in css to apply attractive formatting to resume created earlier.
         use web font 
         change colors, background colors 
         apply borders and shadow
@@ -27,3 +27,15 @@ a = 10            b = 15             a>=b
         9th
 
    display full month name instead of month number 
+
+4) create gst calculator using functional components 
+ for reference 
+ https://wise.com/in/vat/gst/calculator
+
+
+5) develop currency calculator using class components. 
+for reference 
+https://www.calculator.net/currency-calculator.html?eamount=100&efrom=USD&eto=INR&ccmajorccsettingbox=1&type=1&x=Calculate
+give at least 5 country
+
+
