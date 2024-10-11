@@ -11,7 +11,7 @@ Online Shopping web Application
 		6) Checkout
 		7) View History
 	Admin Panel  (to be used admin)
-		1) Login, Change Password, Reset Password 
+		1) Login, Change Password, forgot Password 
 		2) Categories Management (Add, Edit, Delete, View, search categories)
 		3) Product Management (Add, Edit, Delete, View, search Product)
 		4) User Management (View, search,Message,Block/Unblock users)
