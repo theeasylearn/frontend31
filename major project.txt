@@ -14,6 +14,7 @@ Online Shopping web Application
 		1) Login, Change Password, forgot Password 
 		2) Categories Management (Add, Edit, Delete, View, search categories)
 		3) Product Management (Add, Edit, Delete, View, search Product)
+		   category,title,photo,price,quantity,detail,size,weight,islive	
 		4) User Management (View, search,Message,Block/Unblock users)
 		5) Orders Management (Accept/Reject,View, Search, status change)
 		
