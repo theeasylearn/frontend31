@@ -1,0 +1,190 @@
+<html lang="en">
+
+<head>
+    <title>Keen - Multi-demo Bootstrap 5 HTML Admin Dashboard Template by KeenThemes</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+    <link href="../../assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true"
+    data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true"
+    data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true"
+    data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+    <!--begin::Theme mode setup on page load-->
+    <!--begin::App-->
+    <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+        <!--begin::Page-->
+        <div class="app-page  flex-column flex-column-fluid " id="kt_app_page">
+            <!--begin::Header-->
+            <div id="kt_app_header" class="app-header ">
+                <div class="app-container  container-fluid d-flex align-items-stretch justify-content-between "
+                    id="kt_app_header_container">
+
+                    <!--begin::sidebar mobile toggle-->
+                    <div class="d-flex align-items-center d-lg-none ms-n3 me-2" title="Show sidebar menu">
+                        <div class="btn btn-icon btn-active-color-primary w-35px h-35px"
+                            id="kt_app_sidebar_mobile_toggle">
+                            <i class="ki-duotone ki-abstract-14 fs-1"><span class="path1"></span><span
+                                    class="path2"></span></i>
+                        </div>
+                    </div>
+                    <!--end::sidebar mobile toggle-->
+
+
+                    <!--begin::Mobile logo-->
+                    <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
+                        <a href="../../index.html" class="d-lg-none">
+                            <img alt="Logo" src="../../assets/media/logos/default-small.svg"
+                                class="theme-light-show h-30px" />
+                            <img alt="Logo" src="../../assets/media/logos/default-small-dark.svg"
+                                class="theme-dark-show h-30px" />
+                        </a>
+                    </div>
+                    <!--end::Mobile logo-->
+                </div>
+                <!--end::Header container-->
+            </div>
+            <!--end::Header-->
+            <!--begin::Wrapper-->
+            <div class="app-wrapper  flex-column flex-row-fluid " id="kt_app_wrapper">
+                <div id="kt_app_sidebar" class="app-sidebar  flex-column " data-kt-drawer="true"
+                    data-kt-drawer-name="app-sidebar" data-kt-drawer-activate="{default: true, lg: false}"
+                    data-kt-drawer-overlay="true" data-kt-drawer-width="225px" data-kt-drawer-direction="start"
+                    data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
+
+
+                    <!--begin::Logo-->
+                    <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
+                        <!--begin::Logo image-->
+                        <a href="../../index.html">
+                            <img alt="Logo" src="../../assets/media/logos/default-dark.svg"
+                                class="h-30px app-sidebar-logo-default" />
+                        </a>
+                        <!--end::Logo image-->
+
+                        <!--begin::Sidebar toggle-->
+                        <div id="kt_app_sidebar_toggle"
+                            class="app-sidebar-toggle btn btn-icon btn-sm h-30px w-30px rotate " data-kt-toggle="true"
+                            data-kt-toggle-state="active" data-kt-toggle-target="body"
+                            data-kt-toggle-name="app-sidebar-minimize">
+
+                            <i class="ki-duotone ki-double-left fs-2 rotate-180"><span class="path1"></span><span
+                                    class="path2"></span></i>
+                        </div>
+                        <!--end::Sidebar toggle-->
+                    </div>
+                    <!--end::Logo-->
+                    <!--begin::sidebar menu-->
+                    <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
+                        <div id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper">
+                            <div id="kt_app_sidebar_menu_scroll" class="hover-scroll-y my-5 mx-3" data-kt-scroll="true"
+                                data-kt-scroll-activate="true" data-kt-scroll-height="auto"
+                                data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer"
+                                data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px"
+                                data-kt-scroll-save-state="true">
+                                <!--begin::Menu-->
+                                <div class="
+                                menu 
+                                menu-column 
+                                menu-rounded 
+                                menu-sub-indention       
+                                fw-semibold  
+                            " id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
+                                    <div class="menu-item menu-accordion">
+                                        <a href="#" class="menu-link text-white">Sample Link</a>
+                                    </div>
+
+                                </div>
+                                <!--end::Menu-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::sidebar menu-->
+
+                </div>
+                <!--end::Sidebar-->
+
+
+                <!--begin::Main-->
+                <div class="app-main" id="kt_app_main">
+                   <div class="container mt-10">
+                        <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card shadow">
+                                        <div class="card-header p-5 text-bg-primary">
+                                                <h1 class="text-white">Customers</h1>
+                                               
+                                        </div>
+                                        <div class="card-body p-10">
+                                           <table class="table table-striped table-hover table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sr No</th>
+                                                    <th>Email</th>
+                                                    <th>Mobile</th>
+                                                    <th>Message</th>
+                                                    <th>Action</th>
+                                                    <th>View Orders</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>ankit3385@gmail.com</td>
+                                                    <td>
+                                                       9662512857
+                                                    </td>
+                                                    <td>
+                                                        <a href="admin_send_message.html" class="btn btn-info">message</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-danger">Block</a>
+                                                        <a href="#" class="btn btn-success">UnBlock</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="admin_order.html" class="btn btn-warning">View orders</a>
+                                                    </td>
+                                                  
+                                                </tr>
+                                            </tbody>
+                                           </table>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                   </div>
+                </div>
+                <!--end:::Main-->
+
+
+            </div>
+            <!--end::Wrapper-->
+
+
+        </div>
+        <!--end::Page-->
+    </div>
+    <!--end::App-->
+    <!--end::Modal - Invite Friend--> <!--end::Modals-->
+
+    <!--begin::Javascript-->
+    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+    <script src="../../assets/plugins/global/plugins.bundle.js"></script>
+    <script src="../../assets/js/scripts.bundle.js"></script>
+    <script src="../../assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="../../assets/js/custom/apps/file-manager/list.js"></script>
+    <script src="../../assets/js/widgets.bundle.js"></script>
+    <script src="../../assets/js/custom/apps/chat/chat.js"></script>
+    <script src="../../assets/js/custom/utilities/modals/upgrade-plan.js"></script>
+    <script src="../../assets/js/custom/utilities/modals/create-campaign.js"></script>
+    <script src="../../assets/js/custom/utilities/modals/users-search.js"></script>
+</body>
+</html>
