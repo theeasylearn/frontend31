@@ -16,7 +16,12 @@ Online Shopping web Application
 		3) Product Management (Add, Edit, Delete, View, search Product)
 		   category,title,photo,price,quantity,detail,size,weight,islive	
 		4) User Management (View, search,Message,Block/Unblock users)
-		5) Orders Management (Accept/Reject,View, Search, status change)
-		
+		5) Orders Management (View, Search, status change,Print)
+			Bill
+				id,billdate,amount,customerid,orderstatus,paymentstatus,paymentmode,remarks,
+				fullname,address1,address2,city,pincode,mobileno
+			cart 
+				id,productid,quantity,price,billid
+		6) Dashboard
 		6) Offers Management (Add, Edit, Delete, View, search Offers) Exercise
 		7) Pincode Management(Add,Edit,Delete,View,Search) Exercise 
