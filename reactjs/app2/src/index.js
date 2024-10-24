@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
+import AdminLogin from './AdminLogin';
+import AdminForgotPassword from './AdminForgotPassword';
 /*
     localhost:3000  --> home.js 
     localhost:3000/aboutus  --> aboutus.js 
@@ -24,4 +26,4 @@ function App()
     </BrowserRouter>)
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+root.render(<AdminForgotPassword />);
