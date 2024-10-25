@@ -4,6 +4,8 @@ import './index.css';
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import AdminLogin from './AdminLogin';
 import AdminForgotPassword from './AdminForgotPassword';
+import AdminAddCategory from './AdminAddCategory';
+import AdminAddProduct from './AdminAddProduct';
 /*
     localhost:3000  --> home.js 
     localhost:3000/aboutus  --> aboutus.js 
@@ -26,4 +28,4 @@ function App()
     </BrowserRouter>)
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<AdminForgotPassword />);
+root.render(<AdminAddProduct />);
