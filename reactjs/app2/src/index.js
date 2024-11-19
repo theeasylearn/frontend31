@@ -6,26 +6,43 @@ import AdminLogin from './AdminLogin';
 import AdminForgotPassword from './AdminForgotPassword';
 import AdminAddCategory from './AdminAddCategory';
 import AdminAddProduct from './AdminAddProduct';
-/*
-    localhost:3000  --> home.js 
-    localhost:3000/aboutus  --> aboutus.js 
-    localhost:3000/product  --> product.js 
-*/
-let Home = () => <div><h1>Home</h1></div>
-let AboutUs = () => <div><h1>About us</h1></div>
-let Product = () => <div><h1>Product</h1></div>
-let PageNotFound = () => <div><h1>No such page exist (404)</h1></div>
+import AdminCategory from './AdminCategory';
+import AdminChangePassword from './AdminChangePassword';
+import AdminDashBoard from './AdminDashBoard';
+import AdminEditCategory from './AdminEditCategory';
+import AdminEditProduct from './AdminEditProduct';
+import AdminOrder from './AdminOrder';
+import AdminOrderPrint from './AdminOrderPrint';
+import AdminProduct from './AdminProduct';
+import AdminSendMessage from './AdminSendMessage';
+import AdminViewProduct from './AdminViewProduct';
+import AdminUser from './AdminUser';
+import AdminViewOrderDetail from './AdminViewOrderDetail';
+import PageNotFound from './PageNotFound';
 function App()
 {
     return (<BrowserRouter>
       <Routes>
-          <Route index path="/" element={<Home />} />
-          <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/product" element={<Product />} />
+          <Route index path="/" element={<AdminLogin />} />
+          <Route path="/category" element={<AdminCategory />} /> 
+          <Route path="/category/add" element={<AdminAddCategory />} /> 
+          <Route path="/category/edit" element={<AdminEditCategory />} /> 
+          <Route path="/product" element={<AdminProduct />} />  
+          <Route path="/product/add" element={<AdminAddProduct />} /> 
+          <Route path="/product/edit" element={<AdminEditProduct />} /> 
+          <Route path="/product/detail" element={<AdminViewProduct />} /> 
+          <Route path="/users" element={<AdminUser />} />  
+          <Route path="/orders" element={<AdminOrder />} />  
+          <Route path="/orders/print" element={<AdminOrderPrint />} /> 
+          <Route path="/orders/detail" element={<AdminViewOrderDetail />} /> 
+          <Route path="/forgot-password" element={<AdminForgotPassword />} />  
+          <Route path="/change-password" element={<AdminChangePassword />} />  
+          <Route path="/send-message" element={<AdminSendMessage />} />  
+          <Route path="/dashboard" element={<AdminDashBoard />} />  
           {/* create route which will run for non existing route */}
           <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>)
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<AdminAddProduct />);
+root.render(<App />);

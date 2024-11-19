@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Concept of const</h1>
+    <hr>
+    <script>
+        const name = "Ankit";
+        //name = "Ankit Patel";  // ❌ Error: Assignment to constant variable.
+
+        const user = { name: "Param" };
+        user.name = "Param Patel";  // ✅ Allowed: modifying property of the object.
+        console.log(user.name);  // Outputs: Param Patel
+
+    </script>
+</body>
+
+</html>
