@@ -23981,7 +23981,7 @@ h3 {
 .footer {
     background-color: var(--fc-light);
     padding: 10px 0;
-    position: absolute;
+    position: sticky;
     bottom: 0px;
     left:0px;
     width:100%;
