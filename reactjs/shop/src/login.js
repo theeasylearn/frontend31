@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "./footer";
 class Login extends React.Component 
 {
     render()
@@ -8,7 +9,7 @@ class Login extends React.Component
               <nav className="navbar navbar-light py-2">
                 <div className="container justify-content-center justify-content-lg-between">
                   <a className="navbar-brand" href="../index.html">
-                    <img src="../assets/images/logo/freshcart-logo.png" alt className="d-inline-block align-text-top" />
+                    <img src="theme/assets/images/logo/freshcart-logo.png" alt className="d-inline-block align-text-top" />
                   </a>
                   <span className="navbar-text">
                     Already have an account?
@@ -19,13 +20,13 @@ class Login extends React.Component
             </div>
             <main>
               {/* section */}
-              <section className="my-lg-14 my-8">
+              <section className="my-lg-14 my-8 vh-100">
                 <div className="container">
                   {/* row */}
                   <div className="row justify-content-center align-items-center">
                     <div className="col-12 col-md-6 col-lg-4 order-lg-1 order-2">
                       {/* img */}
-                      <img src="../assets/images/svg-graphics/signin-g.svg" alt className="img-fluid" />
+                      <img src="theme/assets/images/svg-graphics/signin-g.svg" alt className="img-fluid" />
                     </div>
                     {/* col */}
                     <div className="col-12 col-md-6 offset-lg-1 col-lg-4 order-lg-2 order-1">
@@ -75,23 +76,7 @@ class Login extends React.Component
                 </div>
               </section>
             </main>
-            <footer className="footer">
-              <div className="container">
-                <div className="row align-items-center">
-                  <div className="col-md-12 text-center">
-                    <span className="small text-muted">
-                      © 2025
-                      <span id="copyright">
-                        -
-                      </span>
-                      FreshCart eCommerce HTML Template. All rights reserved. Powered by
-                      The easylearn academy
-                      .
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </footer>
+            <Footer />
           </>
           );
     }
