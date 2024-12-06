@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 class Header extends React.Component
 {
     constructor(props)
@@ -16,9 +17,9 @@ class Header extends React.Component
                       <img src="theme/assets/images/logo/freshcart-logo.png" alt="eCommerce HTML Template" />
                     </a>
                     <div className="d-flex justify-content-between w-100 d-lg-none">
-                      <a className="navbar-brand" href="index.html">
+                      <Link className="navbar-brand" to="/">
                         <img src="theme/assets/images/logo/freshcart-logo.png" alt="eCommerce HTML Template" />
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <div className="col-lg-2 col-xxl-2 text-end col-md-6 col-7">
@@ -40,14 +41,38 @@ class Header extends React.Component
               <div className="container">
                 <div className="offcanvas offcanvas-start" tabIndex={-1} id="navbar-default" aria-labelledby="navbar-defaultLabel">
                   <div className="offcanvas-header pb-1">
-                    <a href="index.html"><img src="assets/images/logo/freshcart-logo.svg" alt="eCommerce HTML Template" /></a>
+                    <Link to="/"><img src="assets/images/logo/freshcart-logo.svg" alt="eCommerce HTML Template" /></Link>
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" />
                   </div>
                   <div className="offcanvas-body">
                     <div>
                       <ul className="navbar-nav align-items-center">
                         <li className="nav-item w-100 w-lg-auto">
-                          <a className="nav-link" href="dashboard/index.html">Dashboard</a>
+                          <Link className="nav-link" to="/">Home</Link>
+                        </li>
+                        <li className="nav-item w-100 w-lg-auto">
+                          <Link className="nav-link" to="/shop">Shop</Link>
+                        </li>
+                        <li className="nav-item w-100 w-lg-auto">
+                          <Link className="nav-link" to="/cart">Cart</Link>
+                        </li>
+                        <li className="nav-item w-100 w-lg-auto">
+                          <Link className="nav-link" to="/checkout">Checkout</Link>
+                        </li>
+                        <li className="nav-item w-100 w-lg-auto">
+                          <Link className="nav-link" to="/register">Register</Link>
+                        </li>
+                        <li className="nav-item w-100 w-lg-auto">
+                          <Link className="nav-link" to="/login">Login</Link>
+                        </li>
+                        <li className="nav-item w-100 w-lg-auto">
+                          <Link className="nav-link" to="/change-password">Change Password</Link>
+                        </li>
+                        <li className="nav-item w-100 w-lg-auto">
+                          <Link className="nav-link" to="/forgot-password">Forgot Password</Link>
+                        </li>
+                        <li className="nav-item w-100 w-lg-auto">
+                          <Link className="nav-link" to=""></Link>
                         </li>
                       </ul>
                     </div>
