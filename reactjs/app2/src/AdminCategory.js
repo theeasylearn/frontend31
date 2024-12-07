@@ -1,5 +1,23 @@
+import { useEffect } from "react";
 import AdminSideBar from "./AdminSideBar";
 export default function AdminCategory() {
+    let fetchCategory = function()
+    {
+        let apiAddress = "https://theeasylearnacademy.com/shop/ws/category.php";
+        fetch(apiAddress).then((msg) => msg.json()).then((response) => {
+            console.log(response);
+            //alert('we got data');
+            //get error key's value
+            console.log(response[0]['error']);
+            //get total lkey's value
+            console.log(response[1]['totaal'])
+        });
+
+    }
+
+    useEffect(() =>{
+        fetchCategory();
+    })
     return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
         {/*begin::Page*/}
         <div className="app-page  flex-column flex-column-fluid " id="kt_app_page">
