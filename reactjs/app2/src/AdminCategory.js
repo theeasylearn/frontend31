@@ -1,21 +1,46 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AdminSideBar from "./AdminSideBar";
 export default function AdminCategory() {
-    let fetchCategory = function()
-    {
+    //create state array
+    let [categories, SetCategories] = useState([]);
+    let fetchCategory = function () {
         let apiAddress = "https://theeasylearnacademy.com/shop/ws/category.php";
-        fetch(apiAddress).then((msg) => msg.json()).then((response) => {
-            console.log(response);
-            //alert('we got data');
-            //get error key's value
-            console.log(response[0]['error']);
-            //get total lkey's value
-            console.log(response[1]['totaal'])
-        });
+        if (categories.length === 0) {
+            fetch(apiAddress).then((msg) => msg.json()).then((response) => {
+                //console.log(response); //array of object (JSON)
+                /*
+                 [
+                     {"error":"no"},
+                     {"total":6},
+                     {"id":"1","title":"laptop","photo":"laptop.jpg","islive":"1","isdeleted":"0"},
+                     {"id":"2","title":"mobile","photo":"mobile.jpg","islive":"1","isdeleted":"0"},
+                     {"id":"3","title":"book","photo":"books.jpg","islive":"1","isdeleted":"0"},
+                     {"id":"4","title":"Cookies & waffers","photo":"Cookies.jpg","islive":"1","isdeleted":"0"},{"id":"5","title":"Washing Powders","photo":"washing_powders.jpg","islive":"1","isdeleted":"0"},
+                     {"id":"6","title":"shampoo","photo":"shampoo.jpg","islive":"1","isdeleted":"0"}
+                ]
+                */
+                let error = response[0]['error']; //copy error key value into error
+                if (error !== 'no') {
+                    alert(error);
+                }
+                else {
+                    let total = response[1]['total'];
+                    if (total === 0) {
+                        alert('no category found');
+                    }
+                    else {
+                        //delete 2 objects 
+                        response.splice(0, 2);
+                        console.log(response);
+                        SetCategories(response);
+                    }
+                }
+            });
+        }
 
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         fetchCategory();
     })
     return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
@@ -94,20 +119,22 @@ export default function AdminCategory() {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Mobile</td>
-                                                    <td>
-                                                        <img src="http://picsum.photos/100" className="img-fluid" />
-                                                    </td>
-                                                    <td>
-                                                        Yes
-                                                    </td>
-                                                    <td width="20%">
-                                                        <a href="admin_edit_category.html" className="btn btn-warning">Edit</a>
-                                                        <a href="admin_edit_category.html" className="btn btn-secondary">Delete</a>
-                                                    </td>
-                                                </tr>
+                                                {categories.map((item) => {
+                                                    return (<tr>
+                                                        <td>{item.id}</td>
+                                                        <td>{item.title}</td>
+                                                        <td>
+                                                            <img src={"http://www.theeasylearnacademy.com/shop/images/category/" + item.photo} className="img-fluid" />
+                                                        </td>
+                                                        <td>
+                                                            {(item.islive==='1')?'Yes':'No'}
+                                                        </td>
+                                                        <td width="20%">
+                                                            <a href="admin_edit_category.html" className="btn btn-warning">Edit</a>
+                                                            <a href="admin_edit_category.html" className="btn btn-secondary">Delete</a>
+                                                        </td>
+                                                    </tr>)
+                                                })}
                                             </tbody>
                                         </table>
                                     </div>
