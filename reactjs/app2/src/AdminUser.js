@@ -1,5 +1,31 @@
 import AdminSideBar from "./AdminSideBar";
+import { useEffect,useState } from "react";
 export default function AdminUser() {
+    //create state array
+    let [users,setUsers] = useState([]);
+    
+    useEffect(() => {
+        let apiAddress = "https://theeasylearnacademy.com/shop/ws/users.php";
+        fetch(apiAddress).then((response) => response.json()).then((response) => {
+            console.log(response);
+             
+            let error = response[0]['error'];
+            console.log(error);
+            if(error !== 'no')
+                alert(error);
+            else 
+            {
+                let total = response[1]['total'];
+                if(total === 0)
+                    alert('no users found');
+                else 
+                {
+                    response.splice(0,2);
+
+                }
+            }
+        })
+    })
     return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
         {/*begin::Page*/}
         <div className="app-page  flex-column flex-column-fluid " id="kt_app_page">

@@ -1,6 +1,54 @@
 import AdminSideBar from "./AdminSideBar";
+import { useEffect, useState } from "react";
+
 export default function AdminProduct() {
-    return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
+        //create state array
+        let [products,setProducts] = useState([]);
+
+        useEffect(()=>{
+            if(products.length === 0)
+            {
+                let apiAddress = "https://theeasylearnacademy.com/shop/ws/product.php";
+                fetch(apiAddress).then((response) => response.json()).then((response) => {
+                    console.log(response);
+                    let error = response[0]['error'];
+                    if(error !== 'no')
+                        alert(error);
+                    else 
+                    {
+                        let total = response[1]['title'];
+                        if(total === 0)
+                            alert('no product found');
+                        else 
+                        {
+                            //delete first 2 object
+                            response.splice(0,2);
+                            setProducts(response);
+                        }
+                    }
+                });
+            }    
+        });
+        let display = (item) => {
+            return (   <tr>
+                <td>{item['id']}</td>
+                <td>{item['title']}</td>
+                <td>
+                    <img src={"http://theeasylearnacademy.com/shop/images/product/" + item['photo']} className="img-fluid" alt='image not available' />
+                </td>
+                <td>{item['price']}</td>
+                <td>{item['sto  ck']}</td>
+                <td>
+                    {(item.islive === '1')?"Yes":"No"}
+                </td>
+                <td width="25%">
+                    <a href="admin_view_product.html" className="btn btn-primary">View</a>
+                    <a href="admin_edit_product.html" className="btn btn-warning">Edit</a>
+                    <a href="admin_edit_product.html" className="btn btn-secondary">Delete</a>
+                </td>
+            </tr>);
+        }
+        return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
         {/*begin::Page*/}
         <div className="app-page  flex-column flex-column-fluid " id="kt_app_page">
             {/*begin::Header*/}
@@ -78,23 +126,7 @@ export default function AdminProduct() {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>IPHone 16 pro max</td>
-                                                    <td>
-                                                        <img src="http://picsum.photos/100" className="img-fluid" />
-                                                    </td>
-                                                    <td>165000</td>
-                                                    <td>10</td>
-                                                    <td>
-                                                        Yes
-                                                    </td>
-                                                    <td width="25%">
-                                                        <a href="admin_view_product.html" className="btn btn-primary">View</a>
-                                                        <a href="admin_edit_product.html" className="btn btn-warning">Edit</a>
-                                                        <a href="admin_edit_product.html" className="btn btn-secondary">Delete</a>
-                                                    </td>
-                                                </tr>
+                                                {products.map((item) => display(item))}
                                             </tbody>
                                         </table>
                                     </div>
