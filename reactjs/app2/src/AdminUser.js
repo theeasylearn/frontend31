@@ -1,31 +1,48 @@
 import AdminSideBar from "./AdminSideBar";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 export default function AdminUser() {
     //create state array
-    let [users,setUsers] = useState([]);
-    
+    let [users, setUsers] = useState([]);
+
     useEffect(() => {
         let apiAddress = "https://theeasylearnacademy.com/shop/ws/users.php";
         fetch(apiAddress).then((response) => response.json()).then((response) => {
             console.log(response);
-             
+
             let error = response[0]['error'];
             console.log(error);
-            if(error !== 'no')
+            if (error !== 'no')
                 alert(error);
-            else 
-            {
+            else {
                 let total = response[1]['total'];
-                if(total === 0)
+                if (total === 0)
                     alert('no users found');
-                else 
-                {
-                    response.splice(0,2);
-
+                else {
+                    response.splice(0, 2);
+                    setUsers(response);
                 }
             }
         })
-    })
+    });
+    let display = (item) => {
+        return (<tr>
+            <td>{item.id}</td>
+            <td>{item.email}</td>
+            <td>
+                {item.mobile}
+            </td>
+            <td>
+                <a href="admin_send_message.html" className="btn btn-info">message</a>
+            </td>
+            <td>
+                <a href="#" className="btn btn-danger">Block</a>
+                <a href="#" className="btn btn-success">UnBlock</a>
+            </td>
+            <td>
+                <a href="admin_order.html" className="btn btn-warning">View orders</a>
+            </td>
+        </tr>);
+    }
     return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
         {/*begin::Page*/}
         <div className="app-page  flex-column flex-column-fluid " id="kt_app_page">
@@ -102,23 +119,7 @@ export default function AdminUser() {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>ankit3385@gmail.com</td>
-                                                    <td>
-                                                        9662512857
-                                                    </td>
-                                                    <td>
-                                                        <a href="admin_send_message.html" className="btn btn-info">message</a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" className="btn btn-danger">Block</a>
-                                                        <a href="#" className="btn btn-success">UnBlock</a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="admin_order.html" className="btn btn-warning">View orders</a>
-                                                    </td>
-                                                </tr>
+                                                {users.map((item) => display(item))}
                                             </tbody>
                                         </table>
                                     </div>
