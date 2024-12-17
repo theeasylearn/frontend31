@@ -1,5 +1,54 @@
 import AdminSideBar from "./AdminSideBar";
+import { useState, useEffect } from "react";
+import axios from 'axios';
+
 export default function AdminOrder() {
+    //declare state array
+    var [orders, setOrders] = useState([]);
+    //create an array for status message
+    var status = ['confirm','Dispatched','Delivered','Canceled'];
+    useEffect(() => {
+        if (orders.length === 0) {
+            let apiAddress = "https://theeasylearnacademy.com/shop/ws/orders.php";
+            //api call
+            axios({
+                url: apiAddress,
+                method: 'get',
+                responseType: 'json'
+            }).then((response) => {
+                console.log(response);
+                let error = response.data[0]['error'];
+                if (error !== 'no')
+                    alert(error);
+                else {
+                    let total = response.data[1]['total'];
+                    if (total === 0)
+                        alert('no orders found');
+                    else {
+                        response.data.splice(0, 2); //first two object delete from array
+                        console.log(response.data);
+                        setOrders(response.data);
+                    }
+                }
+            }).catch((error) => {
+                console.log(error);
+                if(error.code === 'ERR_NETWORK')
+                    alert('it seems you are offline');
+            });
+        }
+    });
+    let display = function (item) {
+        return (<tr>
+            <td>{item.id}</td>
+            <td>{item.fullname}</td>
+            <td>{item.billdate}</td>
+            <td>{item.amount}</td>
+            <td>{status[item.orderstatus]}</td>
+            <td>
+                <a href="admin_view_order-detail.html"> <i className="fa fa-eye-low-vision" /></a>
+            </td>
+        </tr>);
+    }
     return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
         {/*begin::Page*/}
         <div className="app-page  flex-column flex-column-fluid " id="kt_app_page">
@@ -72,22 +121,11 @@ export default function AdminOrder() {
                                                     <th>Date</th>
                                                     <th>Amount</th>
                                                     <th>Status</th>
-                                                    <th>Payment</th>
                                                     <th>View</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Ankit Patel</td>
-                                                    <td>19-Nov-2024</td>
-                                                    <td>125000</td>
-                                                    <td>Dispatched</td>
-                                                    <td>Received - Online</td>
-                                                    <td>
-                                                        <a href="admin_view_order-detail.html"> <i className="fa fa-eye-low-vision" /></a>
-                                                    </td>
-                                                </tr>
+                                                {orders.map((item) => display(item))}
                                             </tbody>
                                         </table>
 
