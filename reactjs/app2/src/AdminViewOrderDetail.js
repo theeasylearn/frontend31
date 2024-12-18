@@ -1,5 +1,40 @@
 import AdminSideBar from "./AdminSideBar";
+import axios from "axios";
+import { useEffect,useState } from "react";
 export default function AdminViewOrderDetail() {
+    let [orders,setOrders] = useState([]);
+    useEffect(() => {
+        var apiAddress = "https://theeasylearnacademy.com/shop/ws/orders.php?id=7";
+        axios({
+            url:apiAddress,
+            method:'get',
+            responseType:'json'
+        }).then((response) => {
+            console.log(response);
+            //create error variable
+            let error = response.data[0]['error'];
+            if(error !== 'no')
+            {
+                alert(error);
+            }    
+            else 
+            {
+                //create total 
+                let total = response.data[1]['total'];
+                if(total === 0)
+                    alert('no order detail found');
+                else 
+                {
+                    response.data.splice(0,2);
+                    setOrders(response.data);
+                }
+            }
+        }).catch((error) => {
+            console.log(error);
+            if(error.code === 'ERR_NETWORK')
+                alert('it seems you are offline. check your internet connection');
+        })
+    })
     return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
         {/*begin::Page*/}
         <div className="app-page  flex-column flex-column-fluid " id="kt_app_page">
@@ -71,39 +106,39 @@ export default function AdminViewOrderDetail() {
                                         <table className="table table-sm table-striped table-striped-columns table-bordered">
                                             <tbody><tr>
                                                 <td width="25%">Id</td>
-                                                <td width="25%" />
+                                                <td width="25%" >{orders[0]['id']}</td>
                                                 <td width="25%">Name</td>
-                                                <td width="25%" />
+                                                <td width="25%" >{orders[0]['fullname']}</td>
                                             </tr>
                                                 <tr>
                                                     <td width="25%">Date</td>
-                                                    <td width="25%" />
+                                                    <td width="25%" >{orders[0]['billdate']}</td>
                                                     <td width="25%">Address 1</td>
-                                                    <td width="25%" />
+                                                    <td width="25%" >{orders[0]['billdate']}</td>
                                                 </tr>
                                                 <tr>
                                                     <td width="25%">Amount</td>
-                                                    <td width="25%" />
+                                                    <td width="25%" >{orders[0]['amount']}</td>
                                                     <td width="25%">Address 2</td>
-                                                    <td width="25%" />
+                                                    <td width="25%" >{orders[0]['address2']}</td>
                                                 </tr>
                                                 <tr>
                                                     <td width="25%">Status</td>
-                                                    <td width="25%" />
+                                                    <td width="25%" ></td>
                                                     <td width="25%">City</td>
-                                                    <td width="25%" />
+                                                    <td width="25%" >{orders[0]['city']}</td>
                                                 </tr>
                                                 <tr>
                                                     <td width="25%">Payment Mode</td>
-                                                    <td width="25%" />
+                                                    <td width="25%" ></td>
                                                     <td width="25%">Pincode</td>
-                                                    <td width="25%" />
+                                                    <td width="25%" >{orders[0]['pincode']}</td>
                                                 </tr>
                                                 <tr>
                                                     <td width="25%">Payment Status</td>
-                                                    <td width="25%" />
+                                                    <td width="25%" ></td>
                                                     <td width="25%">Mobile</td>
-                                                    <td width="25%" />
+                                                    <td width="25%" ></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="25%">Remarks</td>

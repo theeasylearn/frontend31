@@ -1,7 +1,7 @@
 import AdminSideBar from "./AdminSideBar";
 import { useState, useEffect } from "react";
 import axios from 'axios';
-
+import { Link } from "react-router-dom";
 export default function AdminOrder() {
     //declare state array
     var [orders, setOrders] = useState([]);
@@ -45,7 +45,7 @@ export default function AdminOrder() {
             <td>{item.amount}</td>
             <td>{status[item.orderstatus]}</td>
             <td>
-                <a href="admin_view_order-detail.html"> <i className="fa fa-eye-low-vision" /></a>
+                <Link to="/orders/detail"> <i className="fa fa-eye-low-vision" /></Link>
             </td>
         </tr>);
     }
