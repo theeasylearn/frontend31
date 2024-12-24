@@ -45,7 +45,7 @@ export default function AdminOrder() {
             <td>{item.amount}</td>
             <td>{status[item.orderstatus]}</td>
             <td>
-                <Link to="/orders/detail"> <i className="fa fa-eye-low-vision" /></Link>
+                <Link to={"/orders/detail/" + item.id}> <i className="fa fa-eye-low-vision" /></Link>
             </td>
         </tr>);
     }

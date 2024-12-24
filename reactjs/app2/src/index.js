@@ -34,7 +34,7 @@ function App()
           <Route path="/users" element={<AdminUser />} />  
           <Route path="/orders" element={<AdminOrder />} />  
           <Route path="/orders/print" element={<AdminOrderPrint />} /> 
-          <Route path="/orders/detail" element={<AdminViewOrderDetail />} /> 
+          <Route path="/orders/detail/:orderid" element={<AdminViewOrderDetail />} /> 
           <Route path="/forgot-password" element={<AdminForgotPassword />} />  
           <Route path="/change-password" element={<AdminChangePassword />} />  
           <Route path="/send-message" element={<AdminSendMessage />} />  
