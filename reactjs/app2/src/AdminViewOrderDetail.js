@@ -15,7 +15,7 @@ export default function AdminViewOrderDetail() {
             responseType: 'json'
         })
             .then((response) => {
-                const error = response.data[0]?.error; // Check for error in response
+                const error = response.data[0].error; // Check for error in response
                 if (error !== 'no') {
                     alert(error);
                 } else {
