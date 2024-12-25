@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import getBase from "./common";
 export default function AdminLogin() {
   //create state variable for each and every input
   var [email, setEmail] = useState('');
   var [password, setPassword] = useState('');
+  var navigator = useNavigate();
   var doLogin = (e) => {
     console.log(email, password);
     e.preventDefault();
     //https://theeasylearnacademy.com/shop/ws/login.php?email=ankit@gmail.com&password=123123
-    var apiAddress = 'https://theeasylearnacademy.com/shop/ws/login.php';
+    var apiAddress = getBase() + 'admin_login.php';
     var form = new FormData();
 
     form.append('email', email);
@@ -31,6 +33,7 @@ export default function AdminLogin() {
           alert('invalid login attempt');
         } else {
           alert('login successful');
+          navigator('/dashboard');
         }
       }
     }).catch((error) => {

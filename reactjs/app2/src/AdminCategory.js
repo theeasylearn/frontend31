@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import AdminSideBar from "./AdminSideBar";
+import getBase from "./common";
+
 export default function AdminCategory() {
     //create state array
     let [categories, SetCategories] = useState([]);
     let fetchCategory = function () {
-        let apiAddress = "https://theeasylearnacademy.com/shop/ws/category.php";
+        let apiAddress = getBase() + "category.php";
         if (categories.length === 0) {
             fetch(apiAddress).then((msg) => msg.json()).then((response) => {
                 //console.log(response); //array of object (JSON)

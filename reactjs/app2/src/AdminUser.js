@@ -1,11 +1,13 @@
 import AdminSideBar from "./AdminSideBar";
 import { useEffect, useState } from "react";
+import getBase from "./common";
+
 export default function AdminUser() {
     //create state array
     let [users, setUsers] = useState([]);
 
     useEffect(() => {
-        let apiAddress = "https://theeasylearnacademy.com/shop/ws/users.php";
+        let apiAddress = getBase() + "users.php";
         fetch(apiAddress).then((response) => response.json()).then((response) => {
             console.log(response);
 

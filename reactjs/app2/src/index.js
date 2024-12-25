@@ -25,20 +25,21 @@ function App()
       <Routes>
           <Route index path="/" element={<AdminLogin />} />
           <Route path="/category" element={<AdminCategory />} /> 
+          <Route path="/product" element={<AdminProduct />} />  
+          <Route path="/orders" element={<AdminOrder />} />  
+          <Route path="/users" element={<AdminUser />} />  
+          <Route path="/orders/detail/:orderid" element={<AdminViewOrderDetail />} /> 
+          <Route path="/dashboard" element={<AdminDashBoard />} />  
+          
           <Route path="/category/add" element={<AdminAddCategory />} /> 
           <Route path="/category/edit" element={<AdminEditCategory />} /> 
-          <Route path="/product" element={<AdminProduct />} />  
           <Route path="/product/add" element={<AdminAddProduct />} /> 
           <Route path="/product/edit" element={<AdminEditProduct />} /> 
           <Route path="/product/detail" element={<AdminViewProduct />} /> 
-          <Route path="/users" element={<AdminUser />} />  
-          <Route path="/orders" element={<AdminOrder />} />  
           <Route path="/orders/print" element={<AdminOrderPrint />} /> 
-          <Route path="/orders/detail/:orderid" element={<AdminViewOrderDetail />} /> 
           <Route path="/forgot-password" element={<AdminForgotPassword />} />  
           <Route path="/change-password" element={<AdminChangePassword />} />  
           <Route path="/send-message" element={<AdminSendMessage />} />  
-          <Route path="/dashboard" element={<AdminDashBoard />} />  
           {/* create route which will run for non existing route */}
           <Route path="*" element={<PageNotFound />} />
       </Routes>

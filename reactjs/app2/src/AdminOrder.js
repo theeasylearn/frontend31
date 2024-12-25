@@ -2,6 +2,8 @@ import AdminSideBar from "./AdminSideBar";
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import getBase from "./common";
+
 export default function AdminOrder() {
     //declare state array
     var [orders, setOrders] = useState([]);
@@ -9,7 +11,7 @@ export default function AdminOrder() {
     var status = ['confirm','Dispatched','Delivered','Canceled'];
     useEffect(() => {
         if (orders.length === 0) {
-            let apiAddress = "https://theeasylearnacademy.com/shop/ws/orders.php";
+            let apiAddress = getBase() + "orders.php";
             //api call
             axios({
                 url: apiAddress,

@@ -1,5 +1,6 @@
 import AdminSideBar from "./AdminSideBar";
 import { useEffect, useState } from "react";
+import getBase from "./common";
 
 export default function AdminProduct() {
         //create state array
@@ -8,7 +9,7 @@ export default function AdminProduct() {
         useEffect(()=>{
             if(products.length === 0)
             {
-                let apiAddress = "https://theeasylearnacademy.com/shop/ws/product.php";
+                let apiAddress = getBase() + "product.php";
                 fetch(apiAddress).then((response) => response.json()).then((response) => {
                     console.log(response);
                     let error = response[0]['error'];

@@ -2,6 +2,7 @@ import AdminSideBar from "./AdminSideBar";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import getBase from "./common";
 
 export default function AdminViewOrderDetail() {
     const [orders, setOrders] = useState(null); // Initialize orders as null
