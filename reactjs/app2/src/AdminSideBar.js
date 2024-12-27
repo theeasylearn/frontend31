@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 export default function AdminSideBar()
 {
     return ( <div id="kt_app_sidebar" className="app-sidebar  flex-column " data-kt-drawer="true" data-kt-drawer-name="app-sidebar" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="225px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
@@ -27,9 +28,28 @@ export default function AdminSideBar()
                           menu-sub-indention       
                           fw-semibold  
                       " id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
-                <div className="menu-item menu-accordion">
-                  <a href="#" className="menu-link text-white">Sample Link</a>
+                <div className="menu-item">
+                  <Link to="/dashboard" className="menu-link text-white">Dashboard</Link>
                 </div>
+                <div className="menu-item">
+                  <Link to="/category" className="menu-link text-white">Categories</Link>
+                </div>
+                <div className="menu-item">
+                  <Link to="/product" className="menu-link text-white">products</Link>
+                </div>
+                <div className="menu-item">
+                  <Link to="/orders" className="menu-link text-white">orders</Link>
+                </div>
+                <div className="menu-item">
+                  <Link to="/users" className="menu-link text-white">users</Link>
+                </div>
+                <div className="menu-item">
+                  <Link to="/change-password" className="menu-link text-white">Change password</Link>
+                </div>
+                <div className="menu-item">
+                  <Link to="/logout" className="menu-link text-white">Logout</Link>
+                </div>
+                
               </div>
               {/*end::Menu*/}
             </div>

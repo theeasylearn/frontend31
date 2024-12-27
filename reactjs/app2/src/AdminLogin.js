@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import getBase from "./common";
+import getBase,{COOKIE_FILE} from "./common";
+import {useCookies} from 'react-cookie'; //hook
 export default function AdminLogin() {
   //create state variable for each and every input
   var [email, setEmail] = useState('');
   var [password, setPassword] = useState('');
   var navigator = useNavigate();
+  var [cookies,setCookie,removeCookie] = useCookies(COOKIE_FILE);
   var doLogin = (e) => {
     console.log(email, password);
     e.preventDefault();
@@ -16,7 +18,6 @@ export default function AdminLogin() {
 
     form.append('email', email);
     form.append('password', password);
-
     axios({
       method: 'post',
       url: apiAddress,
@@ -33,6 +34,10 @@ export default function AdminLogin() {
           alert('invalid login attempt');
         } else {
           alert('login successful');
+          var adminid = response.data[3]['id'];
+          //store adminid into cookies
+          setCookie('adminid',adminid);
+          console.log('admin id ',cookies['adminid']);
           navigator('/dashboard');
         }
       }

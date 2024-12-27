@@ -2,11 +2,22 @@ import AdminSideBar from "./AdminSideBar";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import getBase from "./common";
+import getBase,{COOKIE_FILE} from "./common";
+import { useCookies } from 'react-cookie'; //hook
+import { useNavigate } from "react-router-dom";
 
 export default function AdminDashBoard() {
     let [summery, setSummery] = useState(null); //state array
+    var [cookies, setCookie, removeCookie] = useCookies(COOKIE_FILE);
+      var navigator = useNavigate();
+    
     useEffect(() => {
+        var adminid = cookies['adminid'];
+        if(adminid == undefined)
+        {
+            alert('login required...');
+            navigator('/');
+        }    
         let apiAddress = getBase() + "summery.php";
         axios({
             method: 'get',
