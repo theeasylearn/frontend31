@@ -1,35 +1,13 @@
 import AdminSideBar from "./AdminSideBar";
 import { useEffect, useState } from "react";
 import getBase from "./common";
+import VerifyLogin from "./authenticate";
 
 export default function AdminProduct() {
         //create state array
         let [products,setProducts] = useState([]);
 
-        useEffect(()=>{
-            if(products.length === 0)
-            {
-                let apiAddress = getBase() + "product.php";
-                fetch(apiAddress).then((response) => response.json()).then((response) => {
-                    console.log(response);
-                    let error = response[0]['error'];
-                    if(error !== 'no')
-                        alert(error);
-                    else 
-                    {
-                        let total = response[1]['title'];
-                        if(total === 0)
-                            alert('no product found');
-                        else 
-                        {
-                            //delete first 2 object
-                            response.splice(0,2);
-                            setProducts(response);
-                        }
-                    }
-                });
-            }    
-        });
+        VerifyLogin();
         let display = (item) => {
             return (   <tr>
                 <td>{item['id']}</td>

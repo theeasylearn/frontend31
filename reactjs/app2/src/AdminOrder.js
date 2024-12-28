@@ -3,13 +3,19 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import getBase from "./common";
+import VerifyLogin from "./authenticate";
+import { use } from "react";
 
 export default function AdminOrder() {
     //declare state array
     var [orders, setOrders] = useState([]);
     //create an array for status message
+  
     var status = ['confirm','Dispatched','Delivered','Canceled'];
+    VerifyLogin();
+    
     useEffect(() => {
+      
         if (orders.length === 0) {
             let apiAddress = getBase() + "orders.php";
             //api call

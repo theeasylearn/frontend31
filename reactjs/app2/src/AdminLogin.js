@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import getBase,{COOKIE_FILE} from "./common";
 import {useCookies} from 'react-cookie'; //hook
+import { toast, Bounce, ToastContainer } from 'react-toastify';
 export default function AdminLogin() {
   //create state variable for each and every input
   var [email, setEmail] = useState('');
@@ -30,15 +31,40 @@ export default function AdminLogin() {
         alert(error);
       } else {
         const success = response.data[1].success;
+        const message = response.data[2].success;
         if (success === 'no') {
           alert('invalid login attempt');
+          toast.error('invalid login attempt' , {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,
+          });
         } else {
-          alert('login successful');
+          toast.success('login successful' , {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,
+          });
           var adminid = response.data[3]['id'];
           //store adminid into cookies
           setCookie('adminid',adminid);
           console.log('admin id ',cookies['adminid']);
-          navigator('/dashboard');
+          setTimeout(() => {
+            navigator('/dashboard');
+          }, 3000);
+        
         }
       }
     }).catch((error) => {
@@ -50,6 +76,7 @@ export default function AdminLogin() {
     })
   }
   return (<div className="container">
+    <ToastContainer />
     <div className="row mt-20">
       <div className="col-lg-6 offset-3">
         <div className="card shadow">

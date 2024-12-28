@@ -1,6 +1,10 @@
+import { use, useEffect } from "react";
 import AdminSideBar from "./AdminSideBar";
+import VerifyLogin from "./authenticate";
 export default function AdminAddCategory()
 {
+  VerifyLogin();
+
     return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
         {/*begin::Page*/}
         <div className="app-page  flex-column flex-column-fluid " id="kt_app_page">

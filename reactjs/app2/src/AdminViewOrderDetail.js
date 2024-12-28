@@ -3,11 +3,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import getBase from "./common";
-
+import VerifyLogin from "./authenticate";
 export default function AdminViewOrderDetail() {
     const [orders, setOrders] = useState(null); // Initialize orders as null
     const { orderid } = useParams();
-
+    VerifyLogin();
     useEffect(() => {
         const apiAddress = `https://theeasylearnacademy.com/shop/ws/orders.php?id=${orderid}`;
         axios({

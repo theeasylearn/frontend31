@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import AdminSideBar from "./AdminSideBar";
 import getBase from "./common";
-
+import VerifyLogin from "./authenticate";
 export default function AdminCategory() {
     //create state array
     let [categories, SetCategories] = useState([]);
+    VerifyLogin();
+
+        
     let fetchCategory = function () {
         let apiAddress = getBase() + "category.php";
         if (categories.length === 0) {
