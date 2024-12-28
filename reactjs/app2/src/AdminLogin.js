@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import getBase,{COOKIE_FILE} from "./common";
 import {useCookies} from 'react-cookie'; //hook
-import { toast, Bounce, ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 export default function AdminLogin() {
   //create state variable for each and every input
   var [email, setEmail] = useState('');
