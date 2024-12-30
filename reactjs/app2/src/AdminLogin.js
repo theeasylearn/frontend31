@@ -3,7 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import getBase,{COOKIE_FILE} from "./common";
 import {useCookies} from 'react-cookie'; //hook
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, Bounce } from 'react-toastify';
+import { showError, showMessage } from "./message";
 export default function AdminLogin() {
   //create state variable for each and every input
   var [email, setEmail] = useState('');
@@ -33,30 +34,9 @@ export default function AdminLogin() {
         const success = response.data[1].success;
         const message = response.data[2].success;
         if (success === 'no') {
-          alert('invalid login attempt');
-          toast.error('invalid login attempt' , {
-            position: "bottom-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            transition: Bounce,
-          });
+          showError('invalid login attempt');
         } else {
-          toast.success('login successful' , {
-            position: "bottom-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            transition: Bounce,
-          });
+          showMessage('login successful');
           var adminid = response.data[3]['id'];
           //store adminid into cookies
           setCookie('adminid',adminid);

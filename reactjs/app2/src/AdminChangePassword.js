@@ -1,15 +1,44 @@
 import AdminSideBar from "./AdminSideBar";
 import VerifyLogin from "./authenticate";
 import { useEffect, useState } from "react";
-
+import { ToastContainer, toast, Bounce } from 'react-toastify';
+import { showError, showMessage } from "./message";
+import axios from "axios";
+import getBase from "./common";
 export default function AdminChangePassword() {
     VerifyLogin();
+    let [password, setPassword] = useState('');
+    let [newPassword, setNewPassword] = useState('');
+    let [confirmNewPassword, setConfirmNewPassword] = useState('');
 
+    let doChangePassword = function (event) {
+        event.preventDefault();
+        if (newPassword !== confirmNewPassword) {
+            showError('new password and confirm new password mismatch');
+        }
+        else 
+        {
+            //api call 
+            http://theeasylearnacademy.com/shop/ws/admin_change_password.php?id=1&password=123123&newpassword=112233
+            var apiAddress = getBase() + "admin_change_password.php";
+            var form = new FormData();
+            form.append('id','1');
+            form.append('password',password);
+            form.append('newpassword',newPassword);
+            axios({
+                method:'post',
+                responseType:'json',
+                data:form,
+                url:apiAddress
+            });
 
+        }
+    }
     return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
         {/*begin::Page*/}
         <div className="app-page  flex-column flex-column-fluid " id="kt_app_page">
             {/*begin::Header*/}
+            <ToastContainer />
             <div id="kt_app_header" className="app-header ">
                 <div className="app-container  container-fluid d-flex align-items-stretch justify-content-between " id="kt_app_header_container">
                     {/*begin::sidebar mobile toggle*/}
@@ -70,24 +99,27 @@ export default function AdminChangePassword() {
                                         <h1 className="text-white">Change password</h1>
                                     </div>
                                     <div className="card-body p-10">
-                                        <form action>
+                                        <form action onSubmit={doChangePassword}>
                                             <div className="mb-5">
                                                 <label htmlFor="password" className="form-label">Current password</label>
-                                                <input type="password" name="password" id="password" className="form-control" />
+                                                <input type="password" name="password" id="password" className="form-control" required
+                                                    value={password} onChange={(event) => setPassword(event.target.value)} />
                                             </div>
                                             <div className="mb-5">
                                                 <label htmlFor="new_password" className="form-label">New password</label>
-                                                <input type="password" name="new_password" id="new_password" className="form-control" />
+                                                <input type="password" name="password" id="password" className="form-control" required
+                                                    value={newPassword} onChange={(event) => setNewPassword(event.target.value)} />
                                             </div>
                                             <div className="mb-5">
                                                 <label htmlFor="confirm_new_password" className="form-label">
                                                     Confirm new password
                                                 </label>
-                                                <input type="password" name="confirm_new_password" id="confirm_new_password" className="form-control" />
+                                                <input type="password" name="confirm_new_password" id="confirm_new_password" className="form-control"
+                                                    value={confirmNewPassword} onChange={(event) => setConfirmNewPassword(event.target.value)} required />
                                             </div>
                                             <div className="d-flex justify-content-end">
-                                                <input type="submit" defaultValue="Save changes" className="btn btn-primary" />&nbsp;
-                                                <input type="reset" defaultValue="Clear all" className="btn btn-dark" />
+                                                <input type="submit" value="Save changes" className="btn btn-primary" />&nbsp;
+                                                <input type="reset" value="Clear all" className="btn btn-dark" />
                                             </div>
                                         </form>
                                     </div>
