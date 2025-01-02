@@ -19,6 +19,7 @@ import AdminViewProduct from './AdminViewProduct';
 import AdminUser from './AdminUser';
 import AdminViewOrderDetail from './AdminViewOrderDetail';
 import PageNotFound from './PageNotFound';
+import AdminLogout from './AdminLogout';
 function App()
 {
     return (<BrowserRouter>
@@ -30,7 +31,7 @@ function App()
           <Route path="/users" element={<AdminUser />} />  
           <Route path="/orders/detail/:orderid" element={<AdminViewOrderDetail />} /> 
           <Route path="/dashboard" element={<AdminDashBoard />} />  
-          
+          <Route path='/logout' element={<AdminLogout />} />
           <Route path="/category/add" element={<AdminAddCategory />} /> 
           <Route path="/category/edit" element={<AdminEditCategory />} /> 
           <Route path="/product/add" element={<AdminAddProduct />} /> 

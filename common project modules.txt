@@ -1,0 +1,9 @@
+search internet for 2 theme 
+    1 theme for admin (admin template)
+    1 theme for other user (general purpose template)
+approval is required from ankit patel 
+types of users.
+    admin 
+        login 
+        change password
+        forgot password

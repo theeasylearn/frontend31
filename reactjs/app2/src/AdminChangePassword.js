@@ -4,32 +4,61 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import { showError, showMessage } from "./message";
 import axios from "axios";
-import getBase from "./common";
+import {useCookies} from 'react-cookie'; //hook
+import { useNavigate } from "react-router-dom";
+import getBase,{COOKIE_FILE} from "./common";
+
 export default function AdminChangePassword() {
     VerifyLogin();
     let [password, setPassword] = useState('');
     let [newPassword, setNewPassword] = useState('');
     let [confirmNewPassword, setConfirmNewPassword] = useState('');
+    var navigator = useNavigate();
+    var [cookies, setCookie, removeCookie] = useCookies(COOKIE_FILE);
 
     let doChangePassword = function (event) {
         event.preventDefault();
         if (newPassword !== confirmNewPassword) {
             showError('new password and confirm new password mismatch');
         }
-        else 
-        {
+        else {
             //api call 
             http://theeasylearnacademy.com/shop/ws/admin_change_password.php?id=1&password=123123&newpassword=112233
             var apiAddress = getBase() + "admin_change_password.php";
             var form = new FormData();
-            form.append('id','1');
-            form.append('password',password);
-            form.append('newpassword',newPassword);
+            form.append('id',cookies['adminid']);
+            form.append('password', password);
+            form.append('newpassword', newPassword);
             axios({
-                method:'post',
-                responseType:'json',
-                data:form,
-                url:apiAddress
+                method: 'post',
+                responseType: 'json',
+                data: form,
+                url: apiAddress
+            }).then((response) => {
+                console.log(response.data);
+                var error = response.data[0]['error'];
+                if (error !== 'no')
+                    showError(error);
+                else {
+                    var success = response.data[1]['success'];
+                    var message = response.data[2]['message'];
+                    if (success === 'no') {
+                        showError(message);
+                    }
+                    else {
+                        showMessage(message);
+                        setTimeout(() => {
+                            navigator("/logout");
+                        },2000);
+                    }
+
+                }
+            }).catch((error) => {
+                if (error.code === 'ERR_NETWORK') {
+                    showError('It seems you are offline. Check your internet connection.');
+                }
+                else
+                    showError('oops something went wrong please contact Administrator');
             });
 
         }
