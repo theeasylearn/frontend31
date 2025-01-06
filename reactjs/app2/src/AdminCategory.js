@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import AdminSideBar from "./AdminSideBar";
 import getBase from "./common";
 import VerifyLogin from "./authenticate";
+import { Link } from "react-router-dom";
 export default function AdminCategory() {
     //create state array
     let [categories, SetCategories] = useState([]);
@@ -110,7 +111,7 @@ export default function AdminCategory() {
                                 <div className="card shadow">
                                     <div className="card-header p-5 text-bg-primary">
                                         <h1 className="text-white">Category</h1>
-                                        <a href="admin_add_category.html" className="btn btn-light">Add Category</a>
+                                        <Link to="/category/add" className="btn btn-light">Add Category</Link>
                                     </div>
                                     <div className="card-body p-10">
                                         <table className="table table-striped table-hover table-bordered">
