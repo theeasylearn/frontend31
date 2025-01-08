@@ -1,9 +1,64 @@
 import AdminSideBar from "./AdminSideBar";
 import VerifyLogin from "./authenticate";
 import { useEffect, useState } from "react";
-
+import getBase from "./common";
+import { Link } from "react-router-dom";
 export default function AdminAddProduct() {
   VerifyLogin();
+  let [categories, SetCategories] = useState([]);
+  let [categoryId, setCategoryId] = useState("");
+  let [title, setTitle] = useState("");
+  let [price, setPrice] = useState("");
+  let [quantity, setQuantity] = useState("");
+  let [weight, setWeight] = useState("");
+  let [size, setSize] = useState("");
+  let [detail, setDetail] = useState("");
+  let [isLive, setIsLive] = useState(1); // default to 1 (Yes)
+  let [photo, setPhoto] = useState(null);
+  
+  useEffect(() => {
+    fetchCategory();
+  });
+  let fetchCategory = function () {
+    let apiAddress = getBase() + "category.php";
+    if (categories.length === 0) {
+      fetch(apiAddress).then((msg) => msg.json()).then((response) => {
+        //console.log(response); //array of object (JSON)
+        /*
+         [
+             {"error":"no"},
+             {"total":6},
+             {"id":"1","title":"laptop","photo":"laptop.jpg","islive":"1","isdeleted":"0"},
+             {"id":"2","title":"mobile","photo":"mobile.jpg","islive":"1","isdeleted":"0"},
+             {"id":"3","title":"book","photo":"books.jpg","islive":"1","isdeleted":"0"},
+             {"id":"4","title":"Cookies & waffers","photo":"Cookies.jpg","islive":"1","isdeleted":"0"},{"id":"5","title":"Washing Powders","photo":"washing_powders.jpg","islive":"1","isdeleted":"0"},
+             {"id":"6","title":"shampoo","photo":"shampoo.jpg","islive":"1","isdeleted":"0"}
+        ]
+        */
+        let error = response[0]['error']; //copy error key value into error
+        if (error !== 'no') {
+          alert(error);
+        }
+        else {
+          let total = response[1]['total'];
+          if (total === 0) {
+            alert('no category found');
+          }
+          else {
+            //delete 2 objects 
+            response.splice(0, 2);
+            console.log(response);
+            SetCategories(response);
+          }
+        }
+      });
+    }
+
+  }
+  let addProduct = function(event) {
+    console.log(title,categoryId,price,quantity,weight,size,detail,isLive,photo);
+    event.preventDefault();
+  }
   return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
     {/*begin::Page*/}
     <div className="app-page  flex-column flex-column-fluid " id="kt_app_page">
@@ -66,31 +121,34 @@ export default function AdminAddProduct() {
                 <div className="card shadow">
                   <div className="card-header p-5 text-bg-primary">
                     <h1 className="text-white">Product (Add new)</h1>
-                    <a href="admin_product.html" className="btn btn-light">Back</a>
+                    <Link to="/adminproduct" className="btn btn-light">Back</Link>
                   </div>
                   <div className="card-body p-10">
-                    <form action>
+                    <form onSubmit={addProduct}>
                       <div className="row mb-3">
                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                           <div className="form-floating">
-                            <select className="form-select" id="categoryid" name="categoryid" aria-label="Floating label select example">
-                              <option selected value>Select</option>
-                              <option value={1}>One</option>
-                              <option value={2}>Two</option>
-                              <option value={3}>Three</option>
+                            <select className="form-select" id="categoryid" name="categoryid" aria-label="Floating label select example"
+                            onChange={(e) => setCategoryId(e.target.value)} >
+                              <option selected value>Select Category</option>
+                              {categories.map((item) => {
+                                  return <option value={item.id}>{item.title}</option>
+                              })}
                             </select>
                             <label htmlFor="floatingSelect">Product Category</label>
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                           <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="title" name="title" placeholder="title" />
+                            <input type="text" className="form-control" id="title" name="title" placeholder="title" value={title} 
+                            onChange={(e) => setTitle(e.target.value)} />
                             <label htmlFor="title">Product Name</label>
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                           <div className="form-floating mb-3">
-                            <input type="number" className="form-control" id="price" name="price" placeholder="Price" />
+                            <input type="number" className="form-control" id="price" name="price" placeholder="Price" value={price} 
+                            onChange={(e) => setPrice(e.target.value)} />
                             <label htmlFor="price">Price</label>
                           </div>
                         </div>
@@ -98,19 +156,22 @@ export default function AdminAddProduct() {
                       <div className="row mb-3">
                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                           <div className="form-floating mb-3">
-                            <input type="number" className="form-control" id="quantity" name="quantity" placeholder="Product quantity" />
+                            <input type="number" className="form-control" id="quantity" name="quantity" placeholder="Product quantity" value={quantity} 
+                            onChange={(e) => setQuantity(e.target.value)} />
                             <label htmlFor="floatingInput">Stock</label>
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                           <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="weight" name="weight" placeholder="Weight" />
+                            <input type="text" className="form-control" id="weight" name="weight" placeholder="Weight" value={weight} 
+                            onChange={(e) => setWeight(e.target.value)} />
                             <label htmlFor="weight">Weight</label>
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                           <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="size" name="size" placeholder="Size" />
+                            <input type="text" className="form-control" id="size" name="size" placeholder="Size" value={size} 
+                            onChange={(e) => setSize(e.target.value)} />
                             <label htmlFor="size">Size</label>
                           </div>
                         </div>
@@ -118,18 +179,22 @@ export default function AdminAddProduct() {
                       <div className="row mb-3">
                         <div className="col-lg-8 col-md-6 col-sm-6 col-12">
                           <div className="form-floating">
-                            <textarea className="form-control" placeholder="Product description" id="detail" style={{ "height": "100px" }} name="detail" defaultValue={""} />
+                            <textarea className="form-control" placeholder="Product description" id="detail" style={{ "height": "100px" }} name="detail" 
+                            value={detail} 
+                            onChange={(e) => setDetail(e.target.value)} />
                             <label htmlFor="floatingTextarea">Detail</label>
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6 col-sm-6 col-12">
                           <p className="fw-bold">is this category Live?</p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                           <div className="form-check mb-4">
-                            <input name="islive" type="radio" className="form-check-input" defaultValue={1} />
+                            <input name="islive" type="radio" className="form-check-input" value={1}
+                            onChange={() => setIsLive(1)} />
                             <label htmlFor className="form-check-label">Yes</label>
                           </div>
                           <div className="form-check">
-                            <input name="islive" type="radio" className="form-check-input" defaultValue={0} />
+                            <input name="islive" type="radio" className="form-check-input" 
+                            value={0} onChange={(e) => setIsLive(0)} />
                             <label htmlFor className="form-check-label">No</label>
                           </div>
                         </div>
@@ -137,11 +202,12 @@ export default function AdminAddProduct() {
                       <div className="row">
                         <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                           <label htmlFor="photo" className="form-label">Select Product Photo</label>
-                          <input className="form-control" type="file" id="photo" name="photo" />
+                          <input className="form-control" type="file" id="photo" name="photo" 
+                          onChange={(e) => setPhoto(e.target.files[0])} required/>
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-6 col-12 mt-5 pt-3 d-flex  justify-content-end">
-                          <input type="submit" defaultValue="Save changes" className="btn btn-primary" />&nbsp;
-                          <input type="reset" defaultValue="Clear all" className="btn btn-dark" />
+                          <input type="submit" value="Save changes" className="btn btn-primary" />&nbsp;
+                          <input type="reset"  value="Clear All" className="btn btn-dark" />
                         </div>
                       </div>
                     </form>

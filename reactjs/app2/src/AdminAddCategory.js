@@ -106,7 +106,7 @@ export default function AdminAddCategory()
                         <div className="mb-5">
                           <label htmlFor="photo" className="form-label">Select Photo</label>
                           <input type="file" name="photo" id="photo" className="form-control" required accept="image/*" 
-                          onChange={(e) => setPhoto(e.target.files[0])}/>
+                          onChange={(e) => setPhoto(e.target.files[0])} />
                         </div>
                         <span className="my-5 fw-bold">is this category Live?</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <div className="form-check-inline mb-5">

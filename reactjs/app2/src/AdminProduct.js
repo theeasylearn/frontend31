@@ -2,12 +2,12 @@ import AdminSideBar from "./AdminSideBar";
 import { useEffect, useState } from "react";
 import getBase from "./common";
 import VerifyLogin from "./authenticate";
-
+import { Link } from "react-router-dom";
 export default function AdminProduct() {
         //create state array
         let [products,setProducts] = useState([]);
-
         VerifyLogin();
+       
         let display = (item) => {
             return (   <tr>
                 <td>{item['id']}</td>
@@ -89,7 +89,7 @@ export default function AdminProduct() {
                                 <div className="card shadow">
                                     <div className="card-header p-5 text-bg-primary">
                                         <h1 className="text-white">Product</h1>
-                                        <a href="admin_add_product.html" className="btn btn-light">Add Product</a>
+                                        <Link to="/product/add" className="btn btn-light">Add Product</Link>
                                     </div>
                                     <div className="card-body p-10">
                                         <table className="table table-striped table-hover table-bordered">
