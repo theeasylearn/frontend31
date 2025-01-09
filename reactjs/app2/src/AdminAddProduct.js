@@ -3,6 +3,9 @@ import VerifyLogin from "./authenticate";
 import { useEffect, useState } from "react";
 import getBase from "./common";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { showError, showMessage } from "./message";
+import { ToastContainer } from "react-toastify";
 export default function AdminAddProduct() {
   VerifyLogin();
   let [categories, SetCategories] = useState([]);
@@ -15,7 +18,7 @@ export default function AdminAddProduct() {
   let [detail, setDetail] = useState("");
   let [isLive, setIsLive] = useState(1); // default to 1 (Yes)
   let [photo, setPhoto] = useState(null);
-  
+
   useEffect(() => {
     fetchCategory();
   });
@@ -55,8 +58,43 @@ export default function AdminAddProduct() {
     }
 
   }
-  let addProduct = function(event) {
-    console.log(title,categoryId,price,quantity,weight,size,detail,isLive,photo);
+  let addProduct = function (event) {
+    console.log(title, categoryId, price, quantity, weight, size, detail, isLive, photo);
+    let apiAddress = getBase() + "insert_product.php";
+    console.log(apiAddress);
+    let form = new FormData();
+    form.append('name', title);
+    form.append('categoryid', categoryId);
+    form.append('price', price);
+    form.append('stock', quantity);
+    form.append('weight', weight);
+    form.append('size', size);
+    form.append('detail', detail);
+    form.append('islive', isLive);
+    form.append('photo', photo);
+    axios({
+      method: 'post',
+      url: apiAddress,
+      responseType: 'json',
+      data: form
+    }).then((response) => {
+      console.log(response.data);
+      let error = response.data[0]['error'];
+      if (error !== 'no') {
+        showError(error);
+      } else {
+        let success = response.data[1]['success'];
+        let message = response.data[2]['message'];
+        if (success === 'no') {
+          showError(message);
+        } else {
+          showMessage(message);
+        }
+      }}).catch((error) => {
+          if (error.code === 'ERR_NETWORK') {
+            console.log(error);
+            showError('oops, it seems either your offline or server is not available, please try after sometime');
+          }});
     event.preventDefault();
   }
   return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
@@ -116,6 +154,7 @@ export default function AdminAddProduct() {
         {/*begin::Main*/}
         <div className="app-main" id="kt_app_main">
           <div className="container mt-10">
+            <ToastContainer />
             <div className="row">
               <div className="col-lg-12">
                 <div className="card shadow">
@@ -129,10 +168,10 @@ export default function AdminAddProduct() {
                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                           <div className="form-floating">
                             <select className="form-select" id="categoryid" name="categoryid" aria-label="Floating label select example"
-                            onChange={(e) => setCategoryId(e.target.value)} >
+                              onChange={(e) => setCategoryId(e.target.value)} >
                               <option selected value>Select Category</option>
                               {categories.map((item) => {
-                                  return <option value={item.id}>{item.title}</option>
+                                return <option value={item.id}>{item.title}</option>
                               })}
                             </select>
                             <label htmlFor="floatingSelect">Product Category</label>
@@ -140,15 +179,15 @@ export default function AdminAddProduct() {
                         </div>
                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                           <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="title" name="title" placeholder="title" value={title} 
-                            onChange={(e) => setTitle(e.target.value)} />
+                            <input type="text" className="form-control" id="title" name="title" placeholder="title" value={title}
+                              onChange={(e) => setTitle(e.target.value)} />
                             <label htmlFor="title">Product Name</label>
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                           <div className="form-floating mb-3">
-                            <input type="number" className="form-control" id="price" name="price" placeholder="Price" value={price} 
-                            onChange={(e) => setPrice(e.target.value)} />
+                            <input type="number" className="form-control" id="price" name="price" placeholder="Price" value={price}
+                              onChange={(e) => setPrice(e.target.value)} />
                             <label htmlFor="price">Price</label>
                           </div>
                         </div>
@@ -156,22 +195,22 @@ export default function AdminAddProduct() {
                       <div className="row mb-3">
                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                           <div className="form-floating mb-3">
-                            <input type="number" className="form-control" id="quantity" name="quantity" placeholder="Product quantity" value={quantity} 
-                            onChange={(e) => setQuantity(e.target.value)} />
+                            <input type="number" className="form-control" id="quantity" name="quantity" placeholder="Product quantity" value={quantity}
+                              onChange={(e) => setQuantity(e.target.value)} />
                             <label htmlFor="floatingInput">Stock</label>
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                           <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="weight" name="weight" placeholder="Weight" value={weight} 
-                            onChange={(e) => setWeight(e.target.value)} />
+                            <input type="text" className="form-control" id="weight" name="weight" placeholder="Weight" value={weight}
+                              onChange={(e) => setWeight(e.target.value)} />
                             <label htmlFor="weight">Weight</label>
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                           <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="size" name="size" placeholder="Size" value={size} 
-                            onChange={(e) => setSize(e.target.value)} />
+                            <input type="text" className="form-control" id="size" name="size" placeholder="Size" value={size}
+                              onChange={(e) => setSize(e.target.value)} />
                             <label htmlFor="size">Size</label>
                           </div>
                         </div>
@@ -179,9 +218,9 @@ export default function AdminAddProduct() {
                       <div className="row mb-3">
                         <div className="col-lg-8 col-md-6 col-sm-6 col-12">
                           <div className="form-floating">
-                            <textarea className="form-control" placeholder="Product description" id="detail" style={{ "height": "100px" }} name="detail" 
-                            value={detail} 
-                            onChange={(e) => setDetail(e.target.value)} />
+                            <textarea className="form-control" placeholder="Product description" id="detail" style={{ "height": "100px" }} name="detail"
+                              value={detail}
+                              onChange={(e) => setDetail(e.target.value)} />
                             <label htmlFor="floatingTextarea">Detail</label>
                           </div>
                         </div>
@@ -189,12 +228,12 @@ export default function AdminAddProduct() {
                           <p className="fw-bold">is this category Live?</p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                           <div className="form-check mb-4">
                             <input name="islive" type="radio" className="form-check-input" value={1}
-                            onChange={() => setIsLive(1)} />
+                              onChange={() => setIsLive(1)} />
                             <label htmlFor className="form-check-label">Yes</label>
                           </div>
                           <div className="form-check">
-                            <input name="islive" type="radio" className="form-check-input" 
-                            value={0} onChange={(e) => setIsLive(0)} />
+                            <input name="islive" type="radio" className="form-check-input"
+                              value={0} onChange={(e) => setIsLive(0)} />
                             <label htmlFor className="form-check-label">No</label>
                           </div>
                         </div>
@@ -202,12 +241,12 @@ export default function AdminAddProduct() {
                       <div className="row">
                         <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                           <label htmlFor="photo" className="form-label">Select Product Photo</label>
-                          <input className="form-control" type="file" id="photo" name="photo" 
-                          onChange={(e) => setPhoto(e.target.files[0])} required/>
+                          <input className="form-control" type="file" id="photo" name="photo"
+                            onChange={(e) => setPhoto(e.target.files[0])} required />
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-6 col-12 mt-5 pt-3 d-flex  justify-content-end">
                           <input type="submit" value="Save changes" className="btn btn-primary" />&nbsp;
-                          <input type="reset"  value="Clear All" className="btn btn-dark" />
+                          <input type="reset" value="Clear All" className="btn btn-dark" />
                         </div>
                       </div>
                     </form>
