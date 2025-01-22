@@ -3,31 +3,62 @@ import { useEffect, useState } from "react";
 import getBase from "./common";
 import VerifyLogin from "./authenticate";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { showError,ERROR_MESSAGE } from "./message";
+import { ToastContainer } from "react-toastify";
 export default function AdminProduct() {
-        //create state array
-        let [products,setProducts] = useState([]);
-        VerifyLogin();
-       
-        let display = (item) => {
-            return (   <tr>
-                <td>{item['id']}</td>
-                <td>{item['title']}</td>
-                <td>
-                    <img src={"http://theeasylearnacademy.com/shop/images/product/" + item['photo']} className="img-fluid" alt='image not available' />
-                </td>
-                <td>{item['price']}</td>
-                <td>{item['sto  ck']}</td>
-                <td>
-                    {(item.islive === '1')?"Yes":"No"}
-                </td>
-                <td width="25%">
-                    <a href="admin_view_product.html" className="btn btn-primary">View</a>
-                    <a href="admin_edit_product.html" className="btn btn-warning">Edit</a>
-                    <a href="admin_edit_product.html" className="btn btn-secondary">Delete</a>
-                </td>
-            </tr>);
+    //create state array
+    let [products, setProducts] = useState([]);
+    VerifyLogin();
+    useEffect(() => {
+        if (products.length === 0) {
+            let apiAddress = getBase() + "product.php";
+            axios({
+                method: 'get',
+                responseType: 'json',
+                url: apiAddress
+            }).then((response) => {
+                console.log(response.data);
+                let error = response.data[0]['error']; //WE HAVE CREATE ERROR VARAIABLE FROM 0TH OBJECT WHICH HAS KEY ERROR
+                if (error !== 'no')
+                    showError(error)
+                else {
+                    let total = response.data[1]['total'];
+                    if (total === 0)
+                        showError('no products found');
+                    else {
+                        response.data.splice(0, 2); //delete 2 object from beginning
+                        setProducts(response.data);
+                    }
+                }
+            }).catch((error) => {
+                if (error.code === 'ERR_NETWORK')
+                    showError(ERROR_MESSAGE);
+            });
         }
-        return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
+
+    });
+
+    let display = (item) => {
+        return (<tr>
+            <td>{item['id']}</td>
+            <td>{item['title']}</td>
+            <td>
+                <img src={"http://theeasylearnacademy.com/shop/images/product/" + item['photo']} className="img-fluid" alt='image not available' />
+            </td>
+            <td>{item['price']}</td>
+            <td>{item['stock']}</td>
+            <td>
+                {(item.islive === '1') ? "Yes" : "No"}
+            </td>
+            <td width="25%">
+                <a href="admin_view_product.html" className="btn btn-primary">View</a>
+                <a href="admin_edit_product.html" className="btn btn-warning">Edit</a>
+                <a href="admin_edit_product.html" className="btn btn-secondary">Delete</a>
+            </td>
+        </tr>);
+    }
+    return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
         {/*begin::Page*/}
         <div className="app-page  flex-column flex-column-fluid " id="kt_app_page">
             {/*begin::Header*/}
@@ -84,6 +115,7 @@ export default function AdminProduct() {
                 {/*begin::Main*/}
                 <div className="app-main" id="kt_app_main">
                     <div className="container mt-10">
+                        <ToastContainer />
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="card shadow">

@@ -3,12 +3,13 @@ import AdminSideBar from "./AdminSideBar";
 import getBase from "./common";
 import VerifyLogin from "./authenticate";
 import { Link } from "react-router-dom";
+import { showError,ERROR_MESSAGE, showMessage } from "./message";
+import { ToastContainer } from "react-toastify";
+import axios from "axios";
 export default function AdminCategory() {
     //create state array
     let [categories, SetCategories] = useState([]);
     VerifyLogin();
-
-        
     let fetchCategory = function () {
         let apiAddress = getBase() + "category.php";
         if (categories.length === 0) {
@@ -27,12 +28,12 @@ export default function AdminCategory() {
                 */
                 let error = response[0]['error']; //copy error key value into error
                 if (error !== 'no') {
-                    alert(error);
+                    showError(error);
                 }
                 else {
                     let total = response[1]['total'];
                     if (total === 0) {
-                        alert('no category found');
+                        showMessage('no category found');
                     }
                     else {
                         //delete 2 objects 
@@ -48,7 +49,37 @@ export default function AdminCategory() {
 
     useEffect(() => {
         fetchCategory();
-    })
+    });
+
+    let DeleteCategory = function (categoryid) {
+        // alert('delete button clicked....' + categoryid);
+        let apiAddress = getBase() + "delete_category.php?id=" + categoryid;
+        let config = {
+            method: 'get',
+            responseType: 'json',
+            url: apiAddress
+        };
+        axios(config).then((response)=>
+        {
+            let error = response.data[0]['error'];
+            if(error !== 'no')
+                showError(error);
+            else 
+            {
+                showMessage(response.data[1]['message']);
+                let temp = categories.filter((item) => {
+                    if(item.id !== categoryid)
+                        return item
+                });
+                SetCategories(temp);
+            }
+        }).catch((error) => {
+            if(error.code === 'ERR_NETWORK')
+                showError(ERROR_MESSAGE)
+        });
+        
+    }
+
     return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
         {/*begin::Page*/}
         <div className="app-page  flex-column flex-column-fluid " id="kt_app_page">
@@ -81,6 +112,7 @@ export default function AdminCategory() {
                     <AdminSideBar />
                     {/*end::Logo*/}
                     {/*begin::sidebar menu*/}
+                    <ToastContainer />
                     <div className="app-sidebar-menu overflow-hidden flex-column-fluid">
                         <div id="kt_app_sidebar_menu_wrapper" className="app-sidebar-wrapper">
                             <div id="kt_app_sidebar_menu_scroll" className="hover-scroll-y my-5 mx-3" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer" data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px" data-kt-scroll-save-state="true">
@@ -137,7 +169,7 @@ export default function AdminCategory() {
                                                         </td>
                                                         <td width="20%">
                                                             <a href="admin_edit_category.html" className="btn btn-warning">Edit</a>
-                                                            <a href="admin_edit_category.html" className="btn btn-secondary">Delete</a>
+                                                            <button className="btn btn-danger" onClick={() => DeleteCategory(item.id)}>Delete</button>
                                                         </td>
                                                     </tr>)
                                                 })}

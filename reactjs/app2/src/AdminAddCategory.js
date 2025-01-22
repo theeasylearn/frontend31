@@ -110,18 +110,18 @@ export default function AdminAddCategory()
                         </div>
                         <span className="my-5 fw-bold">is this category Live?</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <div className="form-check-inline mb-5">
-                          <input name="islive" type="radio" className="form-check-input" 
+                          <input id="yes" name="islive" type="radio" className="form-check-input" 
                           value={1} onChange={(e) => setIsLive(e.target.value)} required />
-                          <label htmlFor className="form-check-label">Yes</label>
+                          <label htmlFor="yes" className="form-check-label">Yes</label>
                         </div>
                         <div className="form-check-inline mb-5">
-                          <input name="islive" type="radio" className="form-check-input" 
+                          <input id="no" name="islive" type="radio" className="form-check-input" 
                           value={0} onChange={(e) => setIsLive(e.target.value)} required />
-                          <label htmlFor className="form-check-label">No</label>
+                          <label htmlFor='no' className="form-check-label">No</label>
                         </div>
                         <div className="d-flex justify-content-end">
-                          <input type="submit" defaultValue="Save changes" className="btn btn-primary" />&nbsp;
-                          <input type="reset" defaultValue="Clear all" className="btn btn-dark" />
+                          <input type="submit" value="Save changes" className="btn btn-primary" />&nbsp;
+                          <input type="reset" value="Clear all" className="btn btn-dark" />
                         </div>
                       </form>
                     </div>

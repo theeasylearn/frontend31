@@ -1,4 +1,5 @@
 import { toast, Bounce } from "react-toastify";
+export const ERROR_MESSAGE = 'oops, it seems either your offline or server is not available, please try after sometime';
 export function showError(msg) {
     toast.error(msg, {
         position: "bottom-center",
