@@ -38,6 +38,14 @@ export default function AdminProduct() {
         }
 
     });
+    let deleteProduct = function(productid) {
+        // let temp = products.filter((item) => {
+        //         if(item.id != productid)
+        //             return item;
+        // });
+        // setProducts(temp);
+        let apiAddress = getBase() + 
+    }
 
     let display = (item) => {
         return (<tr>
@@ -54,7 +62,8 @@ export default function AdminProduct() {
             <td width="25%">
                 <a href="admin_view_product.html" className="btn btn-primary">View</a>
                 <a href="admin_edit_product.html" className="btn btn-warning">Edit</a>
-                <a href="admin_edit_product.html" className="btn btn-secondary">Delete</a>
+                <button type='button' className="btn btn-secondary"
+                onClick={() => deleteProduct(item.id)}>Delete</button>
             </td>
         </tr>);
     }

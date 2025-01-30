@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { showError, showMessage } from "./message";
 import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 export default function AdminAddProduct() {
   VerifyLogin();
   let [categories, SetCategories] = useState([]);
@@ -18,7 +19,7 @@ export default function AdminAddProduct() {
   let [detail, setDetail] = useState("");
   let [isLive, setIsLive] = useState(1); // default to 1 (Yes)
   let [photo, setPhoto] = useState(null);
-
+  let navigate = useNavigate();
   useEffect(() => {
     fetchCategory();
   });
@@ -89,6 +90,11 @@ export default function AdminAddProduct() {
           showError(message);
         } else {
           showMessage(message);
+          //change screen after 2 second delay
+          setTimeout(() =>{
+            // alert('we are here');
+            navigate("/product");
+          },2000);
         }
       }}).catch((error) => {
           if (error.code === 'ERR_NETWORK') {
