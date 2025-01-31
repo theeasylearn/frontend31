@@ -1,5 +1,10 @@
+const PATH = "http://www.theeasylearnacademy.com/shop/";
 export default function getBase()
 {
-    return "http://theeasylearnacademy.com/shop/ws/";
+    return PATH + "ws/";
+}
+export function getImageBase()
+{
+    return PATH + "images/";
 }
 export const COOKIE_FILE = 'theeasylearn';

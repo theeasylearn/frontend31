@@ -33,7 +33,7 @@ function App()
           <Route path="/dashboard" element={<AdminDashBoard />} />  
           <Route path='/logout' element={<AdminLogout />} />
           <Route path="/category/add" element={<AdminAddCategory />} /> 
-          <Route path="/category/edit" element={<AdminEditCategory />} /> 
+          <Route path="/category/edit/:id" element={<AdminEditCategory />} /> 
           <Route path="/product/add" element={<AdminAddProduct />} /> 
           <Route path="/product/edit" element={<AdminEditProduct />} /> 
           <Route path="/product/detail" element={<AdminViewProduct />} /> 

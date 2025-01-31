@@ -1,9 +1,45 @@
 import AdminSideBar from "./AdminSideBar";
 import VerifyLogin from "./authenticate";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import getBase, { getImageBase } from "./common";
+import { ToastContainer } from "react-toastify";
+import { showError, showMessage, ERROR_MESSAGE } from "./message";
 export default function AdminEditCategory() {
+    let { id } = useParams();
+    let [title, setTitle] = useState('');
+    let [photo, setPhoto] = useState('');
+    let [isLive, setIsLive] = useState('');
     VerifyLogin();
+    useEffect(() => {
+        let apiAddress = getBase() + "category.php?id=" + id;
+        axios({
+            method: 'get',
+            responseType: 'json',
+            url: apiAddress
+        }).then((response) => {
+            console.log(response.data);
+            let error = response.data[0]['error'];
+            if (error !== 'no')
+                showError(error);
+            else {
+                let total = response.data[1]['total'];
+                if (total === 0)
+                    alert('no category found');
+                else {
+                    // response.data.splice(0,2);
+                    setTitle(response.data[2]['title']);
+                    setPhoto(response.data[2]['photo']);
+                    setIsLive(response.data[2]['islive']);
+                }
+            }
+        }).catch((error) => {
+            if (error.code === 'ERR_NETWORK')
+                showError(ERROR_MESSAGE)
+        });
 
+    });
     return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
         {/*begin::Page*/}
         <div className="app-page  flex-column flex-column-fluid " id="kt_app_page">
@@ -75,30 +111,44 @@ export default function AdminEditCategory() {
                                             <form action>
                                                 <div className="mb-5">
                                                     <label htmlFor="title" className="form-label">Edit Title</label>
-                                                    <input type="text" name="title" id="title" className="form-control" required />
+                                                    <input type="text" name="title" id="title" className="form-control" required
+                                                        value={title}
+                                                        onChange={(e) => setTitle(e.target.value)} />
                                                 </div>
                                                 <div className="mb-5">
                                                     <label htmlFor="photo" className="form-label">Change Photo</label>
-                                                    <input type="file" name="photo" id="photo" className="form-control" required accept="image/*" />
+                                                    <input type="file" name="photo" id="photo" className="form-control" required accept="image/*" onChange={(e) => setPhoto(e.target.files[0])} />
                                                 </div>
                                                 <span className="my-5 fw-bold">is this category Live?</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <div className="form-check-inline mb-5">
-                                                    <input name="islive" type="radio" className="form-check-input" defaultValue={1} />
-                                                    <label htmlFor className="form-check-label">Yes</label>
+                                                    <input
+                                                        name="islive"
+                                                        type="radio"
+                                                        className="form-check-input"
+                                                        value={1}
+                                                        checked={isLive === '1'}
+                                                    />
                                                 </div>
                                                 <div className="form-check-inline mb-5">
-                                                    <input name="islive" type="radio" className="form-check-input" defaultValue={0} />
+                                                <input
+                                                        name="islive"
+                                                        type="radio"
+                                                        className="form-check-input"
+                                                        value={0}
+                                                        checked={isLive === '0'}
+                                                    />
                                                     <label htmlFor className="form-check-label">No</label>
                                                 </div>
                                                 <div className="d-flex justify-content-end">
-                                                    <input type="submit" defaultValue="Save changes" className="btn btn-primary" />&nbsp;
+                                                    <input type="submit" value="Save changes" className="btn btn-primary" />&nbsp;
                                                     <input type="reset" defaultValue="Clear all" className="btn btn-dark" />
                                                 </div>
                                             </form>
                                         </div>
                                         <div className="col-lg-4 text-center">
-                                            <b>Current Photo</b>
-                                            <img src="https://picsum.photos/300?random=1" alt className="img-fluid img-thumbnail shadow" />
+                                            <b>Current Photo</b> <br />
+                                            <img
+                                                src={getImageBase() + "category/" + photo} alt className="img-fluid img-thumbnail shadow" />
                                         </div>
                                     </div>
                                 </div>

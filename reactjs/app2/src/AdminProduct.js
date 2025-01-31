@@ -4,7 +4,7 @@ import getBase from "./common";
 import VerifyLogin from "./authenticate";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { showError,ERROR_MESSAGE } from "./message";
+import { showError, ERROR_MESSAGE, showMessage } from "./message";
 import { ToastContainer } from "react-toastify";
 export default function AdminProduct() {
     //create state array
@@ -38,13 +38,32 @@ export default function AdminProduct() {
         }
 
     });
-    let deleteProduct = function(productid) {
-        // let temp = products.filter((item) => {
-        //         if(item.id != productid)
-        //             return item;
-        // });
-        // setProducts(temp);
-        let apiAddress = getBase() + 
+    let deleteProduct = function (productid) {
+
+        let apiAddress = getBase() + "delete_product.php?id=" + productid;
+        axios({
+            method: 'get',
+            responseType: 'json',
+            url: apiAddress
+        }).then((response) => {
+            console.log(response.data);
+            let error = response.data[0]['error'];
+            if (error !== 'no') {
+                showError(error);
+            }
+            else {
+                let temp = products.filter((item) => {
+                        if(item.id != productid)
+                            return item;
+                });
+                setProducts(temp);
+                showMessage(response.data[1]['message']);
+
+            }
+        }).catch((error) => {
+            if (error.code === 'ERR_NETWORK')
+                showError(ERROR_MESSAGE);
+        })
     }
 
     let display = (item) => {
@@ -63,7 +82,7 @@ export default function AdminProduct() {
                 <a href="admin_view_product.html" className="btn btn-primary">View</a>
                 <a href="admin_edit_product.html" className="btn btn-warning">Edit</a>
                 <button type='button' className="btn btn-secondary"
-                onClick={() => deleteProduct(item.id)}>Delete</button>
+                    onClick={() => deleteProduct(item.id)}>Delete</button>
             </td>
         </tr>);
     }

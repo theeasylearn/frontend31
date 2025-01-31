@@ -168,7 +168,8 @@ export default function AdminCategory() {
                                                             {(item.islive==='1')?'Yes':'No'}
                                                         </td>
                                                         <td width="20%">
-                                                            <a href="admin_edit_category.html" className="btn btn-warning">Edit</a>
+                                                            <Link 
+                                                            to={"/category/edit/" + item.id} className="btn btn-warning">Edit</Link>
                                                             <button className="btn btn-danger" onClick={() => DeleteCategory(item.id)}>Delete</button>
                                                         </td>
                                                     </tr>)
