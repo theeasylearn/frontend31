@@ -1,7 +1,7 @@
 import AdminSideBar from "./AdminSideBar";
 import VerifyLogin from "./authenticate";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import getBase, { getImageBase } from "./common";
 import { ToastContainer } from "react-toastify";
@@ -11,35 +11,79 @@ export default function AdminEditCategory() {
     let [title, setTitle] = useState('');
     let [photo, setPhoto] = useState('');
     let [isLive, setIsLive] = useState('');
+    let [isFetched, setIsFetched] = useState(false);
+    let navigator = useNavigate();
     VerifyLogin();
     useEffect(() => {
-        let apiAddress = getBase() + "category.php?id=" + id;
+        if (isFetched === false) {
+            let apiAddress = getBase() + "category.php?id=" + id;
+            axios({
+                method: 'get',
+                responseType: 'json',
+                url: apiAddress
+            }).then((response) => {
+                console.log(response.data);
+                let error = response.data[0]['error'];
+                if (error !== 'no')
+                    showError(error);
+                else {
+                    let total = response.data[1]['total'];
+                    if (total === 0)
+                        alert('no category found');
+                    else {
+                        // response.data.splice(0,2);
+                        setTitle(response.data[2]['title']);
+                        setPhoto(response.data[2]['photo']);
+                        setIsLive(response.data[2]['islive']);
+                        setIsFetched(true);
+                    }
+                }
+            }).catch((error) => {
+                if (error.code === 'ERR_NETWORK')
+                    showError(ERROR_MESSAGE)
+            });
+        }
+    });
+    let updateCategory = function (e) {
+        e.preventDefault();
+        console.log(title, photo, isLive);
+        //call api 
+        let apiAddress = getBase() + "update_category.php";
+        let form = new FormData();
+
+        form.append('title', title);
+        form.append('photo', photo);
+        form.append('islive', isLive);
+        form.append('id', id);
         axios({
-            method: 'get',
+            method: 'post',
             responseType: 'json',
-            url: apiAddress
+            url: apiAddress,
+            data: form
         }).then((response) => {
             console.log(response.data);
             let error = response.data[0]['error'];
-            if (error !== 'no')
+            if (error !== 'no') {
                 showError(error);
+            }
             else {
-                let total = response.data[1]['total'];
-                if (total === 0)
-                    alert('no category found');
+                let success = response.data[1]['succcess'];
+                let message = response.data[2]['message'];
+                if (success === 'no')
+                    showError(message);
                 else {
-                    // response.data.splice(0,2);
-                    setTitle(response.data[2]['title']);
-                    setPhoto(response.data[2]['photo']);
-                    setIsLive(response.data[2]['islive']);
+                    showMessage(message);
+                    //display another view
+                    setTimeout(() => {
+                        navigator("/category");
+                    }, 2000);
                 }
             }
         }).catch((error) => {
             if (error.code === 'ERR_NETWORK')
-                showError(ERROR_MESSAGE)
+                showError('oops, it seems either your offline or server is not available, please try after sometime');
         });
-
-    });
+    }
     return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
         {/*begin::Page*/}
         <div className="app-page  flex-column flex-column-fluid " id="kt_app_page">
@@ -97,6 +141,7 @@ export default function AdminEditCategory() {
                 {/*begin::Main*/}
                 <div className="app-main" id="kt_app_main">
                     <div className="container mt-10">
+                        <ToastContainer />
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="card shadow">
@@ -108,7 +153,7 @@ export default function AdminEditCategory() {
                                 <div className="card-body p-10">
                                     <div className="row">
                                         <div className="col-lg-8">
-                                            <form action>
+                                            <form action onSubmit={updateCategory}>
                                                 <div className="mb-5">
                                                     <label htmlFor="title" className="form-label">Edit Title</label>
                                                     <input type="text" name="title" id="title" className="form-control" required
@@ -127,15 +172,20 @@ export default function AdminEditCategory() {
                                                         className="form-check-input"
                                                         value={1}
                                                         checked={isLive === '1'}
+                                                        required
+                                                        onChange={() => setIsLive('1')}
                                                     />
+                                                    <label htmlFor className="form-check-label">Yes</label>
                                                 </div>
                                                 <div className="form-check-inline mb-5">
-                                                <input
+                                                    <input
                                                         name="islive"
                                                         type="radio"
                                                         className="form-check-input"
                                                         value={0}
                                                         checked={isLive === '0'}
+                                                        required
+                                                        onChange={() => setIsLive('0')}
                                                     />
                                                     <label htmlFor className="form-check-label">No</label>
                                                 </div>

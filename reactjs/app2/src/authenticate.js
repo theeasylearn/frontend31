@@ -5,7 +5,6 @@ import { toast, Bounce } from 'react-toastify';
 export default function VerifyLogin() {
     var [cookies, setCookie, removeCookie] = useCookies(COOKIE_FILE);
     var navigator = useNavigate();
-
     var adminid = cookies['adminid'];
     if (adminid == undefined) {
         //alert('login required...');
