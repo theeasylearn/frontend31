@@ -80,7 +80,7 @@ export default function AdminProduct() {
             </td>
             <td width="25%">
                 <a href="admin_view_product.html" className="btn btn-primary">View</a>
-                <a href="admin_edit_product.html" className="btn btn-warning">Edit</a>
+                <Link to={"/product/edit/" + item.id} className="btn btn-warning">Edit</Link>
                 <button type='button' className="btn btn-secondary"
                     onClick={() => deleteProduct(item.id)}>Delete</button>
             </td>

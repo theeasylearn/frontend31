@@ -1,10 +1,107 @@
+import { useParams } from "react-router-dom";
 import AdminSideBar from "./AdminSideBar";
 import VerifyLogin from "./authenticate";
 import { useEffect, useState } from "react";
+import getBase, { getImageBase } from "./common";
+import axios from "axios";
+import { showError, ERROR_MESSAGE, showMessage } from "./message";
 
 export default function AdminEditProduct() {
     VerifyLogin();
+    //create state array
+    let [categoryId, setCategoryId] = useState("");
+    let [name, setName] = useState("");
+    let [price, setPrice] = useState(0);
+    let [stock, setStock] = useState(0);
+    let [weight, setWeight] = useState(0);
+    let [size, setSize] = useState("");
+    let [remarks, setRemarks] = useState("");
+    let [photo, setPhoto] = useState(null);
+    let [islive, setIsLive] = useState(false);
+    let [isFetched, setIsFetched] = useState(false);
+    let [categories, SetCategories] = useState([]);
+    let { id } = useParams();
+    let fetchCategory = function () {
+        let apiAddress = getBase() + "category.php";
+        if (categories.length === 0) {
+            fetch(apiAddress).then((msg) => msg.json()).then((response) => {
+                //console.log(response); //array of object (JSON)
+                /*
+                 [
+                     {"error":"no"},
+                     {"total":6},
+                     {"id":"1","title":"laptop","photo":"laptop.jpg","islive":"1","isdeleted":"0"},
+                     {"id":"2","title":"mobile","photo":"mobile.jpg","islive":"1","isdeleted":"0"},
+                     {"id":"3","title":"book","photo":"books.jpg","islive":"1","isdeleted":"0"},
+                     {"id":"4","title":"Cookies & waffers","photo":"Cookies.jpg","islive":"1","isdeleted":"0"},{"id":"5","title":"Washing Powders","photo":"washing_powders.jpg","islive":"1","isdeleted":"0"},
+                     {"id":"6","title":"shampoo","photo":"shampoo.jpg","islive":"1","isdeleted":"0"}
+                ]
+                */
+                let error = response[0]['error']; //copy error key value into error
+                if (error !== 'no') {
+                    alert(error);
+                }
+                else {
+                    let total = response[1]['total'];
+                    if (total === 0) {
+                        alert('no category found');
+                    }
+                    else {
+                        //delete 2 objects 
+                        response.splice(0, 2);
+                        console.log(response);
+                        SetCategories(response);
+                    }
+                }
+            });
+        }
 
+    }
+
+    let fetchProduct = function () {
+
+        let apiAddress = getBase() + "product.php?productid=" + id;
+        console.log(apiAddress);
+        axios({
+            method: 'get',
+            responseType: 'json',
+            url: apiAddress
+        }).then((response) => {
+            console.log(response.data);
+            let error = response.data[0]['error']; //WE HAVE CREATE ERROR VARAIABLE FROM 0TH OBJECT WHICH HAS KEY ERROR
+            if (error !== 'no')
+                showError(error)
+            else {
+                let total = response.data[1]['total'];
+                if (total === 0)
+                    showError('no products found');
+                else {
+                    response.data.splice(0, 2); //delete 2 object from beginning
+                    setCategoryId(response.data[0]['categoryid']);
+                    setIsLive(response.data[0]['islive']);
+                    setName(response.data[0]['title']);
+                    setPhoto(response.data[0]['photo']);
+                    setPrice(response.data[0]['price']);
+                    setRemarks(response.data[0]['detail']);
+                    setSize(response.data[0]['size']);
+                    setStock(response.data[0]['stock']);
+                    setWeight(response.data[0]['weight']);
+                    setIsFetched(true);
+
+                }
+            }
+        }).catch((error) => {
+            if (error.code === 'ERR_NETWORK')
+                showError(ERROR_MESSAGE);
+        });
+
+    }
+    useEffect(() => {
+        if (isFetched === false) {
+            fetchCategory();
+            fetchProduct();
+        }
+    })
     return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
         {/*begin::Page*/}
         <div className="app-page  flex-column flex-column-fluid " id="kt_app_page">
@@ -76,24 +173,30 @@ export default function AdminEditProduct() {
                                                     <div className="row mb-3">
                                                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                                                             <div className="form-floating">
-                                                                <select className="form-select" id="categoryid" name="categoryid" aria-label="Floating label select example">
-                                                                    <option selected value>Select</option>
-                                                                    <option value={1}>One</option>
-                                                                    <option value={2}>Two</option>
-                                                                    <option value={3}>Three</option>
-                                                                </select>
+        <select className="form-select" id="categoryid" name="categoryid" aria-label="Floating label select example">
+            <option selected value>Select</option>
+            {categories.map((item) => {
+                if(item.id === categoryId)
+                    return (<option value={item.id} selected>{item.title}</option>);
+                else 
+                    return (<option value={item.id}>{item.title}</option>);
+            })}
+        </select>
                                                                 <label htmlFor="floatingSelect">Change Product Category</label>
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                                                             <div className="form-floating mb-3">
-                                                                <input type="text" className="form-control" id="title" name="title" placeholder="title" />
+                                                                <input type="text" className="form-control" id="title" name="title" placeholder="title"
+                                                                    value={name} onChange={(e) => setName(e.target.value)} />
                                                                 <label htmlFor="title">Edit Product Name</label>
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                                                             <div className="form-floating mb-3">
-                                                                <input type="number" className="form-control" id="price" name="price" placeholder="Price" />
+                                                                <input type="number" className="form-control" id="price" name="price" placeholder="Price"
+                                                                    value={price}
+                                                                    onChange={(e) => setPrice(e.target.value)} />
                                                                 <label htmlFor="price">Edit Price</label>
                                                             </div>
                                                         </div>
@@ -101,19 +204,25 @@ export default function AdminEditProduct() {
                                                     <div className="row mb-3">
                                                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                                                             <div className="form-floating mb-3">
-                                                                <input type="number" className="form-control" id="quantity" name="quantity" placeholder="Product quantity" />
+                                                                <input type="number" className="form-control" id="quantity" name="quantity" placeholder="Product quantity"
+                                                                    value={stock}
+                                                                    onChange={(e) => setStock(e.target.value)} />
                                                                 <label htmlFor="floatingInput">Edit Stock</label>
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                                                             <div className="form-floating mb-3">
-                                                                <input type="text" className="form-control" id="weight" name="weight" placeholder="Weight" />
+                                                                <input type="text" className="form-control" id="weight" name="weight" placeholder="Weight"
+                                                                    value={weight}
+                                                                    onChange={(e) => setWeight(e.target.value)} />
                                                                 <label htmlFor="weight">Edit Weight</label>
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                                                             <div className="form-floating mb-3">
-                                                                <input type="text" className="form-control" id="size" name="size" placeholder="Size" />
+                                                                <input type="text" className="form-control" id="size" name="size" placeholder="Size"
+                                                                    value={size}
+                                                                    onChange={(e) => setSize(e.target.value)} />
                                                                 <label htmlFor="size">Edit Size</label>
                                                             </div>
                                                         </div>
@@ -121,18 +230,20 @@ export default function AdminEditProduct() {
                                                     <div className="row mb-3">
                                                         <div className="col-lg-8 col-md-6 col-sm-6 col-12">
                                                             <div className="form-floating">
-                                                                <textarea className="form-control" placeholder="Product description" id="detail" style={{ "height": "100px" }} name="detail" defaultValue={""} />
+                                                                <textarea className="form-control" placeholder="Product description" id="detail" style={{ "height": "100px" }} name="detail"
+                                                                    defaultValue={remarks}
+                                                                    onChange={(e) => setRemarks(e.target.value)}></textarea>
                                                                 <label htmlFor="floatingTextarea">Edit Detail</label>
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-4 col-md-6 col-sm-6 col-12">
                                                             <p className="fw-bold">is this category Live?</p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <div className="form-check mb-4">
-                                                                <input name="islive" type="radio" className="form-check-input" defaultValue={1} />
+                                                                <input name="islive" type="radio" className="form-check-input" value={1} checked={(islive === '1')} />
                                                                 <label htmlFor className="form-check-label">Yes</label>
                                                             </div>
                                                             <div className="form-check">
-                                                                <input name="islive" type="radio" className="form-check-input" defaultValue={0} />
+                                                                <input name="islive" type="radio" className="form-check-input" value={0} checked={(islive === '0')} />
                                                                 <label htmlFor className="form-check-label">No</label>
                                                             </div>
                                                         </div>
@@ -151,7 +262,7 @@ export default function AdminEditProduct() {
                                             </div>
                                             <div className="col-lg-3">
                                                 <b>Current Photo</b>
-                                                <img src="https://picsum.photos/300?random=1" alt className="img-fluid img-thumbnail shadow" />
+                                                <img src={getImageBase() + "/product/" + photo} alt className="img-fluid img-thumbnail shadow" />
                                             </div>
                                         </div>
                                     </div>
