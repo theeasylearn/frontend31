@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AdminSideBar from "./AdminSideBar";
 import VerifyLogin from "./authenticate";
 import { useEffect, useState } from "react";
 import getBase, { getImageBase } from "./common";
 import axios from "axios";
 import { showError, ERROR_MESSAGE, showMessage } from "./message";
+import { ToastContainer } from "react-toastify";
 
 export default function AdminEditProduct() {
     VerifyLogin();
@@ -16,11 +17,13 @@ export default function AdminEditProduct() {
     let [weight, setWeight] = useState(0);
     let [size, setSize] = useState("");
     let [remarks, setRemarks] = useState("");
-    let [photo, setPhoto] = useState(null);
+    let [photo, setPhoto] = useState(null); //used to store current photo (photo selected by user)
+    let [oldPhoto, setOldPhoto] = useState(null); ////used to store existing(old) photo
     let [islive, setIsLive] = useState(false);
     let [isFetched, setIsFetched] = useState(false);
     let [categories, SetCategories] = useState([]);
     let { id } = useParams();
+    let navigate = useNavigate();
     let fetchCategory = function () {
         let apiAddress = getBase() + "category.php";
         if (categories.length === 0) {
@@ -81,6 +84,7 @@ export default function AdminEditProduct() {
                     setIsLive(response.data[0]['islive']);
                     setName(response.data[0]['title']);
                     setPhoto(response.data[0]['photo']);
+                    setOldPhoto(response.data[0]['photo']);
                     setPrice(response.data[0]['price']);
                     setRemarks(response.data[0]['detail']);
                     setSize(response.data[0]['size']);
@@ -102,6 +106,50 @@ export default function AdminEditProduct() {
             fetchProduct();
         }
     })
+    let saveProduct = function (e) {
+        console.log(categoryId, name, price, stock, weight, remarks, size, islive, photo);
+        e.preventDefault();
+        let apiAddress = getBase() + "update_product.php";
+        let form = new FormData();
+        form.append('name', name);
+        form.append('categoryid', categoryId);
+        form.append('price', price);
+        form.append('stock', stock);
+        form.append('weight', weight);
+        form.append('size', size);
+        form.append('detail', remarks);
+        form.append('islive', islive);
+        form.append('photo', photo);
+        form.append('productid', id);
+        axios({
+            method: 'post',
+            responseType: 'json',
+            url: apiAddress,
+            data:form
+        }).then((response) => {
+            console.log(response.data);
+            let error = response.data[0]['error'];
+            if (error !== 'no')
+                showError(error);
+            else {
+                let success = response.data[1]['success'];
+                let message = response.data[2]['message'];
+                if(success === 'no')
+                    showError(message);
+                else 
+                {
+                    showMessage(message);
+                    setTimeout(()=>{
+                        navigate("/product");
+                    },2000);
+                }
+            }
+        }).catch((error) => {
+            if (error.code === 'NETWORK_ERROR')
+                showError('oops, it seems either your offline or server is not available, please try after sometime');
+
+        })
+    }
     return (<div className="d-flex flex-column flex-root app-root" id="kt_app_root">
         {/*begin::Page*/}
         <div className="app-page  flex-column flex-column-fluid " id="kt_app_page">
@@ -159,6 +207,7 @@ export default function AdminEditProduct() {
                 {/*begin::Main*/}
                 <div className="app-main" id="kt_app_main">
                     <div className="container mt-10">
+                        <ToastContainer />
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="card shadow">
@@ -169,19 +218,19 @@ export default function AdminEditProduct() {
                                     <div className="card-body p-10">
                                         <div className="row">
                                             <div className="col-lg-9">
-                                                <form action>
+                                                <form action onSubmit={saveProduct}>
                                                     <div className="row mb-3">
                                                         <div className="col-lg-4 col-md-4 col-sm-6 col-12">
                                                             <div className="form-floating">
-        <select className="form-select" id="categoryid" name="categoryid" aria-label="Floating label select example">
-            <option selected value>Select</option>
-            {categories.map((item) => {
-                if(item.id === categoryId)
-                    return (<option value={item.id} selected>{item.title}</option>);
-                else 
-                    return (<option value={item.id}>{item.title}</option>);
-            })}
-        </select>
+                                                                <select className="form-select" id="categoryid" name="categoryid" aria-label="Floating label select example">
+                                                                    <option selected value>Select</option>
+                                                                    {categories.map((item) => {
+                                                                        if (item.id === categoryId)
+                                                                            return (<option value={item.id} selected>{item.title}</option>);
+                                                                        else
+                                                                            return (<option value={item.id}>{item.title}</option>);
+                                                                    })}
+                                                                </select>
                                                                 <label htmlFor="floatingSelect">Change Product Category</label>
                                                             </div>
                                                         </div>
@@ -239,11 +288,11 @@ export default function AdminEditProduct() {
                                                         <div className="col-lg-4 col-md-6 col-sm-6 col-12">
                                                             <p className="fw-bold">is this category Live?</p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <div className="form-check mb-4">
-                                                                <input name="islive" type="radio" className="form-check-input" value={1} checked={(islive === '1')} />
+                                                                <input name="islive" type="radio" className="form-check-input" value={1} checked={(islive === '1')} onChange={(e) => setIsLive(e.target.value)} />
                                                                 <label htmlFor className="form-check-label">Yes</label>
                                                             </div>
                                                             <div className="form-check">
-                                                                <input name="islive" type="radio" className="form-check-input" value={0} checked={(islive === '0')} />
+                                                                <input name="islive" type="radio" className="form-check-input" value={0} checked={(islive === '0')} onChange={(e) => setIsLive(e.target.value)} />
                                                                 <label htmlFor className="form-check-label">No</label>
                                                             </div>
                                                         </div>
@@ -251,10 +300,10 @@ export default function AdminEditProduct() {
                                                     <div className="row">
                                                         <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                                                             <label htmlFor="photo" className="form-label">Change Product Photo</label>
-                                                            <input className="form-control" type="file" id="photo" name="photo" />
+                                                            <input className="form-control" type="file" id="photo" name="photo" onChange={(e) => setPhoto(e.target.files[0])} />
                                                         </div>
                                                         <div className="col-lg-6 col-md-6 col-sm-6 col-12 mt-5 pt-3 d-flex  justify-content-end">
-                                                            <input type="submit" defaultValue="Save changes" className="btn btn-primary" />&nbsp;
+                                                            <input type="submit" value="Save changes" className="btn btn-primary" />&nbsp;
                                                             <input type="reset" defaultValue="Clear all" className="btn btn-dark" />
                                                         </div>
                                                     </div>
@@ -262,7 +311,7 @@ export default function AdminEditProduct() {
                                             </div>
                                             <div className="col-lg-3">
                                                 <b>Current Photo</b>
-                                                <img src={getImageBase() + "/product/" + photo} alt className="img-fluid img-thumbnail shadow" />
+                                                <img src={getImageBase() + "/product/" + oldPhoto} alt className="img-fluid img-thumbnail shadow" />
                                             </div>
                                         </div>
                                     </div>
