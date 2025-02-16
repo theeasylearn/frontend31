@@ -1,11 +1,48 @@
 import React from "react";
 import Header from "./header";
 import Footer from "./footer";
+import getBase, { getImageBase } from "./common";
+import { showError, showNetworkError } from "./message";
+import axios from 'axios';
+import { Link } from "react-router-dom";
 class Home extends React.Component
 {
     constructor(props)
     {
         super(props);
+        //create state array
+        this.state = {
+            categories : [] // create empty state array
+        }
+    }
+    componentDidMount()
+    {
+        //api call to fetch categories from server
+        let apiAddress = getBase() + "category.php";
+        axios({
+          method:'get',
+          responseType:'json',
+          url:apiAddress
+        }).then((response) => {
+            console.log(response.data);
+            let error = response.data[0]['error'];
+            if(error !== 'no')
+              showError(error);
+            else 
+            {
+                let total = response.data[1]['total'];
+                if(total === 0)
+                  showError('no categories found');
+                else 
+                {
+                    response.data.splice(0,2); // delete 2 object from beginning 
+                    //store remaining array into state array
+                    this.setState({
+                      categories:response.data
+                    });
+                }
+            }
+        }).catch((error) =>  showNetworkError(error))
     }
     render()
     {
@@ -124,21 +161,23 @@ class Home extends React.Component
                     </div>
                   </div>
                 </div>
-                <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6 g-6">
+                <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-4 g-6">
                   {/* col */}
-                  <div className="col">
-                    <a href="shop-grid.html" className="text-decoration-none text-inherit">
-                      {/* card */}
-                      <div className="card card-product shadow">
-                        <div className="card-body text-center py-8">
-                          {/* img */}
-                          <img src="theme/assets/images/category/category-dairy-bread-eggs.jpg" alt="Grocery Ecommerce Template" className="mb-3" />
-                          {/* text */}
-                          <div className="text-truncate">Dairy, Bread &amp; Eggs</div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
+                  {this.state.categories.map((item) => {
+                      return (<div className="col">
+                        <Link to={"/product/" + item.id} className="text-decoration-none text-inherit">
+                          {/* card */}
+                          <div className="card card-product shadow">
+                            <div className="card-body text-center py-8">
+                              {/* img */}
+                              <img src={getImageBase() + "category/" + item.photo} alt="Grocery Ecommerce Template" className="img-fluid mb-3" />
+                              {/* text */}
+                              <div className="text-truncate">{item.title}</div>
+                            </div>
+                          </div>
+                        </Link>
+                      </div>)
+                  })}
                 </div>
               </div>
             </section>

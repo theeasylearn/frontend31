@@ -11,6 +11,7 @@ import Shop from './Shop';
 import SingleProduct from './single_product';
 import Cart from './cart';
 import ChangePassword from './change_password';
+import PageNotFound from './PageNotFound';
 function MyRouter()
 {
     return (
@@ -24,8 +25,11 @@ function MyRouter()
             <Route  path='/cart' element={<Cart />} />
             <Route  path='/checkout' element={<Checkout />} />
             <Route  path='/shop' element={<Shop />} />
-            <Route  path='/product' element={<Product />} />
-            <Route  path='/product/id/' element={<SingleProduct />} />
+            {/* dynamaic route */}
+            <Route  path='/product/:categoryid' element={<Product />} />
+            <Route  path='/product/id/:productid' element={<SingleProduct />} />
+            {/* below route will execute for any not existing route */}
+            <Route  path="*" element={<PageNotFound />} />
         </Routes>
     </BrowserRouter>);
 }

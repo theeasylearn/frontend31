@@ -16,7 +16,7 @@ class Footer extends React.Component
                     <span id="copyright">
                       -
                     </span>
-                    FreshCart eCommerce HTML Template. All rights reserved. Powered by
+                    MyShop eCommerce HTML Template. All rights reserved. Powered by
                     The easylearn academy
                     .
                   </span>
