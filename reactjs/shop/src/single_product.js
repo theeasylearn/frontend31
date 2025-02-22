@@ -13,7 +13,8 @@ class SingleProduct extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            product: null
+            product: null, /* product whose all details will be displayed. */
+            products: null, /* related product (product in same category). */
         }
     }
 
@@ -41,6 +42,40 @@ class SingleProduct extends React.Component {
                     this.setState({
                         product: response.data[0],
                     });
+                    this.getRelatedProducts(response.data[0]['categoryid']);
+                }
+            }
+        }).catch((error) => showNetworkError(error));
+    }
+    getRelatedProducts(categoryid) {
+        let apiAddress = getBase() + "product.php?categoryid=" + categoryid;
+        const { productid } = this.props.params;
+        console.log(apiAddress);
+        axios({
+            method: 'get',
+            responseType: 'json',
+            url: apiAddress,
+        }).then((response) => {
+            console.log("no of related products count = " + response.data.length);
+            let error = response.data[0]['error'];
+            if (error !== 'no')
+                showError(error);
+            else {
+                let total = response.data[1]['total'];
+                if (total === 0)
+                    showError('no product found');
+                else {
+                    //delete 2 objects from beginning
+                    response.data.splice(0, 2);
+                    //remove product which is already being displayed
+                    response.data = response.data.filter((item) => {
+                        if (item.id !== productid)
+                            return item;
+                    });
+
+                    this.setState({
+                        products: response.data,
+                    });
                 }
             }
         }).catch((error) => showNetworkError(error));
@@ -59,11 +94,11 @@ class SingleProduct extends React.Component {
             </div>
             <div className="col-lg-6">
                 <div className="ps-lg-8 mt-6 mt-lg-0">
-                    <a href="#!" className="mb-4 d-block">{this.state.product.categorytitle}</a>
+                    <Link className="mb-4 d-block">{this.state.product.categorytitle}</Link>
                     <h2 className="mb-1 h1">{this.state.product.title}</h2>
                     <div className="fs-4">
                         <span className="fw-bold text-dark">₹ {this.state.product.price}</span>
-                        
+
                     </div>
                     <hr className="my-6" />
                     <div>
@@ -106,64 +141,57 @@ class SingleProduct extends React.Component {
                 </div>
             </div>
         </div>
-        <div className="row my-2">
-            <div className="col-12">
-                <span className="fw-bold">Description</span>
-                <p>{this.state.product.detail}</p>
-            </div>
-        </div>
-        <div className="row">
-            <div className="col-12">
-                <h3>You may also like this</h3>
-            </div>
-        </div>
-        <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6 g-6 mb-3">
-            {/* col */}
-            <div className="col">
-                {/* card */}
-                <div className="card card-product shadow">
-                    <div className="card-body">
-                        {/* badge */}
-                        <div className="text-center position-relative">
-                            <a href="shop-single.html">
-                                {/* img */}
-                                <img src="theme/assets/images/products/product-img-6.jpg" alt="Grocery Ecommerce Template" className="mb-3 img-fluid" />
-                            </a>
-                            {/* action btn */}
-                        </div>
-                        {/* heading */}
-                        <h2 className="fs-6"><a href="shop-single.html" className="text-inherit text-decoration-none">Dhokla</a></h2>
-                        <div>
-                            {/* rating */}
-                            <small className="text-warning">
-                                <i className="bi bi-star-fill" />
-                                <i className="bi bi-star-fill" />
-                                <i className="bi bi-star-fill" />
-                                <i className="bi bi-star-fill" />
-                                <i className="bi bi-star-half" />
-                            </small>
-                            <span className="text-muted small">4.5 (189)</span>
-                        </div>
-                        {/* price */}
-                        <div className="d-flex justify-content-between align-items-center mt-3">
-                            <div>
-                                <span className="text-dark">₹ 18</span>
-                            </div>
-                            {/* btn */}
-                            <div>
-                                <a href="#!" className="btn btn-primary btn-sm">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="feather feather-plus">
-                                        <line x1={12} y1={5} x2={12} y2={19} />
-                                        <line x1={5} y1={12} x2={19} y2={12} />
-                                    </svg>
-                                    Add
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+            <div className="row my-2">
+                <div className="col-12">
+                    <span className="fw-bold">Description</span>
+                    <p>{this.state.product.detail}</p>
                 </div>
             </div>
-        </div></>): ''; 
+            <div className="row">
+                <div className="col-12">
+                    <h3>You may also like this</h3>
+                </div>
+            </div>
+            <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6 g-6 mb-3">
+                {this.state.products !== null && this.state.products.map((item) => {
+
+                    return (<div className="col">
+                        <a href={"/product/id/" + item.id}>
+                            {/* card */}
+                            <div className="card card-product shadow">
+                                <div className="card-body">
+                                    {/* badge */}
+                                    <div className="text-center position-relative">
+
+                                        <img src={getImageBase() + "product/" + item.photo} className="mb-3 img-fluid" />
+
+                                        {/* action btn */}
+                                    </div>
+                                    {/* heading */}
+                                    <h2 className="fs-6">{item.title}</h2>
+
+                                    {/* price */}
+                                    <div className="d-flex justify-content-between align-items-center mt-3">
+                                        <div>
+                                            <span className="text-dark">₹ {item.price}</span>
+                                        </div>
+                                        {/* btn */}
+                                        <div>
+                                            <button className="btn btn-primary btn-sm">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="feather feather-plus">
+                                                    <line x1={12} y1={5} x2={12} y2={19} />
+                                                    <line x1={5} y1={12} x2={19} y2={12} />
+                                                </svg>
+                                                Add
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>);
+                })}
+            </div></>) : '';
         return (<>
             <Header />
             <main>
