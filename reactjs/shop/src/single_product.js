@@ -18,6 +18,28 @@ class SingleProduct extends React.Component {
         }
     }
 
+    updateCart = () => {
+        let userid = this.props.cookies['userid'];
+        const { productid } = this.props.params; // Get categoryid from params
+        let apiAddress = getBase() + "add_to_cart.php?productid=" + productid + "&usersid=" + userid ;
+        //alert(apiAddress);
+        axios({
+            method:'get',
+            responseType:'json',
+            url:apiAddress
+        }).then((response) =>{
+            console.log(response.data);
+            let error = response.data[0]['error'];
+            if(error !== 'no')
+            {
+                showError(error);
+            }    
+            else 
+            {
+                showMessage(response.data[1]['message']);
+            }
+        }).catch((error) => showNetworkError(error));
+    }
     componentDidMount() {
         const { productid } = this.props.params; // Get categoryid from params
         console.log(productid);
@@ -109,7 +131,8 @@ class SingleProduct extends React.Component {
                         <div className="col-lg-4 col-md-5 col-6 d-grid">
                             {/* button */}
                             {/* btn */}
-                            <button type="button" className="btn btn-primary">
+                            <button type="button" className="btn btn-primary" 
+                            onClick={this.updateCart}>
                                 <i className="feather-icon icon-shopping-bag me-2" />
                                 Add to cart
                             </button>
@@ -196,6 +219,7 @@ class SingleProduct extends React.Component {
             <Header />
             <main>
                 <div className="container">
+                    <ToastContainer />
                     {output}
                 </div>
             </main>
