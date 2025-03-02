@@ -1,5 +1,13 @@
 import React from "react";
 import Footer from "./footer";
+/*
+    api forgot_password.php
+        input : email(required) 
+        output :
+        [{"error":"input is missing"}] 
+        [{"error":"no"},{"success":"yes"},{"message":"please check email for password"}]
+        [{"error":"no"},{"success":"no"},{"message":"invalid email address"}]
+*/
 class ForgotPassword extends React.Component {
     constructor(props) {
         super(props);
@@ -63,7 +71,7 @@ class ForgotPassword extends React.Component {
                     </section>
                 </main>
 
-               <Footer />
+                <Footer />
             </>
         );
     }

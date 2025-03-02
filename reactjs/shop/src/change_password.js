@@ -1,6 +1,14 @@
 import React from 'react'
 import Header from './header';
 import Footer from './footer';
+/*
+    api name : change_password.php
+    //input  input : id (id means userid),password,newpassword (required) 
+      output :
+        [{"error":"input is missing"}] 
+        [{"error":"no"},{"success":"no","message":"invalid change password attempt"}]
+        [{"error":"no"},{"success":"yes","message":"password changed"}]
+*/
 class ChangePassword extends React.Component {
     constructor(props) {
         super(props);
