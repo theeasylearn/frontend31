@@ -1,8 +1,8 @@
 import AdminSideBar from "./AdminSideBar";
 import VerifyLogin from "./authenticate";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import getBase from "./common";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { showError, showMessage } from "./message";
 import { ToastContainer } from "react-toastify";
@@ -27,18 +27,6 @@ export default function AdminAddProduct() {
     let apiAddress = getBase() + "category.php";
     if (categories.length === 0) {
       fetch(apiAddress).then((msg) => msg.json()).then((response) => {
-        //console.log(response); //array of object (JSON)
-        /*
-         [
-             {"error":"no"},
-             {"total":6},
-             {"id":"1","title":"laptop","photo":"laptop.jpg","islive":"1","isdeleted":"0"},
-             {"id":"2","title":"mobile","photo":"mobile.jpg","islive":"1","isdeleted":"0"},
-             {"id":"3","title":"book","photo":"books.jpg","islive":"1","isdeleted":"0"},
-             {"id":"4","title":"Cookies & waffers","photo":"Cookies.jpg","islive":"1","isdeleted":"0"},{"id":"5","title":"Washing Powders","photo":"washing_powders.jpg","islive":"1","isdeleted":"0"},
-             {"id":"6","title":"shampoo","photo":"shampoo.jpg","islive":"1","isdeleted":"0"}
-        ]
-        */
         let error = response[0]['error']; //copy error key value into error
         if (error !== 'no') {
           alert(error);

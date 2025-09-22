@@ -1,5 +1,6 @@
 Types of users
     admin
+	-----------------------------------------------------------------------------
         role
          add/edit/delete/view/search all most everything in this project for example category,product,pincode,shipping,orders,customers
 
@@ -12,21 +13,15 @@ Types of users
                 Add, edit, delete, view, search products
                 table 
                 id,category,title,detail,price,stock,weight,size,photo,islive,isdeleted
-            slider management  (excercise)
-                Add, edit, delete, view, search sliders
-                table 
-                id,title,startdate,enddate,productid,photo
-            pincodes management (excercise)
-                Add, edit, delete, view, search pincodes
-                table 
-                id,city,area,pincode,state,islive,isdeleted
+	
             orders management  (class)        
                 view, process, search, Bill generate,print orders
                 table 
                 1 cart
                     id,productid,quantity,price,userid,billid
                 2 bill
-                    id,userid,billdate,amount,paymentmode,paymentstatus,fullname,address1,address2,city,pincode,mobile,remarks,orderstatus
+			   pincode,shipping (exercise)
+    	             id,userid,billdate,amount,paymentmode,paymentstatus,fullname,address1,address2,city,pincode,mobile,remarks,orderstatus
             //checkout 
             //process
             //check all the items in order are in stock or not 
@@ -43,10 +38,14 @@ Types of users
             login (class)
             change password (class)
             forgot password (class)
+
     buyers /register users (class)
+	-----------------------------------------------	
         register, login, logout, change password, recover account
-        browse products, manage cart, wishlist, place orders 
+        browse products, manage cart, place orders 
+
         (excercise)
+			wishlist
          pincode check 
          view history & download bill 
          rating and reviews 
